@@ -3,12 +3,14 @@ from rest_framework import viewsets
 from .serializers import AlunoSerializer
 from .serializers import ServidorSerializer
 from .serializers import ProfessorSerializer
+from .serializers import NotificacaoSerializer
 from .serializers import TipoFormacaoSerializer
 from .serializers import TipoNotificacaoSerializer
 
 from .models import Aluno
 from .models import Servidor
 from .models import Professor
+from .models import Notificacao
 from .models import Tipoformacao
 from .models import Tiponotificacao
 
@@ -38,6 +40,15 @@ class ProfessorViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Professor.objects.all()
+
+
+class NotificacaoViewSet(viewsets.ModelViewSet):
+    model = Notificacao
+    lookup_field = 'pk'
+    serializer_class = NotificacaoSerializer
+
+    def get_queryset(self):
+        return Notificacao.objects.all()
 
 
 class TipoFormacaoViewSet(viewsets.ModelViewSet):

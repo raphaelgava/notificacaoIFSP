@@ -27,6 +27,7 @@ from rest_framework import routers
 from notificacao.views import AlunoViewSet
 from notificacao.views import ServidorViewSet
 from notificacao.views import ProfessorViewSet
+from notificacao.views import NotificacaoViewSet
 from notificacao.views import TipoFormacaoViewSet
 from notificacao.views import TipoNotificacaoViewSet
 
@@ -34,6 +35,7 @@ router = routers.DefaultRouter()
 router.register(r'aluno', AlunoViewSet, base_name='aluno')
 router.register(r'servidor', ServidorViewSet, base_name='servidor')
 router.register(r'professor', ProfessorViewSet, base_name='professor')
+router.register(r'notificacao', NotificacaoViewSet, base_name='notificacao')
 router.register(r'tipo_formacao', TipoFormacaoViewSet, base_name='tipoformacao')
 router.register(r'tipo_notificacao', TipoNotificacaoViewSet, base_name='tiponotificacao')
 
