@@ -17,12 +17,15 @@ Including another URLconf
 # from django.contrib import admin
 #
 # urlpatterns = [
-#     url(r'^admin/', admin.site.urls),
+#     url(r'^cadastro/', admin.site.urls),
 # ]
 
 from django.conf.urls import patterns, url
 from django.contrib import admin
 from rest_framework import routers
+
+from notificacao.views import cadastro_aluno, cadastro_atualizar_aluno, lista_aluno
+from notificacao.views import login_user, thanks
 
 from notificacao.views import AlunoViewSet
 from notificacao.views import ServidorViewSet
@@ -41,16 +44,11 @@ router.register(r'tipo_notificacao', TipoNotificacaoViewSet, base_name='tiponoti
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'lista_aluno/$', lista_aluno.as_view(), name='listaAluno'),
+    url(r'cadastro_aluno/$', cadastro_aluno.as_view(), name='cadastroAluno'),
+    url(r'cadastro_aluno/(?P<pk>\d+)/$', cadastro_atualizar_aluno.as_view(), name='cadastroUpdateAluno'),
+    # url(r'cadastro_aluno/$', 'notificacao.views.cadastro_aluno'),
+    url(r'^login/$', login_user),
+    url(r'^$', thanks, name = "thanks"),
+    #url(r'cadastro/cadastro_aluno/$', 'notificacao.views.cadastro_aluno')
 ] + router.urls
-
-# from django.conf.urls import patterns, url
-# from django.contrib import admin
-# from rest_framework import routers
-# from notificacao.views import TipoFormacaoViewSet
-#
-# router = routers.DefaultRouter()
-# router.register(r'tipo_formacao', TipoFormacaoViewSet, base_name='tipoformacao')
-#
-# urlpatterns = patterns('',
-#
-# ) + router.urls

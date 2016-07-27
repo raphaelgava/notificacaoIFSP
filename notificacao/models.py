@@ -8,31 +8,56 @@
 from __future__ import unicode_literals
 
 import datetime
-from django.db import models
-# from django.utils.translation import ugettext_lazy as _
 
-class Pessoa(models.Model):
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+from django.utils import timezone
+
+# class Pessoa(models.Model):
+#     SEXO = (
+#         ('Masculino', 'Masculino'),
+#         ('Feminino', 'Feminino'),
+#     )
+#     prontuario = models.IntegerField("Prontuário",unique=True)  # Field name made lowercase.
+#     nome = models.CharField(max_length=50)  # Field name made lowercase.
+#     senha = models.CharField(max_length=10)  # Field name made lowercase.
+#     sexo = models.CharField(max_length=10, default='Masculino', blank=False, null=False, choices=SEXO)  # Field name made lowercase.
+#     datanascimento = models.DateField("Data de nascimento")  # Field name made lowercase.
+#     email = models.EmailField(max_length=50, blank=True, null=True)  # Field name made lowercase.
+#     ativo = models.BooleanField(default=True)  # Field name made lowercase. This field type is a guess.
+#     id_instituto = models.ForeignKey('Instituto')  # Field name made lowercase.
+#
+#     class Meta:
+#         abstract=True
+#         verbose_name = 'Pessoa'
+#         verbose_name_plural = 'Pessoas'
+#
+#     # essa definição é para mostrar a descrição na lista dos cadastros
+#     def __str__(self):
+#         return '{} - {}'.format(self.prontuario, self.nome)
+
+
+class Pessoa(AbstractUser):
     SEXO = (
         ('Masculino', 'Masculino'),
         ('Feminino', 'Feminino'),
     )
-    prontuario = models.IntegerField("Prontuário",unique=True)  # Field name made lowercase.
-    nome = models.CharField(max_length=50)  # Field name made lowercase.
-    senha = models.CharField( max_length=10)  # Field name made lowercase.
     sexo = models.CharField(max_length=10, default='Masculino', blank=False, null=False, choices=SEXO)  # Field name made lowercase.
-    datanascimento = models.DateField("Data de nascimento")  # Field name made lowercase.
-    email = models.CharField(max_length=50, blank=True, null=True)  # Field name made lowercase.
-    ativo = models.TextField(blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    id_instituto = models.ForeignKey('Instituto')  # Field name made lowercase.
+    datanascimento = models.DateField("Data de nascimento", default=timezone.now)  # Field name made lowercase.
+    id_instituto = models.ForeignKey('Instituto', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
-        abstract=True
+    # USERNAME_FIELD = 'username'
+
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
+        # abstract=True
         verbose_name = 'Pessoa'
         verbose_name_plural = 'Pessoas'
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
-        return '{} - {}'.format(self.prontuario, self.nome)
+        return '{} - {}'.format(self.username, self.first_name)
 
 class Servidor(Pessoa):
     funcao = models.CharField("Função", max_length=30, blank=True, null=True)  # Field name made lowercase.
@@ -52,7 +77,7 @@ class Professor(Servidor):
 
 
 class Aluno(Pessoa):
-    turma = models.CharField( max_length=10, blank=True, null=True)  # Field name made lowercase.
+    turma = models.CharField(max_length=10, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         verbose_name = 'Aluno'
@@ -72,7 +97,7 @@ class Remetente(models.Model):
 
 class Curso(Remetente):
     id_instituto = models.ForeignKey('Instituto')  # Field name made lowercase.
-    ativo = models.TextField( blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    ativo = models.BooleanField(default=True)  # Field name made lowercase. This field type is a guess.
     disciplinas = models.ManyToManyField('Disciplina')
     class Meta:
         verbose_name = 'Curso'
@@ -111,7 +136,8 @@ class Notificacao(models.Model):
     id_local = models.ForeignKey(Local, verbose_name="Local", blank=True, null=True)  # Field name made lowercase.
     descricao = models.CharField("Descrição", max_length=255)  # Field name made lowercase.
     titulo = models.CharField("Título", max_length=45)  # Field name made lowercase.
-    prontuario = models.ForeignKey('Servidor')  # Field name made lowercase.
+    # prontuario = models.ForeignKey('Servidor', null=False, blank=False)  # Field name made lowercase.
+    username = models.ForeignKey('Servidor', null=False, blank=False)  # Field name made lowercase.
     remetente = models.ManyToManyField(Remetente)
 
     class Meta:
@@ -131,7 +157,7 @@ class Oferecimento(Remetente):
 
     ano = models.DateField(default=datetime.date.today)  # Field name made lowercase.
     semestre = models.IntegerField(default=1, choices=SEMESTER)  # Field name made lowercase.
-    id_professor = models.ForeignKey('Professor')  # Field name made lowercase.
+    id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.
     alunos = models.ManyToManyField(Aluno)
 

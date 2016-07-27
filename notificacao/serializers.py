@@ -10,25 +10,29 @@ from .models import Tiponotificacao
 class AlunoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Aluno
-		fields = ('prontuario', 'nome', 'senha', 'sexo', 'datanascimento', 'email', 'ativo', 'id_instituto', 'turma',)
+		# fields = ('prontuario', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto', 'turma')
+		fields = ('username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto', 'turma')
 
 
 class ServidorSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Servidor
-		fields = ('prontuario', 'nome', 'senha', 'sexo', 'datanascimento', 'email', 'ativo', 'id_instituto', 'funcao',)
+		# fields = ('prontuario', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto', 'funcao')
+		fields = ('username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto', 'funcao')
 
 
 class ProfessorSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Professor
-		fields = ('prontuario', 'nome', 'senha', 'sexo', 'datanascimento', 'email', 'ativo', 'id_instituto', 'formacao', 'id_tipo')
+		# fields = ('prontuario', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto', 'formacao', 'id_tipo')
+		fields = ('username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto', 'formacao', 'id_tipo')
 
 
 class NotificacaoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Notificacao
-		fields = ('datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'prontuario', 'remetente')
+		# fields = ('datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'prontuario', 'remetente')
+		fields = ('datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'username', 'remetente')
 
 
 class TipoFormacaoSerializer(serializers.ModelSerializer):

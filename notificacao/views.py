@@ -1,5 +1,16 @@
 from rest_framework import viewsets
 
+from django.template import RequestContext
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, render_to_response, redirect
+from django.contrib.auth import authenticate, login, logout
+
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView
+from django.core.urlresolvers import reverse_lazy, reverse
+
+from braces.views import LoginRequiredMixin, GroupRequiredMixin
+
 from .serializers import AlunoSerializer
 from .serializers import ServidorSerializer
 from .serializers import ProfessorSerializer
@@ -14,6 +25,29 @@ from .models import Notificacao
 from .models import Tipoformacao
 from .models import Tiponotificacao
 
+from .forms import AlunoForm
+
+def thanks(request):
+    return render(request, 'thanks.html')
+
+def login_user(request):
+    logout(request)
+    username = password = ''
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/cadastro_aluno/')
+    return render_to_response('login.html', context_instance=RequestContext(request))
+
+# class MyView(LoginRequiredMixin, View):
+#     login_url = '/login/'
+#     redirect_field_name = 'redirect_to'
+
 
 class AlunoViewSet(viewsets.ModelViewSet):
     model = Aluno
@@ -22,6 +56,91 @@ class AlunoViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Aluno.objects.all()
+
+# def cadastro_aluno(request):
+#     # if this is a POST request we need to process the form data
+#     if request.method == 'POST':
+#         # create a form instance and populate it with data from the request:
+#         form = AlunoForm(request.POST)
+#         # check whether it's valid:
+#         if form.is_valid():
+#             # process the data in form.cleaned_data as required
+#             # ...
+#             # redirect to a new URL:
+#             form.save()
+#             return HttpResponseRedirect('/thanks/')
+#
+#     # if a GET (or any other method) we'll create a blank form
+#     else:
+#         form = AlunoForm()
+#
+#     return render(request, 'cadastroAluno.html', {'content': form})
+#     #return render(request, 'cadastro/cadastroAluno.html', {'content': form})
+
+class lista_aluno(ListView):
+    template_name = 'aluno_list.html'
+    model = Aluno
+
+class cadastro_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
+# class cadastro_aluno(LoginRequiredMixin, CreateView):
+    template_name = 'cadastroAluno.html'
+    model = Aluno
+    form_class = AlunoForm
+    # success_url = '/thanks/'
+    success_url = reverse_lazy('listaAluno')
+    login_url = '/login/'
+
+    group_required = ["Servidores"]
+
+    # def form_valid(self, form):
+    #     # print 'happening2'
+    #     # form.instance.save()
+    #     # self.user.teams.add(form.instance)
+    #     form.save()
+    #     return super(form_valid, self).form_valid(form)
+
+
+
+    def form_valid(self, form):
+        aluno = form.save(commit=False)
+
+        password = form.cleaned_data['password']
+        password_check = form.cleaned_data['password_check']
+
+        if password != password_check:
+            return HttpResponse('Confirmação de senha inválida')
+
+        username = form.cleaned_data['username']
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        email = form.cleaned_data['email']
+        sexo = form.cleaned_data['sexo']
+        datanascimento = form.cleaned_data['datanascimento']
+        instituto = form.cleaned_data['id_instituto']
+        turma = form.cleaned_data['turma']
+
+        aluno = Aluno.objects.create(username=username, password=password, email=email, first_name=first_name,
+                                    last_name=last_name,
+                                    sexo=sexo, datanascimento=datanascimento, id_instituto=instituto, turma=turma)
+        aluno.set_password(password)
+
+        aluno.save()
+        return HttpResponseRedirect(reverse('thanks'))
+
+        def get_context_data(self, **kwargs):
+            context = super(cadastro_aluno, self).get_context_data(**kwargs)
+            context['raphael'] = Aluno.objects.all()
+            return context
+
+class cadastro_atualizar_aluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
+    template_name = 'cadastroAluno.html'
+    model = Aluno
+    form_class = AlunoForm
+    # success_url = '/thanks/'
+    success_url = reverse_lazy('listaAluno')
+    login_url = '/login/'
+
+    # group_required = ["Servidores"]
 
 
 class ServidorViewSet(viewsets.ModelViewSet):
@@ -40,7 +159,6 @@ class ProfessorViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Professor.objects.all()
-
 
 class NotificacaoViewSet(viewsets.ModelViewSet):
     model = Notificacao
