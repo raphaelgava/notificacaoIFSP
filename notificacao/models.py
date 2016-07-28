@@ -11,32 +11,7 @@ import datetime
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
 from django.utils import timezone
-
-# class Pessoa(models.Model):
-#     SEXO = (
-#         ('Masculino', 'Masculino'),
-#         ('Feminino', 'Feminino'),
-#     )
-#     prontuario = models.IntegerField("Prontuário",unique=True)  # Field name made lowercase.
-#     nome = models.CharField(max_length=50)  # Field name made lowercase.
-#     senha = models.CharField(max_length=10)  # Field name made lowercase.
-#     sexo = models.CharField(max_length=10, default='Masculino', blank=False, null=False, choices=SEXO)  # Field name made lowercase.
-#     datanascimento = models.DateField("Data de nascimento")  # Field name made lowercase.
-#     email = models.EmailField(max_length=50, blank=True, null=True)  # Field name made lowercase.
-#     ativo = models.BooleanField(default=True)  # Field name made lowercase. This field type is a guess.
-#     id_instituto = models.ForeignKey('Instituto')  # Field name made lowercase.
-#
-#     class Meta:
-#         abstract=True
-#         verbose_name = 'Pessoa'
-#         verbose_name_plural = 'Pessoas'
-#
-#     # essa definição é para mostrar a descrição na lista dos cadastros
-#     def __str__(self):
-#         return '{} - {}'.format(self.prontuario, self.nome)
-
 
 class Pessoa(AbstractUser):
     SEXO = (

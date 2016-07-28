@@ -14,7 +14,6 @@ class AlunoForm(ModelForm):
 
     class Meta:
         model = Aluno
-        # fields = ('prontuario', 'first_name', 'last_name', 'email', 'password', 'senha2', 'sexo', 'datanascimento', 'turma',)
         fields = ('username', 'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento', 'id_instituto', 'turma',)
 
     # def compare_password(self):

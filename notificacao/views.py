@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
 
 from .serializers import AlunoSerializer
+from .serializers import AlunoLoginSerializer
 from .serializers import ServidorSerializer
 from .serializers import ProfessorSerializer
 from .serializers import NotificacaoSerializer
@@ -44,11 +45,6 @@ def login_user(request):
                 return HttpResponseRedirect('/cadastro_aluno/')
     return render_to_response('login.html', context_instance=RequestContext(request))
 
-# class MyView(LoginRequiredMixin, View):
-#     login_url = '/login/'
-#     redirect_field_name = 'redirect_to'
-
-
 class AlunoViewSet(viewsets.ModelViewSet):
     model = Aluno
     lookup_field = 'pk'
@@ -57,32 +53,19 @@ class AlunoViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Aluno.objects.all()
 
-# def cadastro_aluno(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == 'POST':
-#         # create a form instance and populate it with data from the request:
-#         form = AlunoForm(request.POST)
-#         # check whether it's valid:
-#         if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             # ...
-#             # redirect to a new URL:
-#             form.save()
-#             return HttpResponseRedirect('/thanks/')
-#
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = AlunoForm()
-#
-#     return render(request, 'cadastroAluno.html', {'content': form})
-#     #return render(request, 'cadastro/cadastroAluno.html', {'content': form})
+class AlunoLoginViewSet(viewsets.ModelViewSet):
+    model = Aluno
+    lookup_field = 'pk'
+    serializer_class = AlunoLoginSerializer
+
+    def get_queryset(self):
+        return Aluno.objects.all()
 
 class lista_aluno(ListView):
     template_name = 'aluno_list.html'
     model = Aluno
 
 class cadastro_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
-# class cadastro_aluno(LoginRequiredMixin, CreateView):
     template_name = 'cadastroAluno.html'
     model = Aluno
     form_class = AlunoForm
@@ -91,15 +74,6 @@ class cadastro_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     login_url = '/login/'
 
     group_required = ["Servidores"]
-
-    # def form_valid(self, form):
-    #     # print 'happening2'
-    #     # form.instance.save()
-    #     # self.user.teams.add(form.instance)
-    #     form.save()
-    #     return super(form_valid, self).form_valid(form)
-
-
 
     def form_valid(self, form):
         aluno = form.save(commit=False)
@@ -127,10 +101,11 @@ class cadastro_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
         aluno.save()
         return HttpResponseRedirect(reverse('thanks'))
 
-        def get_context_data(self, **kwargs):
-            context = super(cadastro_aluno, self).get_context_data(**kwargs)
-            context['raphael'] = Aluno.objects.all()
-            return context
+    #joga no context todos os objetos de Aluno, então no html é utilizado esse context (raphael) para exibi-lo
+    def get_context_data(self, **kwargs):
+        context = super(cadastro_aluno, self).get_context_data(**kwargs)
+        context['raphael'] = Aluno.objects.all()
+        return context
 
 class cadastro_atualizar_aluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     template_name = 'cadastroAluno.html'
@@ -140,7 +115,7 @@ class cadastro_atualizar_aluno(LoginRequiredMixin, GroupRequiredMixin, UpdateVie
     success_url = reverse_lazy('listaAluno')
     login_url = '/login/'
 
-    # group_required = ["Servidores"]
+    group_required = ["Servidores"]
 
 
 class ServidorViewSet(viewsets.ModelViewSet):

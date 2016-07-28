@@ -24,10 +24,14 @@ from django.conf.urls import patterns, url
 from django.contrib import admin
 from rest_framework import routers
 
+from django.conf.urls import patterns, url
+from notificacao import views as api_views
+
 from notificacao.views import cadastro_aluno, cadastro_atualizar_aluno, lista_aluno
 from notificacao.views import login_user, thanks
 
 from notificacao.views import AlunoViewSet
+from notificacao.views import AlunoLoginViewSet
 from notificacao.views import ServidorViewSet
 from notificacao.views import ProfessorViewSet
 from notificacao.views import NotificacaoViewSet
@@ -41,6 +45,7 @@ router.register(r'professor', ProfessorViewSet, base_name='professor')
 router.register(r'notificacao', NotificacaoViewSet, base_name='notificacao')
 router.register(r'tipo_formacao', TipoFormacaoViewSet, base_name='tipoformacao')
 router.register(r'tipo_notificacao', TipoNotificacaoViewSet, base_name='tiponotificacao')
+router.register(r'alunologin', AlunoLoginViewSet, base_name='alunologin')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -49,6 +54,6 @@ urlpatterns = [
     url(r'cadastro_aluno/(?P<pk>\d+)/$', cadastro_atualizar_aluno.as_view(), name='cadastroUpdateAluno'),
     # url(r'cadastro_aluno/$', 'notificacao.views.cadastro_aluno'),
     url(r'^login/$', login_user),
-    url(r'^$', thanks, name = "thanks"),
+    url(r'^$', thanks, name = "thanks")
     #url(r'cadastro/cadastro_aluno/$', 'notificacao.views.cadastro_aluno')
 ] + router.urls
