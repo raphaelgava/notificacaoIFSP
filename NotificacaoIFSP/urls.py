@@ -20,14 +20,13 @@ Including another URLconf
 #     url(r'^cadastro/', admin.site.urls),
 # ]
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib import admin
 from rest_framework import routers
 
-from django.conf.urls import patterns, url
-from notificacao import views as api_views
+from notificacao.views import CadastrarAluno, AtualizarAluno, ListarAluno
+from notificacao.views import CadastrarServidor
 
-from notificacao.views import cadastrar_aluno, atualizar_aluno, listar_aluno
 # from notificacao.views import login_user, thanks
 from notificacao.views import login_view, logout_view, thanks
 
@@ -47,12 +46,13 @@ router.register(r'tipo_formacao', TipoFormacaoViewSet, base_name='tipoformacao')
 router.register(r'tipo_notificacao', TipoNotificacaoViewSet, base_name='tiponotificacao')
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'lista_aluno/$', listar_aluno.as_view(), name='listaAluno'),
-    url(r'cadastro_aluno/$', cadastrar_aluno.as_view(), name='cadastroAluno'),
-    url(r'cadastro_aluno/(?P<pk>\d+)/$', atualizar_aluno.as_view(), name='cadastroUpdateAluno'),
-    # url(r'^login/$', login_user),
-    url(r'^login/$', login_view, name='login'),
-    url(r'^logout/$', logout_view, name='logout'),
-    url(r'^$', thanks, name = "thanks")
-] + router.urls
+                  url(r'^admin/', admin.site.urls),
+                  url(r'lista_aluno/$', ListarAluno.as_view(), name='listaAluno'),
+                  url(r'cadastro_aluno/$', CadastrarAluno.as_view(), name='cadastroAluno'),
+                  url(r'cadastro_aluno/(?P<pk>\d+)/$', AtualizarAluno.as_view(), name='cadastroUpdateAluno'),
+                  url(r'cadastro_servidor/$', CadastrarServidor.as_view(), name='cadastroServidor'),
+                  # url(r'^login/$', login_user),
+                  url(r'^login/$', login_view, name='login'),
+                  url(r'^logout/$', logout_view, name='logout'),
+                  url(r'^$', thanks, name="thanks")
+              ] + router.urls

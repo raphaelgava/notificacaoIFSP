@@ -1,20 +1,19 @@
 from django.contrib import admin
-
 from django.contrib.auth.admin import UserAdmin
 
 from .models import Aluno
-from .models import Professor
-from .models import Servidor
 from .models import Curso
 from .models import Disciplina
 from .models import Instituto
 from .models import Local
 from .models import Notificacao
 from .models import Oferecimento
+from .models import Professor
 from .models import Salaalunos
 from .models import Salaprofessores
-from .models import Tiponotificacao
+from .models import Servidor
 from .models import Tipoformacao
+from .models import Tiponotificacao
 
 # Register your models here.
 

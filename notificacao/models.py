@@ -13,12 +13,14 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 
+
 class Pessoa(AbstractUser):
     SEXO = (
         ('Masculino', 'Masculino'),
         ('Feminino', 'Feminino'),
     )
-    sexo = models.CharField(max_length=10, default='Masculino', blank=False, null=False, choices=SEXO)  # Field name made lowercase.
+    sexo = models.CharField(max_length=10, default='Masculino', blank=False, null=False,
+                            choices=SEXO)  # Field name made lowercase.
     datanascimento = models.DateField("Data de nascimento", default=timezone.now)  # Field name made lowercase.
     id_instituto = models.ForeignKey('Instituto', blank=True, null=True)  # Field name made lowercase.
 
@@ -33,6 +35,7 @@ class Pessoa(AbstractUser):
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
         return '{} - {}'.format(self.username, self.first_name)
+
 
 class Servidor(Pessoa):
     funcao = models.CharField("Função", max_length=30, blank=True, null=True)  # Field name made lowercase.
@@ -70,10 +73,12 @@ class Remetente(models.Model):
     def __str__(self):
         return '{}'.format(self.descricao)
 
+
 class Curso(Remetente):
     id_instituto = models.ForeignKey('Instituto')  # Field name made lowercase.
     ativo = models.BooleanField(default=True)  # Field name made lowercase. This field type is a guess.
     disciplinas = models.ManyToManyField('Disciplina')
+
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
@@ -106,7 +111,8 @@ class Local(models.Model):
 
 
 class Notificacao(models.Model):
-    datahora = models.DateTimeField("Data notificação", primary_key=True, auto_now_add=True)  # Field name made lowercase.
+    datahora = models.DateTimeField("Data notificação", primary_key=True,
+                                    auto_now_add=True)  # Field name made lowercase.
     id_tipo = models.ForeignKey('Tiponotificacao', verbose_name="Tipo notificação")  # Field name made lowercase.
     id_local = models.ForeignKey(Local, verbose_name="Local", blank=True, null=True)  # Field name made lowercase.
     descricao = models.CharField("Descrição", max_length=255)  # Field name made lowercase.
@@ -174,7 +180,7 @@ class Tipoformacao(models.Model):
         verbose_name = 'Tipo Formação'
         verbose_name_plural = 'Tipos Formações'
 
-    #essa definição é para mostrar a descrição na lista dos cadastros
+    # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
         return '{}'.format(self.descricao)
 
