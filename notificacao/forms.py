@@ -7,6 +7,10 @@ from django.forms import ModelForm
 from .models import Aluno
 from .models import Notificacao
 
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
 class AlunoForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Senha')
     password_check = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Confirmar senha',)
@@ -15,14 +19,6 @@ class AlunoForm(ModelForm):
     class Meta:
         model = Aluno
         fields = ('username', 'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento', 'id_instituto', 'turma',)
-
-    # def compare_password(self):
-    #     user = self.model()
-    #     user.set_password(password)
-    #     if (senha2 = password)
-    #         set_password(password)
-
-    # def verify_password:
 
 
         # class NotificacaoForm(ModelForm):

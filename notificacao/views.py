@@ -27,45 +27,56 @@ from .models import Tipoformacao
 from .models import Tiponotificacao
 
 from .forms import AlunoForm
+from .forms import LoginForm
 
 def thanks(request):
     return render(request, 'thanks.html')
 
-def login_user(request):
+def logout_view(request):
     logout(request)
-    username = password = ''
-    if request.POST:
-        username = request.POST['username']
-        password = request.POST['password']
+    return HttpResponseRedirect(reverse('login'))
 
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/cadastro_aluno/')
-    return render_to_response('login.html', context_instance=RequestContext(request))
+def login_view(request):
+    if request.method == "GET":
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
+    elif request.method == "POST":
+        form = LoginForm(request.POST)
+        if not form.is_valid():
+            return HttpResponse('Invalid data')
 
-class AlunoViewSet(viewsets.ModelViewSet):
-    model = Aluno
-    lookup_field = 'pk'
-    serializer_class = AlunoSerializer
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username,
+                            password=password)
+        if not user:
+            return HttpResponse('Invalid username and/or password')
 
-    def get_queryset(self):
-        return Aluno.objects.all()
+        login(request, user)
 
-class AlunoLoginViewSet(viewsets.ModelViewSet):
-    model = Aluno
-    lookup_field = 'pk'
-    serializer_class = AlunoLoginSerializer
+        user
+        return HttpResponseRedirect(reverse('cadastroAluno'))
 
-    def get_queryset(self):
-        return Aluno.objects.all()
+# def login_user(request):
+    # logout(request)
+    # username = password = ''
+    # if request.POST:
+    #     username = request.POST['username']
+    #     password = request.POST['password']
+    #
+    #     user = authenticate(username=username, password=password)
+    #     if user is not None:
+    #         if user.is_active:
+    #             login(request, user)
+    #             return HttpResponseRedirect('/cadastro_aluno/')
+    # return render_to_response('login.html', context_instance=RequestContext(request))
 
-class lista_aluno(ListView):
+
+class listar_aluno(ListView):
     template_name = 'aluno_list.html'
     model = Aluno
 
-class cadastro_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
+class cadastrar_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     template_name = 'cadastroAluno.html'
     model = Aluno
     form_class = AlunoForm
@@ -73,7 +84,7 @@ class cadastro_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     success_url = reverse_lazy('listaAluno')
     login_url = '/login/'
 
-    group_required = ["Servidores"]
+    group_required = ["Admin"]
 
     def form_valid(self, form):
         aluno = form.save(commit=False)
@@ -107,7 +118,7 @@ class cadastro_aluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
         context['raphael'] = Aluno.objects.all()
         return context
 
-class cadastro_atualizar_aluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
+class atualizar_aluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     template_name = 'cadastroAluno.html'
     model = Aluno
     form_class = AlunoForm
@@ -116,6 +127,15 @@ class cadastro_atualizar_aluno(LoginRequiredMixin, GroupRequiredMixin, UpdateVie
     login_url = '/login/'
 
     group_required = ["Servidores"]
+
+#All objects
+class AlunoViewSet(viewsets.ModelViewSet):
+    model = Aluno
+    lookup_field = 'pk'
+    serializer_class = AlunoSerializer
+
+    def get_queryset(self):
+        return Aluno.objects.all()
 
 
 class ServidorViewSet(viewsets.ModelViewSet):
