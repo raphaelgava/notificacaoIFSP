@@ -1,8 +1,22 @@
+body{
+    min-width: 250px;
+}
+
+.wrapper{
+	min-height: 100%;
+	/*position: relative;*/
+}
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
   margin-bottom: 0;
   border-radius: 0;
 }
+/*
+.navbar-inverse{
+    background: rgb(92, 184, 92);
+}
+*/
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 450px}
@@ -14,12 +28,15 @@
   height: 100%;
 }
 
-/* Set black background color, white text and some padding */
-footer {
-  background-color: #555;
-  color: white;
-  padding: 15px;
-}
+
+.vertical-center {
+      min-height: 100%;
+
+      display: flex;
+      align-items: center;
+    }
+
+
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
@@ -30,3 +47,55 @@ footer {
   .row.content {height:auto;}
 }
 
+/*Gera o alinhamento dos itens do navbar quando não estiver exibindo o ícone de opções*/
+
+@media screen and (min-width: 768px) {
+/*
+    .vertical-center {
+      min-height: 100%;
+
+      display: flex;
+      align-items: center;
+    }
+    */
+    .navbar-collapse{
+        padding-top: 25px;
+    }
+}
+
+
+/*css do form de login!!!*/
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

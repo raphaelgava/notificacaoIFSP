@@ -14,8 +14,8 @@ from .models import Aluno
 from .models import Notificacao
 from .models import Professor
 from .models import Servidor
-from .models import Tipoformacao
-from .models import Tiponotificacao
+from .models import TipoFormacao
+from .models import TipoNotificacao
 from .serializers import AlunoSerializer
 from .serializers import NotificacaoSerializer
 from .serializers import ProfessorSerializer
@@ -182,7 +182,6 @@ class AlunoViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Aluno.objects.all()
 
-
 class ServidorViewSet(viewsets.ModelViewSet):
     model = Servidor
     lookup_field = 'pk'
@@ -211,18 +210,18 @@ class NotificacaoViewSet(viewsets.ModelViewSet):
 
 
 class TipoFormacaoViewSet(viewsets.ModelViewSet):
-    model = Tipoformacao
+    model = TipoFormacao
     lookup_field = 'pk'
     serializer_class = TipoFormacaoSerializer
 
     def get_queryset(self):
-        return Tipoformacao.objects.all()
+        return TipoFormacao.objects.all()
 
 
 class TipoNotificacaoViewSet(viewsets.ModelViewSet):
-    model = Tiponotificacao
+    model = TipoNotificacao
     lookup_field = 'pk'
     serializer_class = TipoNotificacaoSerializer
 
     def get_queryset(self):
-        return Tiponotificacao.objects.all()
+        return TipoNotificacao.objects.all()

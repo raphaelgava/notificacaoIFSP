@@ -14,6 +14,7 @@ from django.db import models
 from django.utils import timezone
 
 
+
 class Pessoa(AbstractUser):
     SEXO = (
         ('Masculino', 'Masculino'),
@@ -155,7 +156,7 @@ class Instituto(Remetente):
         verbose_name_plural = 'Institutos'
 
 
-class Salaalunos(Remetente):
+class SalaAlunos(Remetente):
     id_curso = models.ForeignKey(Curso, blank=True, null=True)  # Field name made lowercase.
     alunos = models.ManyToManyField(Aluno)
 
@@ -164,7 +165,7 @@ class Salaalunos(Remetente):
         verbose_name_plural = 'Salas Alunos'
 
 
-class Salaprofessores(Remetente):
+class SalaProfessores(Remetente):
     id_curso = models.ForeignKey(Curso, blank=True, null=True)  # Field name made lowercase.
     professores = models.ManyToManyField(Professor)
 
@@ -173,7 +174,7 @@ class Salaprofessores(Remetente):
         verbose_name_plural = 'Salas Professores'
 
 
-class Tipoformacao(models.Model):
+class TipoFormacao(models.Model):
     descricao = models.CharField("Descrição", max_length=30, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -185,7 +186,7 @@ class Tipoformacao(models.Model):
         return '{}'.format(self.descricao)
 
 
-class Tiponotificacao(models.Model):
+class TipoNotificacao(models.Model):
     titulo = models.CharField("Título", max_length=20, blank=True, null=True)  # Field name made lowercase.
     cor = models.CharField(max_length=7, blank=True, null=True)  # Field name made lowercase.
 
