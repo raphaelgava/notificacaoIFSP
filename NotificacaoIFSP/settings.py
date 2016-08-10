@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',
     'notificacao',
 ]
 
@@ -101,7 +100,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'notificacao.Pessoa'
+AUTH_USER_MODEL = 'notificacao.Usuario'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

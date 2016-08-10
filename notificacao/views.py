@@ -1,9 +1,12 @@
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
+from django import forms
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from rest_framework import viewsets
 
@@ -22,52 +25,97 @@ from .serializers import ProfessorSerializer
 from .serializers import ServidorSerializer
 from .serializers import TipoFormacaoSerializer
 from .serializers import TipoNotificacaoSerializer
-from .stuff.constants import GroupConst
+from .stuff.constants import GroupConst, HTML, Paginas, Mensagens
 from .stuff.helpers import CreatePerson
 
 
 def thanks(request):
-    return render(request, 'thanks.html')
+    return render(request, HTML.THANKS)
 
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('login'))
+    return HttpResponseRedirect(reverse(Paginas.LOGIN))
 
 
 def login_view(request):
     if request.method == "GET":
         form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, HTML.LOGIN, {'form': form})
     elif request.method == "POST":
         form = LoginForm(request.POST)
         if not form.is_valid():
-            return HttpResponse('Invalid data')
+            messages.error(request, Mensagens.DADOS_INVALIDOS)
+            return HttpResponseRedirect(Paginas.LOGIN)
 
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         user = authenticate(username=username,
                             password=password)
         if not user:
-            return HttpResponse('Invalid username and/or password')
+            messages.error(request, Mensagens.LOGIN_INVALIDO)
+            return HttpResponseRedirect(Paginas.LOGIN)
+
+        # form.clean_remember_me(self);
+        # remember = form.cleaned_data['remember_me']
+        # if remember:
+        #     request.session.set_expiry(1209600) # 2 weeks
 
         login(request, user)
 
         # user.groups.all()
         if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
-            return HttpResponseRedirect(reverse('cadastroAluno'))
+            return HttpResponseRedirect(reverse('loginAluno'))
         elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
-            return HttpResponseRedirect(reverse('cadastroServidor'))
+            return HttpResponseRedirect(reverse('loginServidor'))
+        elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
+            return HttpResponseRedirect(reverse('loginProfessor'))
         elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
-            return HttpResponseRedirect(reverse('cadastroAluno'))
+            return HttpResponseRedirect(reverse('loginAdmin'))
         else:
             logout(request)
-            return HttpResponse('Invalid group!!!')
+            messages.error(request, Mensagens.USUARIO_INVALIDO)
+            return HttpResponseRedirect(reverse(Paginas.LOGIN))
 
 
-class ListarAluno(ListView):
-    template_name = 'aluno_list.html'
-    model = Aluno
+# ==========================================PÁGINAS LOGIN===============================================================
+
+class AlunoLogado(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
+    template_name = 'aluno.html'
+    success_url = reverse_lazy('loginAluno')
+    login_url = Paginas.LOGIN_URL
+
+    group_required = [GroupConst.STUDENT]
+
+
+class ServidorLogado(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
+    template_name = 'loginServidor.html'
+    success_url = reverse_lazy('loginServidor')
+    login_url = Paginas.LOGIN_URL
+
+    group_required = [GroupConst.EMPLOYEE]
+
+
+class ProfessorLogado(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
+    template_name = 'professor.html'
+    success_url = reverse_lazy('loginProfessor')
+    login_url = Paginas.LOGIN_URL
+
+    group_required = [GroupConst.PROFESSOR]
+
+
+class AdminLogado(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
+    template_name = 'loginAdministrador.html'
+    success_url = reverse_lazy('loginAdministrador')
+    login_url = Paginas.LOGIN_URL
+
+    group_required = [GroupConst.ADMIN]
+
+
+#======================================================================================================================
+
+
+
 
 
 class CadastrarAluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
@@ -75,10 +123,14 @@ class CadastrarAluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     model = Aluno
     form_class = AlunoForm
     # success_url = '/thanks/'
-    success_url = reverse_lazy('listaAluno')
+    success_url = reverse_lazy('listaAlunos')
     login_url = '/login/'
 
-    group_required = [GroupConst.STUDENT]
+    group_required = [GroupConst.ADMIN]
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = None
+    #     return super(CadastrarAluno, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
         # aluno = form.save(commit=False)
@@ -88,7 +140,10 @@ class CadastrarAluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
         password_check = form.cleaned_data['password_check']
 
         if password != password_check:
-            return HttpResponse('Confirmação de senha inválida')
+            # messages.error(request, Mensagens.DADOS_INVALIDOS)
+            raise forms.ValidationError("Passwords don't match")
+            return HttpResponseRedirect(reverse_lazy('cadastroAluno'))
+            # return HttpResponse('Confirmação de senha inválida')
 
         username = form.cleaned_data['username']
         first_name = form.cleaned_data['first_name']
@@ -108,7 +163,7 @@ class CadastrarAluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
         # aluno = CreatePerson.create_student(aluno, password)
         CreatePerson.create_student(aluno, password)
 
-        return HttpResponseRedirect(reverse('thanks'))
+        return HttpResponseRedirect(reverse_lazy('listaAlunos'))
 
     # joga no context todos os objetos de Aluno, então no html é utilizado esse context (raphael) para exibi-lo
     def get_context_data(self, **kwargs):
@@ -122,11 +177,27 @@ class AtualizarAluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     model = Aluno
     form_class = AlunoForm
     # success_url = '/thanks/'
-    success_url = reverse_lazy('listaAluno')
+    success_url = reverse_lazy('listaAlunos')
     login_url = '/login/'
 
-    group_required = [GroupConst.STUDENT]
+    group_required = [GroupConst.ADMIN]
 
+
+class ListarAluno(LoginRequiredMixin, GroupRequiredMixin, ListView):
+    template_name = 'listaAlunos.html'
+    model = Aluno
+    form_class = AlunoForm
+    # success_url = '/thanks/'
+    success_url = reverse_lazy('servidor')
+    login_url = '/login/'
+
+    group_required = [GroupConst.ADMIN]
+
+    # joga no context todos os objetos de Aluno, então no html é utilizado esse context (listaPessoa) para exibi-lo
+    def get_context_data(self, **kwargs):
+        context = super(ListarAluno, self).get_context_data(**kwargs)
+        context['listaPessoa'] = Aluno.objects.all();
+        return context
 
 class CadastrarServidor(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     template_name = 'cadastroServidor.html'
@@ -136,7 +207,7 @@ class CadastrarServidor(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     success_url = reverse_lazy('listaAluno')
     login_url = '/login/'
 
-    group_required = [GroupConst.EMPLOYEE]
+    group_required = [GroupConst.ADMIN]
 
     def form_valid(self, form):
         form.save(commit=False)

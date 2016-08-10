@@ -15,12 +15,54 @@ from .models import Servidor
 from .models import TipoFormacao
 from .models import TipoNotificacao
 
-# Register your models here.
+
+# from .model.pessoas import Aluno
+# from .model.remetentes import Curso
+# from .model.outros import Disciplina
+# from .model.remetentes import Instituto
+# from .model.outros import Local
+# from .model.outros import Notificacao
+# from .model.remetentes import Oferecimento
+# from .model.pessoas import Professor
+# from .model.remetentes import SalaAlunos
+# from .model.remetentes import SalaProfessores
+# from .model.pessoas import Servidor
+# from .model.outros import TipoFormacao
+# from .model.outros import TipoNotificacao
 
 
-admin.site.register(Aluno, UserAdmin)
-admin.site.register(Professor, UserAdmin)
-admin.site.register(Servidor, UserAdmin)
+# Register your model here.
+
+class _PersonAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        (('Outras Informações'), {'fields': ('sexo', 'datanascimento', 'id_instituto')}),
+    )
+
+    class Meta:
+        abstract = True;
+
+
+class AlunoAdmin(_PersonAdmin):
+    fieldsets = _PersonAdmin.fieldsets + (
+        (('Informações Aluno'), {'fields': ('turma',)}),
+    )
+
+
+class ServidorAdmin(_PersonAdmin):
+    fieldsets = _PersonAdmin.fieldsets + (
+        (('Informações Servidor'), {'fields': ('funcao',)}),
+    )
+
+
+class ProfessorAdmin(_PersonAdmin):
+    fieldsets = ServidorAdmin.fieldsets + (
+        (('Informações Professor'), {'fields': ('formacao', 'id_tipo',)}),
+    )
+
+
+admin.site.register(Aluno, AlunoAdmin)
+admin.site.register(Professor, ProfessorAdmin)
+admin.site.register(Servidor, ServidorAdmin)
 admin.site.register(Curso)
 admin.site.register(Disciplina)
 admin.site.register(Instituto)
