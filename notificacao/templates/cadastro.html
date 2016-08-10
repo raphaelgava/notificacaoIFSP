@@ -20,13 +20,48 @@
                         </div>
                     </div>
                     {% else %}
-                    <div class="form-group">
+                    <div class="form-group
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if 'wrongPassword' in message.tags %}
+                                            {% if field.label == 'Senha' or field.label == 'Confirmar senha' %}
+                                                error
+                                            {% endif %}
+                                        {% else %}
+                                            {% if 'wrongUser' in message.tags %}
+                                                {% if field.label == 'Usuário' %}
+                                                    error
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}">
                         <label class="control-label col-sm-2">{{ field.label }}</label>
                         <div class="col-sm-10">{{ field }}
+                            {% if messages %}
+                            {% for message in messages %}
+                            {% if 'wrongPassword' in message.tags %}
+                            {% if field.label == 'Senha' or field.label == 'Confirmar senha' %}
+                                                    <span class="help-inline">
+                                                        <small>{{message}}</small>
+                                                    </span>
+                            {% endif %}
+                            {% else %}
+                            {% if 'wrongUser' in message.tags %}
+                            {% if field.label == 'Usuário' %}
+                                                        <span class="help-inline">
+                                                            <small>{{message}}</small>
+                                                        </span>
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
                             {% if field.help_text %}
-                            <p class="help-inline">
-                                <small>{{ field.help_text }}</small>
-                            </p>
+                                            <span class="help-inline">
+                                                <small>{{ field.help_text }}</small>
+                                            </span>
+                            {% endif %}
                             {% endif %}
                         </div>
                     </div>

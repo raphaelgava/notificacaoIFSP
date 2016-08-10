@@ -1,5 +1,4 @@
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
-from django import forms
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -46,7 +45,7 @@ def login_view(request):
         form = LoginForm(request.POST)
         if not form.is_valid():
             messages.error(request, Mensagens.DADOS_INVALIDOS)
-            return HttpResponseRedirect(Paginas.LOGIN)
+            return HttpResponseRedirect(reverse(Paginas.LOGIN))
 
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
@@ -54,7 +53,7 @@ def login_view(request):
                             password=password)
         if not user:
             messages.error(request, Mensagens.LOGIN_INVALIDO)
-            return HttpResponseRedirect(Paginas.LOGIN)
+            return HttpResponseRedirect(reverse(Paginas.LOGIN))
 
         # form.clean_remember_me(self);
         # remember = form.cleaned_data['remember_me']
@@ -140,9 +139,10 @@ class CadastrarAluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
         password_check = form.cleaned_data['password_check']
 
         if password != password_check:
-            # messages.error(request, Mensagens.DADOS_INVALIDOS)
-            raise forms.ValidationError("Passwords don't match")
-            return HttpResponseRedirect(reverse_lazy('cadastroAluno'))
+            messages.error(self.request, Mensagens.DADOS_INVALIDOS)
+            return render(self.request, HTML.CADASTRO_ALUNO, {'form': form})
+            # raise forms.ValidationError("Passwords don't match")
+            # return HttpResponseRedirect(reverse_lazy('cadastroAluno'))
             # return HttpResponse('Confirmação de senha inválida')
 
         username = form.cleaned_data['username']
@@ -182,6 +182,45 @@ class AtualizarAluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
 
     group_required = [GroupConst.ADMIN]
 
+    def form_valid(self, form):
+        form.save(commit=False)
+
+        password = form.cleaned_data['password']
+        password_check = form.cleaned_data['password_check']
+        username = form.cleaned_data['username']
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        email = form.cleaned_data['email']
+        sexo = form.cleaned_data['sexo']
+        datanascimento = form.cleaned_data['datanascimento']
+        instituto = form.cleaned_data['id_instituto']
+        turma = form.cleaned_data['turma']
+
+        # aluno = Aluno.objects.get_or_create(username=username, password=password, email=email, first_name=first_name,
+        #                              last_name=last_name,
+        #                              sexo=sexo, datanascimento=datanascimento, id_instituto=instituto, turma=turma)
+
+        aluno = Aluno.objects.filter(username=username).first()
+        if password == password_check:
+            if aluno is not None:
+                aluno.email = email
+                aluno.first_name = first_name
+                aluno.last_name = last_name
+                aluno.sexo = sexo
+                aluno.datanascimento = datanascimento
+                aluno.id_instituto = instituto
+                aluno.turma = turma
+
+                CreatePerson.create_student(aluno, password)
+                return HttpResponseRedirect(reverse_lazy('listaAlunos'))
+            else:
+                messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
+        else:
+            if aluno is None:
+                messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
+            messages.error(self.request, Mensagens.DADOS_INVALIDOS, extra_tags='wrongPassword')
+
+        return render(self.request, HTML.CADASTRO_ALUNO, {'form': form})
 
 class ListarAluno(LoginRequiredMixin, GroupRequiredMixin, ListView):
     template_name = 'listaAlunos.html'
