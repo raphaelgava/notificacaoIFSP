@@ -13,7 +13,8 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <table class="table">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+            <table class="table" id="myTable">
                 <thead>
                 <tr>
                     <th>Prontuário</th>
@@ -23,8 +24,8 @@
                     <th colspan="2">Ações</th>
                 </tr>
                 </thead>
-                <tbody id="myTable">
-                {% for pessoa in listaPessoa %}
+                <tbody id="myTableBordy">
+                {% for pessoa in view.activePerson %}
                 {% if forloop.counter|divisibleby:2 %}
                 <tr class="success">
                     {% else %}
@@ -38,8 +39,32 @@
                     {% endblock %}
                 </tr>
                 {% endfor %}
+
                 </tbody>
             </table>
+            <script>
+                function myFunction() {
+                  // Declare variables
+                  var input, filter, table, tr, td, i;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("myTable");
+                  tr = table.getElementsByTagName("tr");
+
+                  // Loop through all table rows, and hide those who don't match the search query
+                  for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                      } else {
+                        tr[i].style.display = "none";
+                      }
+                    }
+                  }
+                }
+
+            </script>
         </div>
     </div>
 </div>

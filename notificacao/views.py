@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from rest_framework import viewsets
 
 from .forms import AlunoForm
@@ -32,16 +32,135 @@ def thanks(request):
     return render(request, HTML.THANKS)
 
 
-def logout_view(request):
-    logout(request)
+# def logout_view(request):
+#     logout(request)
+#     return HttpResponseRedirect(reverse(Paginas.LOGIN))
+#
+#
+def checkUser(request, user):
+    if user is not None:
+        if user.is_active:
+            variable = "teste"
+            context = {
+                'variable': variable,
+            }
+            if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
+                messages.info(request, GroupConst.STUDENT)
+                return HttpResponseRedirect(reverse('loginAluno'))
+            elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
+                messages.info(request, GroupConst.EMPLOYEE)
+                return HttpResponseRedirect(reverse('loginServidor'))
+            elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
+                messages.info(request, GroupConst.PROFESSOR)
+                return HttpResponseRedirect(reverse('loginProfessor'))
+            elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
+                messages.info(request, GroupConst.ADMIN)
+                return render(request, 'loginAdministrador.html', {'bla': variable})
+                # return HttpResponseRedirect(reverse('loginAdmin'))
+            else:
+                logout(request)
+
+    messages.error(request, Mensagens.USUARIO_INVALIDO)
     return HttpResponseRedirect(reverse(Paginas.LOGIN))
 
 
-def login_view(request):
-    if request.method == "GET":
+# def login_view(request):
+#     if request.method == "GET":
+#         user = request.user
+#         if user is not None:
+#             if not user.is_anonymous():
+#                 return checkUser(request, user)
+#         form = LoginForm()
+#         return render(request, HTML.LOGIN, {'form': form})
+#     elif request.method == "POST":
+#         form = LoginForm(request.POST)
+#         if not form.is_valid():
+#             messages.error(request, Mensagens.DADOS_INVALIDOS)
+#             return HttpResponseRedirect(reverse(Paginas.LOGIN))
+#
+#         username = form.cleaned_data['username']
+#         password = form.cleaned_data['password']
+#         user = authenticate(username=username,
+#                             password=password)
+#         if not user:
+#             messages.error(request, Mensagens.LOGIN_INVALIDO)
+#             return HttpResponseRedirect(reverse(Paginas.LOGIN))
+#
+#         # form.clean_remember_me(self);
+#         # remember = form.cleaned_data['remember_me']
+#         # if remember:
+#         #     request.session.set_expiry(1209600) # 2 weeks
+#
+#         login(request, user)
+#         return checkUser(request, user)
+#
+#         # user.groups.all()
+#         # if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
+#         #     messages.info(request, GroupConst.STUDENT)
+#         #     return HttpResponseRedirect(reverse('loginAluno'))
+#         # elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
+#         #     messages.info(request, GroupConst.EMPLOYEE)
+#         #     return HttpResponseRedirect(reverse('loginServidor'))
+#         # elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
+#         #     messages.info(request, GroupConst.PROFESSOR)
+#         #     return HttpResponseRedirect(reverse('loginProfessor'))
+#         # elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
+#         #     messages.info(request, GroupConst.ADMIN)
+#         #     return HttpResponseRedirect(reverse('loginAdmin'))
+#         # else:
+#         #     logout(request)
+#         #     messages.error(request, Mensagens.USUARIO_INVALIDO)
+#         #     return HttpResponseRedirect(reverse(Paginas.LOGIN))
+
+class Logout(TemplateView):
+    template_name = 'login.html'
+    login_url = Paginas.LOGIN_URL
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return HttpResponseRedirect(reverse(Paginas.LOGIN))
+
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return HttpResponseRedirect(reverse(Paginas.LOGIN))
+
+
+class Login(TemplateView):
+    template_name = 'login.html'
+    login_url = Paginas.LOGIN_URL
+
+    # def checkUser(request, user):
+    #     if user is not None:
+    #         if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
+    #             messages.info(request, GroupConst.STUDENT)
+    #             return HttpResponseRedirect(reverse('loginAluno'))
+    #         elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
+    #             messages.info(request, GroupConst.EMPLOYEE)
+    #             return HttpResponseRedirect(reverse('loginServidor'))
+    #         elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
+    #             messages.info(request, GroupConst.PROFESSOR)
+    #             return HttpResponseRedirect(reverse('loginProfessor'))
+    #         elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
+    #             messages.info(request, GroupConst.ADMIN)
+    #             return HttpResponseRedirect(reverse('loginAdmin'))
+    #         else:
+    #             logout(request)
+    #             messages.error(request, Mensagens.USUARIO_INVALIDO)
+    #             return HttpResponseRedirect(reverse(Paginas.LOGIN))
+    #
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        if user is not None:
+            if not user.is_anonymous():
+                return checkUser(request, user)
+
         form = LoginForm()
         return render(request, HTML.LOGIN, {'form': form})
-    elif request.method == "POST":
+
+    def post(self, request, *args, **kwargs):
+        """
+        Same as django.views.generic.edit.ProcessFormView.post(), but adds test cookie stuff
+        """
         form = LoginForm(request.POST)
         if not form.is_valid():
             messages.error(request, Mensagens.DADOS_INVALIDOS)
@@ -49,8 +168,7 @@ def login_view(request):
 
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
-        user = authenticate(username=username,
-                            password=password)
+        user = authenticate(username=username, password=password)
         if not user:
             messages.error(request, Mensagens.LOGIN_INVALIDO)
             return HttpResponseRedirect(reverse(Paginas.LOGIN))
@@ -61,20 +179,7 @@ def login_view(request):
         #     request.session.set_expiry(1209600) # 2 weeks
 
         login(request, user)
-
-        # user.groups.all()
-        if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
-            return HttpResponseRedirect(reverse('loginAluno'))
-        elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
-            return HttpResponseRedirect(reverse('loginServidor'))
-        elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
-            return HttpResponseRedirect(reverse('loginProfessor'))
-        elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
-            return HttpResponseRedirect(reverse('loginAdmin'))
-        else:
-            logout(request)
-            messages.error(request, Mensagens.USUARIO_INVALIDO)
-            return HttpResponseRedirect(reverse(Paginas.LOGIN))
+        return checkUser(request, user)
 
 
 # ==========================================PÁGINAS LOGIN===============================================================
@@ -115,55 +220,45 @@ class AdminLogado(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
 
 
 
-
+# ==========================================CADASTRO ALUNO=============================================================
 
 class CadastrarAluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     template_name = 'cadastroAluno.html'
     model = Aluno
     form_class = AlunoForm
-    # success_url = '/thanks/'
     success_url = reverse_lazy('listaAlunos')
     login_url = '/login/'
 
     group_required = [GroupConst.ADMIN]
 
-    # def post(self, request, *args, **kwargs):
-    #     self.object = None
-    #     return super(CadastrarAluno, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # aluno = form.save(commit=False)
         form.save(commit=False)
 
         password = form.cleaned_data['password']
         password_check = form.cleaned_data['password_check']
 
-        if password != password_check:
-            messages.error(self.request, Mensagens.DADOS_INVALIDOS)
-            return render(self.request, HTML.CADASTRO_ALUNO, {'form': form})
-            # raise forms.ValidationError("Passwords don't match")
-            # return HttpResponseRedirect(reverse_lazy('cadastroAluno'))
-            # return HttpResponse('Confirmação de senha inválida')
+        if password == password_check:
+            username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            sexo = form.cleaned_data['sexo']
+            datanascimento = form.cleaned_data['datanascimento']
+            instituto = form.cleaned_data['id_instituto']
+            turma = form.cleaned_data['turma']
 
-        username = form.cleaned_data['username']
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-        email = form.cleaned_data['email']
-        sexo = form.cleaned_data['sexo']
-        datanascimento = form.cleaned_data['datanascimento']
-        instituto = form.cleaned_data['id_instituto']
-        turma = form.cleaned_data['turma']
+            aluno = Aluno.objects.create(username=username, password=password, email=email, first_name=first_name,
+                                         last_name=last_name,
+                                         sexo=sexo, datanascimento=datanascimento, id_instituto=instituto, turma=turma)
 
-        aluno = Aluno.objects.create(username=username, password=password, email=email, first_name=first_name,
-                                     last_name=last_name,
-                                     sexo=sexo, datanascimento=datanascimento, id_instituto=instituto, turma=turma)
+            CreatePerson.create_student(aluno, password)
 
-        # aluno.set_password(password)
-        # aluno.save()
-        # aluno = CreatePerson.create_student(aluno, password)
-        CreatePerson.create_student(aluno, password)
+            return HttpResponseRedirect(reverse_lazy('listaAlunos'))
 
-        return HttpResponseRedirect(reverse_lazy('listaAlunos'))
+        messages.error(self.request, Mensagens.DADOS_INVALIDOS)
+        return render(self.request, HTML.CADASTRO_ALUNO, {'form': form})
+
 
     # joga no context todos os objetos de Aluno, então no html é utilizado esse context (raphael) para exibi-lo
     def get_context_data(self, **kwargs):
@@ -176,7 +271,6 @@ class AtualizarAluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
     template_name = 'cadastroAluno.html'
     model = Aluno
     form_class = AlunoForm
-    # success_url = '/thanks/'
     success_url = reverse_lazy('listaAlunos')
     login_url = '/login/'
 
@@ -222,21 +316,75 @@ class AtualizarAluno(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
 
         return render(self.request, HTML.CADASTRO_ALUNO, {'form': form})
 
+
+class ApagarAluno(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
+    template_name = 'delete.html'
+    model = Aluno
+    # form_class = AlunoForm
+    success_url = reverse_lazy('listaAlunos')
+    login_url = '/login/'
+
+    group_required = [GroupConst.ADMIN]
+
+    # def form_valid(self, form):
+    #     if self.request.GET['cancel']:
+    #         form.save(commit=False)
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Calls the delete() method on the fetched object and then
+        redirects to the success URL.
+        """
+        success_url = self.get_success_url()
+        if request.method == 'POST':
+            if 'confirm' in request.POST:
+                self.object = self.get_object()
+                self.object.delete()
+        return HttpResponseRedirect(success_url)
+
+    def get_success_url(self):
+        return reverse_lazy('listaAlunos')
+
+
 class ListarAluno(LoginRequiredMixin, GroupRequiredMixin, ListView):
     template_name = 'listaAlunos.html'
     model = Aluno
     form_class = AlunoForm
-    # success_url = '/thanks/'
     success_url = reverse_lazy('servidor')
     login_url = '/login/'
 
     group_required = [GroupConst.ADMIN]
 
+    def activePerson(self):
+        return Aluno.objects.filter(is_active=True)
+        # return super(ListarAluno, self).get_query_set().filter(is_active=True)
+
+    def allPerson(self):
+        return Aluno.objects.all()
+
     # joga no context todos os objetos de Aluno, então no html é utilizado esse context (listaPessoa) para exibi-lo
-    def get_context_data(self, **kwargs):
-        context = super(ListarAluno, self).get_context_data(**kwargs)
-        context['listaPessoa'] = Aluno.objects.all();
-        return context
+        # def get_context_data(self, **kwargs):
+        #     context = super(ListarAluno, self).get_context_data(**kwargs)
+        #     # return super(ContactActiveManager, self).get_query_set().filter(is_active=True)
+        #     context['listaPessoa'] = Aluno.objects.all();
+        #     return context
+        # {% for pessoa in listaPessoa %}
+        # {% if forloop.counter|divisibleby:2 %}
+        # <tr class="success">
+        # {% else %}
+        # <tr class="info">
+        # {% endif %}
+        # <td>{{ pessoa.username }}</td>
+        # <td>{{ pessoa.first_name }}</td>
+        # <td>{{ pessoa.last_name }}</td>
+        # <td>{{ pessoa.email }}</td>
+        # {% block opcoesLista %}
+        # {% endblock %}
+        # </tr>
+        # {% endfor %}
+
+
+# ======================================================================================================================
 
 class CadastrarServidor(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     template_name = 'cadastroServidor.html'

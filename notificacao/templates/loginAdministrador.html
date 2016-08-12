@@ -2,7 +2,18 @@
 
 {% block sidenavLeft %}
 <ul class="nav nav-pills nav-stacked" data-offset-top="205">
-    <li><a href="{% url 'listaAlunos' %}">Cadastro Aluno</a></li>
+    <!--<div class="well well-sm text-center">-->
+    <div class="well text-center">
+
+        <a href="{% url 'listaAlunos' %}">Cadastro Aluno</a>
+    </div>
+    <div class="well text-center">
+        <p>{{bla}}</p>
+        {% if bla %}
+        <p>TESTEEEEE</p>
+        {% endif %}
+    </div>
+    <!--<li><a href="{% url 'listaAlunos' %}">Cadastro Aluno</a></li>-->
     <!--<li class="dropdown">-->
     <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Section 4 <span class="caret"></span></a>-->
     <!--<ul class="dropdown-menu">-->

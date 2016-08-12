@@ -106,6 +106,10 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.save()
+
 
 # class Usuario(AbstractUser):
 #     class Meta(AbstractUser.Meta):

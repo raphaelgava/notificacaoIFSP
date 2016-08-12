@@ -26,14 +26,14 @@ from rest_framework import routers
 
 from notificacao.views import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
 from notificacao.views import AlunoViewSet
-from notificacao.views import CadastrarAluno, AtualizarAluno, ListarAluno
+from notificacao.views import CadastrarAluno, AtualizarAluno, ApagarAluno, ListarAluno
 from notificacao.views import CadastrarServidor
 from notificacao.views import NotificacaoViewSet
 from notificacao.views import ProfessorViewSet
 from notificacao.views import ServidorViewSet
 from notificacao.views import TipoFormacaoViewSet
 from notificacao.views import TipoNotificacaoViewSet
-from notificacao.views import login_view, logout_view, thanks
+from notificacao.views import thanks, Login, Logout
 
 router = routers.DefaultRouter()
 router.register(r'aluno_json', AlunoViewSet, base_name='aluno')
@@ -48,6 +48,7 @@ urlpatterns = [
                   url(r'lista_aluno/$', ListarAluno.as_view(), name='listaAlunos'),
                   url(r'cadastro_aluno/$', CadastrarAluno.as_view(), name='cadastroAluno'),
                   url(r'cadastro_aluno/(?P<pk>\d+)/$', AtualizarAluno.as_view(), name='cadastroUpdateAluno'),
+                  url(r'delete/(?P<pk>\d+)/$', ApagarAluno.as_view(), name='cadastroDeleteAluno'),
 
                   url(r'cadastro_servidor/$', CadastrarServidor.as_view(), name='cadastroServidor'),
 
@@ -56,7 +57,9 @@ urlpatterns = [
                   url(r'servidor/$', ServidorLogado.as_view(), name='loginServidor'),
                   url(r'administrador/$', AdminLogado.as_view(), name='loginAdmin'),
 
-                  url(r'^login/$', login_view, name='login'),
-                  url(r'^logout/$', logout_view, name='logout'),
+                  # url(r'^login/$', login_view, name='login'),
+                  # url(r'^logout/$', logout_view, name='logout'),
+                  url(r'^login/$', Login.as_view(), name='login'),
+                  url(r'^logout/$', Logout.as_view(), name='logout'),
                   url(r'^$', thanks, name="thanks")
               ] + router.urls

@@ -42,25 +42,25 @@
                             {% for message in messages %}
                             {% if 'wrongPassword' in message.tags %}
                             {% if field.label == 'Senha' or field.label == 'Confirmar senha' %}
-                                                    <span class="help-inline">
-                                                        <small>{{message}}</small>
-                                                    </span>
+                                                                <span class="help-inline">
+                                                                    <small>{{message}}</small>
+                                                                </span>
                             {% endif %}
                             {% else %}
                             {% if 'wrongUser' in message.tags %}
                             {% if field.label == 'Usuário' %}
-                                                        <span class="help-inline">
-                                                            <small>{{message}}</small>
-                                                        </span>
+                                                                        <span class="help-inline">
+                                                                            <small>{{message}}</small>
+                                                                        </span>
                             {% endif %}
                             {% endif %}
                             {% endif %}
                             {% endfor %}
                             {% else %}
                             {% if field.help_text %}
-                                            <span class="help-inline">
-                                                <small>{{ field.help_text }}</small>
-                                            </span>
+                                    <span class="help-inline">
+                                        <small>{{ field.help_text }}</small>
+                                    </span>
                             {% endif %}
                             {% endif %}
                         </div>
