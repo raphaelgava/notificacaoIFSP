@@ -5,15 +5,9 @@
 <h1>Delete Contact</h1>
 
 <form class="form-signin" method="post">{% csrf_token %}
-    {% csrf_token %}
-    <h2 class="form-signin-heading">Are you sure you want to delete the contact {{ contact }}?</h2>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="confirm">Yes, delete</button>
-    <!--<form action="{% url 'listaAlunos' %}">-->
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="cancel">No, cancel</button>
-    <!--</form>-->
-
-    <!--<input type="submit" class="btn btn-primary" value="Yes, delete." />-->
-    <!--<a href="{% url 'listaAlunos' %}">No, cancel.</a>-->
+    <h2 class="form-signin-heading">Deseja realmente desativar o usuário {{ contact }}?</h2>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="confirm">Sim, desativar</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="cancel">Não, voltar</button>
 </form>
 
 {% endblock %}

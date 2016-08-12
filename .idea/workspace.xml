@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="corrected validation of password and user (create and update)/corrected cadastro.html to better show the wrong fields">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/notificacao/templates/delete.html" />
+    <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="created delete/trying to make filter by active user">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NotificacaoIFSP/urls.py" afterPath="$PROJECT_DIR$/NotificacaoIFSP/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/models.py" afterPath="$PROJECT_DIR$/notificacao/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/templates/base.html" afterPath="$PROJECT_DIR$/notificacao/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/templates/cadastro.html" afterPath="$PROJECT_DIR$/notificacao/templates/cadastro.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/templates/listaAlunos.html" afterPath="$PROJECT_DIR$/notificacao/templates/listaAlunos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/templates/listaPessoas.html" afterPath="$PROJECT_DIR$/notificacao/templates/listaPessoas.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/templates/login.html" afterPath="$PROJECT_DIR$/notificacao/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/templates/loginAdministrador.html" afterPath="$PROJECT_DIR$/notificacao/templates/loginAdministrador.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views.py" afterPath="$PROJECT_DIR$/notificacao/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/templates/delete.html" afterPath="$PROJECT_DIR$/notificacao/templates/delete.html" />
     </list>
     <ignored path="NotificacaoIFSP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,9 +29,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="103">
               <caret line="49" column="63" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
-              <folding>
-                <element signature="e#786#818#0" expanded="true" />
-              </folding>
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/notificacao/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -49,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/notificacao/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="142">
-              <caret line="353" column="39" selection-start-line="353" selection-start-column="39" selection-end-line="353" selection-end-column="39" />
+              <caret line="355" column="39" selection-start-line="355" selection-start-column="39" selection-end-line="355" selection-end-column="39" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
               </folding>
@@ -87,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="delete.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="delete.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/notificacao/templates/delete.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="67" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
+            <state relative-caret-position="102">
+              <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -100,27 +99,17 @@
       <file leaf-file-name="cadastro.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notificacao/templates/cadastro.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
+            <state relative-caret-position="289">
               <caret line="71" column="65" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="listaAlunos.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/notificacao/templates/listaAlunos.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listaPessoas.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="listaPessoas.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notificacao/templates/listaPessoas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
+            <state relative-caret-position="757">
               <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
               <folding />
             </state>
@@ -198,10 +187,10 @@
         <option value="$PROJECT_DIR$/notificacao/templates/listaAlunos.html" />
         <option value="$PROJECT_DIR$/NotificacaoIFSP/urls.py" />
         <option value="$PROJECT_DIR$/notificacao/templates/cadastro.html" />
-        <option value="$PROJECT_DIR$/notificacao/templates/delete.html" />
         <option value="$PROJECT_DIR$/notificacao/models.py" />
         <option value="$PROJECT_DIR$/notificacao/views.py" />
         <option value="$PROJECT_DIR$/notificacao/templates/listaPessoas.html" />
+        <option value="$PROJECT_DIR$/notificacao/templates/delete.html" />
       </list>
     </option>
   </component>
@@ -674,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1470860065660</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="created delete/trying to make filter by active user">
+      <created>1471024810829</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1471024810829</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -748,7 +744,8 @@
     <MESSAGE value="changing html/css from login-added professor serializer/view/form" />
     <MESSAGE value="changing problems/added new templates/trying to do password validation" />
     <MESSAGE value="corrected validation of password and user (create and update)/corrected cadastro.html to better show the wrong fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrected validation of password and user (create and update)/corrected cadastro.html to better show the wrong fields" />
+    <MESSAGE value="created delete/trying to make filter by active user" />
+    <option name="LAST_COMMIT_MESSAGE" value="created delete/trying to make filter by active user" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -762,12 +759,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/notificacao/views.py</url>
-          <line>279</line>
+          <line>281</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/notificacao/views.py</url>
-          <line>293</line>
+          <line>295</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
@@ -1088,22 +1085,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notificacao/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/notificacao/templates/cadastroAluno.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/notificacao/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1116,14 +1097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="303" column="48" selection-start-line="295" selection-start-column="4" selection-end-line="303" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/notificacao/templates/delete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="67" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
           <folding />
         </state>
       </provider>
@@ -1156,24 +1129,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
           <caret line="49" column="63" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
-          <folding>
-            <element signature="e#786#818#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/notificacao/templates/cadastro.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="71" column="65" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/notificacao/templates/listaAlunos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -1181,17 +1136,57 @@
     <entry file="file://$PROJECT_DIR$/notificacao/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="142">
-          <caret line="353" column="39" selection-start-line="353" selection-start-column="39" selection-end-line="353" selection-end-column="39" />
+          <caret line="355" column="39" selection-start-line="355" selection-start-column="39" selection-end-line="355" selection-end-column="39" />
           <folding>
             <element signature="e#0#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/notificacao/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/notificacao/templates/listaPessoas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
+        <state relative-caret-position="757">
           <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notificacao/templates/listaAlunos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notificacao/templates/cadastroAluno.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notificacao/templates/cadastro.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="71" column="65" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notificacao/templates/delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
           <folding />
         </state>
       </provider>
