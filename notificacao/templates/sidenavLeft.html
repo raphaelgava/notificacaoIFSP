@@ -1,0 +1,40 @@
+<ul class="nav nav-pills nav-stacked" data-offset-top="205">
+    <!--<div class="well well-sm text-center">-->
+    {% if messages %}
+    {% for message in messages %}
+    {% if 'logged' in message.tags %}
+    {% if message.message == 'Admin' %}
+    <div class="well text-center">
+        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
+    </div>
+    {% else %}
+    {% if message.message == 'Aluno' %}
+    <div class="well text-center">
+        <a href="{% url 'listaAlunos' %}">Message Aluno</a>
+    </div>
+    {% else %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    {% if request.COOKIES.logged == 'Admin' %}
+    <div class="well text-center">
+        <a href="{% url 'listaAlunos' %}">Cookie Cadastro Aluno</a>
+    </div>
+    {% else %}
+    {% if message.message == 'Aluno' %}
+    <div class="well text-center">
+        <a href="{% url 'listaAlunos' %}"> Cookie Aluno</a>
+    </div>
+    {% else %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+
+
+    <p>{{bla}}</p>
+    {% if bla %}
+    <p>TESTEEEEE</p>
+    {% endif %}
+</ul>

@@ -34,15 +34,7 @@
                 </button>
 
                 <a class="pull-left"
-                   href="{% if messages %}
-                            {% for message in messages %}
-                                {% if 'Admin' == message %}
-                                    loginAdministrado.html
-                                {% else %}
-                                    thanks.html
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}">
+                   href="{% url 'login' %}">
                     <img src="{% static 'img/logo-ifsp.png' %}" alt="IFSP">
                 </a>
                 <!--<a class="pull-left" href="#">-->
@@ -74,9 +66,7 @@
         </div>
     </nav>
 
-    <!--<div class="container-fluid totalHeight">-->
     <div class="row content totalHeight nopadding">
-        <!--<nav class="col-sm-2 sidenav" id="myScrollspy">-->
         <nav class="col-sm-2 sidenav">
             <ul class="nav nav-pills nav-stacked" data-offset-top="205">
                 {% block sidenavLeft %}
@@ -93,8 +83,7 @@
             {% block sidenavRight %}
             {% endblock %}
         </div>
-                </div>
-    <!--</div>-->
+    </div>
 
     <footer class="navbar navbar-default vertical-center">
         <div class="container-fluid">

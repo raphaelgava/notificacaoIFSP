@@ -32,11 +32,36 @@ def thanks(request):
     return render(request, HTML.THANKS)
 
 
-# def logout_view(request):
-#     logout(request)
+# def checkUser(request, user):
+#     if user is not None:
+#         if user.is_active:
+#             variable = "teste"
+#             context = {
+#                 'variable': variable,
+#             }
+#             if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
+#                 messages.info(request, GroupConst.STUDENT)
+#                 return HttpResponseRedirect(reverse('loginAluno'))
+#             elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
+#                 messages.info(request, GroupConst.EMPLOYEE)
+#                 return HttpResponseRedirect(reverse('loginServidor'))
+#             elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
+#                 messages.info(request, GroupConst.PROFESSOR)
+#                 return HttpResponseRedirect(reverse('loginProfessor'))
+#             elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
+#                 messages.info(request, GroupConst.ADMIN, extra_tags='logged')
+#                 response = render(request, 'loginUsuario.html', {'bla': variable})
+#
+#                 response.set_cookie('logged', 'Admin')
+#                 return response
+#                 # return render(request, 'loginUsuario.html', {'bla': variable})
+#                 # return HttpResponseRedirect(reverse('loginAdmin'))
+#             else:
+#                 response.set_cookie('logged', 'Out')
+#                 logout(request)
+#
+#     messages.error(request, Mensagens.USUARIO_INVALIDO)
 #     return HttpResponseRedirect(reverse(Paginas.LOGIN))
-#
-#
 def checkUser(request, user):
     if user is not None:
         if user.is_active:
@@ -46,108 +71,81 @@ def checkUser(request, user):
             }
             if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
                 messages.info(request, GroupConst.STUDENT)
-                return HttpResponseRedirect(reverse('loginAluno'))
+                response = render(request, 'loginUsuario.html', {'bla': variable})
+                response.set_cookie('logged', 'Estudante')
+                return response
+                # messages.info(request, GroupConst.STUDENT)
+                # return HttpResponseRedirect(reverse('loginAluno'))
             elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
                 messages.info(request, GroupConst.EMPLOYEE)
-                return HttpResponseRedirect(reverse('loginServidor'))
+                response = render(request, 'loginUsuario.html', {'bla': variable})
+                response.set_cookie('logged', 'Servidor')
+                return response
+                # messages.info(request, GroupConst.EMPLOYEE)
+                # return HttpResponseRedirect(reverse('loginServidor'))
             elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
                 messages.info(request, GroupConst.PROFESSOR)
-                return HttpResponseRedirect(reverse('loginProfessor'))
+                response = render(request, 'loginUsuario.html', {'bla': variable})
+                response.set_cookie('logged', 'Professor')
+                return response
+                # messages.info(request, GroupConst.PROFESSOR)
+                # return HttpResponseRedirect(reverse('loginProfessor'))
             elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
-                messages.info(request, GroupConst.ADMIN)
-                return render(request, 'loginAdministrador.html', {'bla': variable})
+                messages.info(request, GroupConst.ADMIN, extra_tags='logged')
+                # request.session['logged'] = GroupConst.ADMIN
+                response = render(request, 'loginUsuario.html', {'bla': variable})
+                response.set_cookie('logged', 'Admin')
+                return response
+                # messages.info(request, GroupConst.ADMIN, extra_tags='logged')
+                # return render(request, 'loginUsuario.html', {'bla': variable})
                 # return HttpResponseRedirect(reverse('loginAdmin'))
             else:
                 logout(request)
+        else:
+            logout(request)
 
+    # @todo: mesmo com o cookie tem que ter o message pois como o render é executado antes, ele não estava ativo no cookie, então a lateral não carrega!!
+
+    # @todo: cookie é o melhor para resolver esse problema (sidenavLeft) em todas as telas
     messages.error(request, Mensagens.USUARIO_INVALIDO)
+    # messages.info(request, 'Out', extra_tags='logged')
+    # response = render(request, 'login.html')
+    # response.set_cookie('logged', 'Out')
+
     return HttpResponseRedirect(reverse(Paginas.LOGIN))
-
-
-# def login_view(request):
-#     if request.method == "GET":
-#         user = request.user
-#         if user is not None:
-#             if not user.is_anonymous():
-#                 return checkUser(request, user)
-#         form = LoginForm()
-#         return render(request, HTML.LOGIN, {'form': form})
-#     elif request.method == "POST":
-#         form = LoginForm(request.POST)
-#         if not form.is_valid():
-#             messages.error(request, Mensagens.DADOS_INVALIDOS)
-#             return HttpResponseRedirect(reverse(Paginas.LOGIN))
-#
-#         username = form.cleaned_data['username']
-#         password = form.cleaned_data['password']
-#         user = authenticate(username=username,
-#                             password=password)
-#         if not user:
-#             messages.error(request, Mensagens.LOGIN_INVALIDO)
-#             return HttpResponseRedirect(reverse(Paginas.LOGIN))
-#
-#         # form.clean_remember_me(self);
-#         # remember = form.cleaned_data['remember_me']
-#         # if remember:
-#         #     request.session.set_expiry(1209600) # 2 weeks
-#
-#         login(request, user)
-#         return checkUser(request, user)
-#
-#         # user.groups.all()
-#         # if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
-#         #     messages.info(request, GroupConst.STUDENT)
-#         #     return HttpResponseRedirect(reverse('loginAluno'))
-#         # elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
-#         #     messages.info(request, GroupConst.EMPLOYEE)
-#         #     return HttpResponseRedirect(reverse('loginServidor'))
-#         # elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
-#         #     messages.info(request, GroupConst.PROFESSOR)
-#         #     return HttpResponseRedirect(reverse('loginProfessor'))
-#         # elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
-#         #     messages.info(request, GroupConst.ADMIN)
-#         #     return HttpResponseRedirect(reverse('loginAdmin'))
-#         # else:
-#         #     logout(request)
-#         #     messages.error(request, Mensagens.USUARIO_INVALIDO)
-#         #     return HttpResponseRedirect(reverse(Paginas.LOGIN))
+    # return response
 
 class Logout(TemplateView):
     template_name = 'login.html'
     login_url = Paginas.LOGIN_URL
 
+    def out(self, request, *args):
+        logout(request)
+        if request.session.has_key('logged'):
+            del request.session['logged']
+
+        # messages.info(request, 'Out', extra_tags='logged')
+        response = render(request, 'login.html')
+        # response.set_cookie('logged', 'Out')
+        return response
+        # return HttpResponseRedirect(reverse(Paginas.LOGIN))
+        # @todo:corrigir função (erro de parametro faltando)!!!
     def get(self, request, *args, **kwargs):
         logout(request)
-        return HttpResponseRedirect(reverse(Paginas.LOGIN))
+        messages.info(request, 'Out', extra_tags='logged')
+        response = render(request, 'login.html')
+        response.set_cookie('logged', 'Out')
+        return response
+
 
     def post(self, request, *args, **kwargs):
-        logout(request)
-        return HttpResponseRedirect(reverse(Paginas.LOGIN))
+        return self.out(self, request, *args)
 
 
 class Login(TemplateView):
     template_name = 'login.html'
     login_url = Paginas.LOGIN_URL
 
-    # def checkUser(request, user):
-    #     if user is not None:
-    #         if user.groups.filter(name=GroupConst.STUDENT).count() == 1:
-    #             messages.info(request, GroupConst.STUDENT)
-    #             return HttpResponseRedirect(reverse('loginAluno'))
-    #         elif user.groups.filter(name=GroupConst.EMPLOYEE).count() == 1:
-    #             messages.info(request, GroupConst.EMPLOYEE)
-    #             return HttpResponseRedirect(reverse('loginServidor'))
-    #         elif user.groups.filter(name=GroupConst.PROFESSOR).count() == 1:
-    #             messages.info(request, GroupConst.PROFESSOR)
-    #             return HttpResponseRedirect(reverse('loginProfessor'))
-    #         elif user.groups.filter(name=GroupConst.ADMIN).count() == 1:
-    #             messages.info(request, GroupConst.ADMIN)
-    #             return HttpResponseRedirect(reverse('loginAdmin'))
-    #         else:
-    #             logout(request)
-    #             messages.error(request, Mensagens.USUARIO_INVALIDO)
-    #             return HttpResponseRedirect(reverse(Paginas.LOGIN))
-    #
     def get(self, request, *args, **kwargs):
         user = request.user
         if user is not None:
@@ -165,6 +163,9 @@ class Login(TemplateView):
         if not form.is_valid():
             messages.error(request, Mensagens.DADOS_INVALIDOS)
             return HttpResponseRedirect(reverse(Paginas.LOGIN))
+            # return render(request, HTML.LOGIN, {'form': form})
+
+        # @todo: ao deslogar esta mostrando a mensagem de "erro" Out por conta da utilização da verificação do usuário!!!!
 
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
@@ -172,6 +173,7 @@ class Login(TemplateView):
         if not user:
             messages.error(request, Mensagens.LOGIN_INVALIDO)
             return HttpResponseRedirect(reverse(Paginas.LOGIN))
+            # return render(request, HTML.LOGIN, {'form': form})
 
         # form.clean_remember_me(self);
         # remember = form.cleaned_data['remember_me']
@@ -208,9 +210,10 @@ class ProfessorLogado(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
     group_required = [GroupConst.PROFESSOR]
 
 
+# @todo: verificar se de fato eu preciso desse monte de classe (se não da pra fazer apenas com uma!!!
 class AdminLogado(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
-    template_name = 'loginAdministrador.html'
-    success_url = reverse_lazy('loginAdministrador')
+    template_name = 'loginUsuario.html'
+    success_url = reverse_lazy('loginAdmin')
     login_url = Paginas.LOGIN_URL
 
     group_required = [GroupConst.ADMIN]
@@ -230,7 +233,6 @@ class CadastrarAluno(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     login_url = '/login/'
 
     group_required = [GroupConst.ADMIN]
-
 
     def form_valid(self, form):
         form.save(commit=False)
@@ -330,6 +332,7 @@ class ApagarAluno(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
     #     if self.request.GET['cancel']:
     #         form.save(commit=False)
 
+    # @todo:verificar "problema" do html que é igual para ativar o usuario novamente!
     def delete(self, request, *args, **kwargs):
         """
         Calls the delete() method on the fetched object and then
@@ -355,33 +358,21 @@ class ListarAluno(LoginRequiredMixin, GroupRequiredMixin, ListView):
 
     group_required = [GroupConst.ADMIN]
 
-    def activePerson(self):
-        return Aluno.objects.filter(is_active=True)
-        # return super(ListarAluno, self).get_query_set().filter(is_active=True)
+    def get_context_data(self, **kwargs):
+        context = super(ListarAluno, self).get_context_data(**kwargs)
+        if self.request.method == 'GET':
+            if 'filtro' in self.request.GET:
+                parametro = self.request.GET['filtro']
+                if parametro == 'ativo':
+                    context['lista'] = Aluno.objects.filter(is_active=True)
+                    return context
+                else:
+                    if parametro == 'inativo':
+                        context['lista'] = Aluno.objects.filter(is_active=False)
+                        return context
 
-    def allPerson(self):
-        return Aluno.objects.all()
-
-    # joga no context todos os objetos de Aluno, então no html é utilizado esse context (listaPessoa) para exibi-lo
-        # def get_context_data(self, **kwargs):
-        #     context = super(ListarAluno, self).get_context_data(**kwargs)
-        #     # return super(ContactActiveManager, self).get_query_set().filter(is_active=True)
-        #     context['listaPessoa'] = Aluno.objects.all();
-        #     return context
-        # {% for pessoa in listaPessoa %}
-        # {% if forloop.counter|divisibleby:2 %}
-        # <tr class="success">
-        # {% else %}
-        # <tr class="info">
-        # {% endif %}
-        # <td>{{ pessoa.username }}</td>
-        # <td>{{ pessoa.first_name }}</td>
-        # <td>{{ pessoa.last_name }}</td>
-        # <td>{{ pessoa.email }}</td>
-        # {% block opcoesLista %}
-        # {% endblock %}
-        # </tr>
-        # {% endfor %}
+        context['lista'] = Aluno.objects.all()
+        return context
 
 
 # ======================================================================================================================

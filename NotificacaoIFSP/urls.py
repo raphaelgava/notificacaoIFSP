@@ -57,8 +57,8 @@ urlpatterns = [
                   url(r'servidor/$', ServidorLogado.as_view(), name='loginServidor'),
                   url(r'administrador/$', AdminLogado.as_view(), name='loginAdmin'),
 
-                  # url(r'^login/$', login_view, name='login'),
-                  # url(r'^logout/$', logout_view, name='logout'),
+                  # @todo:click url imagem ifsp (base.html)
+
                   url(r'^login/$', Login.as_view(), name='login'),
                   url(r'^logout/$', Logout.as_view(), name='logout'),
                   url(r'^$', thanks, name="thanks")

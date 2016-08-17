@@ -7,13 +7,60 @@
 {% endblock %}
 {% endblock %}
 
+{% block sidenavLeft %}
+{% include "sidenavLeft.html" %}
+{% endblock %}
+
 {% block content %}
 {% block h1Lista %}
 {% endblock %}
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span12">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+        <div class="span12" onload="myScript()">
+            <form action="" method="GET" class="form form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Procurar</label>
+                    <div class="col-md-9">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Busca por nomes..."
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Exibir</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline"><input type="radio" name="filtro" value="ativo"
+                                                           id="a">Ativos</label>
+                        <label class="radio-inline"><input type="radio" class="radio-inline" name="filtro"
+                                                           value="inativo" id="i">Inativos</label>
+                        <label class="radio-inline"><input type="radio" class="radio-inline" name="filtro" value="todos"
+                                                           id="t">Todos</label>
+                        <script>
+                            document.getElementById("t").checked = true;
+
+                            var valor;
+                            var params = window.location.search.substr(1).split('&');
+
+                            for (var i = 0; i < params.length; i++) {
+                              var p=params[i].split('=');
+                              if (p[0] == "filtro") {
+                                valor = decodeURIComponent(p[1]);
+                                if (valor == "ativo"){
+                                    document.getElementById("a").checked = true;
+                                }
+                                else{
+                                    if (valor == "inativo"){
+                                        document.getElementById("i").checked = true;
+                                    }
+                                }
+                              }
+                            }
+
+
+                        </script>
+                        <button type="submit" class="btn btn-primary pull-right">Filtrar</button>
+                    </div>
+                </div>
+            </form>
             <table class="table" id="myTable">
                 <thead>
                 <tr>
@@ -25,7 +72,7 @@
                 </tr>
                 </thead>
                 <tbody id="myTableBordy">
-                {% for pessoa in view.activePerson %}
+                {% for pessoa in lista %}
                 {% if forloop.counter|divisibleby:2 %}
                 <tr class="success">
                     {% else %}
@@ -53,7 +100,7 @@
 
                   // Loop through all table rows, and hide those who don't match the search query
                   for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[0];
+                    td = tr[i].getElementsByTagName("td")[1];
                     if (td) {
                       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";

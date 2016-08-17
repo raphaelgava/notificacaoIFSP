@@ -1,14 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <title>Title</title>
-</head>
-<body>
-    <h1>
-        Obrigado!!!
-    </h1>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+<!--<title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>-->
+<!--Obrigado!!!-->
+<!--</h1>-->
+<!--</body>-->
+<!--</html>-->
+
+{% block sidenavLeft %}
+<ul class="nav nav-pills nav-stacked" data-offset-top="205">
+    <!--<div class="well well-sm text-center">-->
+    <div class="well text-center">
+
+        <a href="{% url 'listaAlunos' %}">Cadastro Aluno</a>
+    </div>
+    <p>{{bla}}</p>
+    {% if bla %}
+    <p>TESTEEEEE</p>
+    {% endif %}
+</ul>
+
+{% endblock%}
+
+{% block navbarLista %}
+<div class="well text-center">
+
+    <a href="{% url 'listaAlunos' %}">BAGUA!!!</a>
+</div>
+{% endblock%}
