@@ -3,18 +3,34 @@
 {% load staticfiles %}
 
 {% block navbarLista %}
-<li><a href="{% url 'cadastroServidor' %}" class="addlink"><img src="{% static 'img/icon-addlink.svg' %}"
-                                                                class="addlink" alt="Add">Adicionar</a></li>
+<li>
+    <a href="{% url 'cadastroServidor' %}" class="addlink">
+        <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">Adicionar
+    </a>
+</li>
 {% endblock %}
 
 {% block h1Lista %}
-<h1>Cadastro de Alunos</h1>
+<h1>Cadastro de Servidores</h1>
 {% endblock %}
 
+
 {% block opcoesLista %}
-<td><a href="{% url 'cadastroUpdateServidor' pessoa.pk %}" class="changelink"><img
-        src="{% static 'img/icon-changelink.svg' %}" class="changelink" alt="Add"></a></td>
-<td><a href="/admin/auth/group/" class="changelink"><img src="{% static 'img/icon-deletelink.svg' %}" class="deletelink"
-                                                         alt="Del"></a></td>
+<td>
+    <a href="{% url 'cadastroUpdateServidor' pessoa.pk %}" class="changelink">
+        <img src="{% static 'img/icon-changelink.svg' %}" class="changelink" alt="Alt">
+    </a>
+</td>
+<td>
+    {% if pessoa.is_active %}
+    <a href="{% url 'cadastroDeleteAluno' pessoa.pk %}" class="deletelinklink">
+        <img src="{% static 'img/icon-deletelink.svg' %}" class="deletelink" alt="Del">
+    </a>
+    {% else %}
+    <a href="{% url 'cadastroDeleteAluno' pessoa.pk %}" class="addlink">
+        <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">
+    </a>
+    {% endif %}
+</td>
 {% endblock %}
 
