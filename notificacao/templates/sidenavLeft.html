@@ -6,12 +6,31 @@
     <div class="well text-center">
         <a href="{% url 'listaAlunos' %}">Cadastro Aluno</a>
     </div>
+    <div class="well text-center">
+        <a href="{% url 'listaServidores' %}">Cadastro Servidor</a>
+    </div>
+    <div class="well text-center">
+        <a href="{% url 'listaProfessores' %}">Cadastro Professor</a>
+    </div>
     {% else %}
-    {% if user|has_group:"Servidor" %}
+    <p>teste</p>
+    {% if user|has_group:"Professor" %}
     <div class="well text-center">
         <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
     </div>
     {% else %}
+    {% if user|has_group:"Employee" %}
+    <div class="well text-center">
+        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
+    </div>
+    {% else %}
+    {% if user|has_group:"Student" %}
+    <div class="well text-center">
+        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
+    </div>
+    {% else %}
+    {% endif %}
+    {% endif %}
     {% endif %}
     {% endif %}
 

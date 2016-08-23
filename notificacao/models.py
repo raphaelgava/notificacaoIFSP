@@ -110,18 +110,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         self.is_active = False
         self.save()
 
-
-# class Usuario(AbstractUser):
-#     class Meta(AbstractUser.Meta):
-#         swappable = 'AUTH_USER_MODEL'
-#         # abstract=True
-#         verbose_name = 'Usuário'
-#         verbose_name_plural = 'Usuários'
-#
-#     # essa definição é para mostrar a descrição na lista dos cadastros
-#     def __str__(self):
-#         return '{} - {}'.format(self.username, self.first_name)
-
+    def activeAgain(self, *args, **kwargs):
+        self.is_active = True
+        self.save()
 
 class Pessoa(Usuario):
     SEXO = (

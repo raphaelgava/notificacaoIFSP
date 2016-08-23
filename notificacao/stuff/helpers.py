@@ -2,7 +2,6 @@ from django.contrib.auth.models import Group
 
 from notificacao.stuff.constants import GroupConst
 
-
 class CreatePerson:
     def create_student(self, password):
         if self is not None:
@@ -15,13 +14,18 @@ class CreatePerson:
 
         return self
 
-    def create_employee(self, password):
+    def create_employee(self, password, professor):
         if self is not None:
             if password is not None:
                 self.set_password(password)
                 if not Group.objects.filter(name=GroupConst.EMPLOYEE).exists():
                     Group.objects.create(name=GroupConst.EMPLOYEE)
-                self.groups.add(Group.objects.get(name=GroupConst.EMPLOYEE))
+
+                if professor == True:
+                    self.funcao = 'Professor'
+                    self.groups.add(Group.objects.get(name=GroupConst.PROFESSOR))
+                else:
+                    self.groups.add(Group.objects.get(name=GroupConst.EMPLOYEE))
                 self.save()
 
         return self

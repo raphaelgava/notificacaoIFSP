@@ -16,8 +16,38 @@ class Paginas:
     LOGIN_URL = '/login/'
 
 
+class Urls:
+    LISTAR_ALUNO = 'listaAlunos'
+    CADASTRAR_ALUNO = 'cadastroAluno'
+    ATUALIZAR_ALUNO = 'cadastroUpdateAluno'
+    DELETAR_ALUNO = 'cadastroDeleteAluno'
+    ADD_ALUNO = 'cadastroAddAluno'
+
+    LISTAR_SERVIDOR = 'listaServidores'
+    CADASTRAR_SERVIDOR = 'cadastroServidor'
+    ATUALIZAR_SERVIDOR = 'cadastroUpdateServidor'
+    DELETAR_SERVIDOR = 'cadastroDeleteServidor'
+    ADD_SERVIDOR = 'cadastroAddServidor'
+
+    LISTAR_PROFESSOR = 'listaProfessores'
+    CADASTRAR_PROFESSOR = 'cadastroProfessor'
+    ATUALIZAR_PROFESSOR = 'cadastroUpdateProfessor'
+    DELETAR_PROFESSOR = 'cadastroDeleteProfessor'
+    ADD_PROFESSOR = 'cadastroAddProfessor'
+
+
 class HTML:
     CADASTRO_ALUNO = 'cadastroAluno.html'
+    CADASTRO_SERVIDOR = 'cadastroServidor.html'
+    CADASTRO_PROFESSOR = 'cadastroProfessor.html'
+
+    LISTA_ALUNO = 'listaAlunos.html'
+    LISTA_SERVIDOR = 'listaServidores.html'
+    LISTA_PROFESSOR = 'listaProfessores.html'
+
+    ADD = 'add.html'
+    DELETE = 'delete.html'
+
     LOGIN = 'login.html'
     THANKS = 'thanks.html'
 

@@ -46,10 +46,10 @@ class ServidorSerializer(serializers.ModelSerializer):
         model = Servidor
         fields = _PessoaSerializer.Meta.fields + ('funcao',)
 
-    def create(self, validated_data):
+    def create(self, validated_data, isProfessor=False):
         servidor = serializers.ModelSerializer.create(self, validated_data)
         password = validated_data['password']
-        servidor = CreatePerson.create_employee(servidor, password)
+        servidor = CreatePerson.create_employee(servidor, password, isProfessor)
 
         return servidor
 
@@ -57,7 +57,12 @@ class ServidorSerializer(serializers.ModelSerializer):
 class ProfessorSerializer(ServidorSerializer):
     class Meta:
         model = Professor
-        fields = ServidorSerializer.Meta.fields + ('formacao', 'id_tipo',)
+        # fields = ServidorSerializer.Meta.fields + ('formacao', 'id_tipo',)
+        fields = _PessoaSerializer.Meta.fields + ('formacao', 'id_tipo',)
+
+    def create(self, validated_data):
+        professor = ServidorSerializer.create(self, validated_data, True)
+        return professor
 
 
 # class ProfessorSerializer(serializers.ModelSerializer):

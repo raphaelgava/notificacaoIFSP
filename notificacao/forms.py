@@ -62,4 +62,5 @@ class ServidorForm(_PersonForm):
 class ProfessorForm(ServidorForm):
     class Meta:
         model = Professor
-        fields = ServidorForm.Meta.fields + ('formacao', 'id_tipo')
+        # fields = ServidorForm.Meta.fields + ('formacao', 'id_tipo',)
+        fields = _PersonForm.Meta.fields + ('formacao', 'id_tipo',)

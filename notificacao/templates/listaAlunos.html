@@ -27,7 +27,7 @@
         <img src="{% static 'img/icon-deletelink.svg' %}" class="deletelink" alt="Del">
     </a>
     {% else %}
-    <a href="{% url 'cadastroDeleteAluno' pessoa.pk %}" class="addlink">
+    <a href="{% url 'cadastroAddAluno' pessoa.pk %}" class="addlink">
         <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">
     </a>
     {% endif %}
