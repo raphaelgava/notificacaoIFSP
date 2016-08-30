@@ -1,13 +1,20 @@
 from datetime import datetime
 
+from colorfield.fields import ColorField
 from django import forms
 from django.db import models
 from django.forms import ModelForm
 
 from .models import Aluno
+from .models import Disciplina
+from .models import Instituto
+from .models import Oferecimento
 from .models import Pessoa
 from .models import Professor
+from .models import Remetente
 from .models import Servidor
+from .models import TipoFormacao
+from .models import TipoNotificacao
 
 
 class LoginForm(forms.Form):
@@ -25,6 +32,8 @@ class LoginForm(forms.Form):
     #     return remember_me
 
 
+# ==========================================CADASTRO USUARIOS===========================================================
+
 class _PersonForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Senha')
     password_check = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Confirmar senha')
@@ -37,15 +46,8 @@ class _PersonForm(ModelForm):
             'username', 'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
             'id_instituto',)
 
-        # def clean(self):
-        #     password = self.cleaned_data.get('password')
-        #     password_check = self.cleaned_data.get('password_check')
-        #
-        #     if password != password_check:
-        #         raise forms.ValidationError("Passwords don't match")
-        #
-        #     return self.cleaned_data
 
+# todo: tornar obrigatório selecionar um instituto!!!!
 
 class AlunoForm(_PersonForm):
     class Meta:
@@ -62,5 +64,57 @@ class ServidorForm(_PersonForm):
 class ProfessorForm(ServidorForm):
     class Meta:
         model = Professor
-        # fields = ServidorForm.Meta.fields + ('formacao', 'id_tipo',)
         fields = _PersonForm.Meta.fields + ('formacao', 'id_tipo',)
+
+
+# ======================================================================================================================
+
+# ==========================================CADASTRO REMETENTE==========================================================
+
+class _RemetenteForm(ModelForm):
+    class Meta:
+        model = Remetente
+        abstract = True
+        fields = ('descricao',)
+
+
+class InstitutoForm(_RemetenteForm):
+    datafundacao = models.DateField("Data de fundação", default=datetime.now())  # Field name made lowercase.
+
+    class Meta:
+        model = Instituto
+        fields = _RemetenteForm.Meta.fields + ('datafundacao',)
+
+
+class OferecimentoForm(_RemetenteForm):
+    class Meta:
+        model = Oferecimento
+        fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')
+
+
+# ======================================================================================================================
+
+
+
+# ==========================================CADASTRO OUTROS==========================================================
+
+class DisciplinaForm(ModelForm):
+    class Meta:
+        model = Disciplina
+        fields = ('descricao',)
+
+
+class TipoNotificacaoForm(ModelForm):
+    cor = ColorField("Data de fundação", default='#FFFFFF')  # Field name made lowercase.
+
+    class Meta:
+        model = TipoNotificacao
+        fields = ('descricao', 'cor',)
+
+
+class TipoFormacaoForm(ModelForm):
+    class Meta:
+        model = TipoFormacao
+        fields = ('descricao',)
+
+        # ======================================================================================================================

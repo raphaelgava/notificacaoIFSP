@@ -4,9 +4,12 @@
 {% include "sidenavLeft.html" %}
 {% endblock %}
 
-{% block content %}
-{% block h1Cadastro %}
+{% block sidenavRight %}
+{% include "sidenavRight.html" %}
 {% endblock %}
+
+{% block content %}
+<h1>{{ view.get_title }}</h1>
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">

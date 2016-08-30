@@ -1,0 +1,25 @@
+{% extends 'listaOutros.html' %}
+
+{% load staticfiles %}
+
+{% block navbarLista %}
+<li>
+    <a href="{% url view.get_link_insert %}" class="addlink">
+        <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">
+        Adicionar
+    </a>
+</li>
+{% endblock %}
+
+{% block h1Lista %}
+<h1>{{view.get_title}}</h1>
+{% endblock %}
+
+{% block opcoesLista %}
+<td class="col-md-1">
+    <a href="{% url view.get_link_modify itemLista.pk %}" class="changelink">
+        <img src="{% static 'img/icon-changelink.svg' %}" class="changelink" alt="Alt">
+    </a>
+</td>
+{% endblock %}
+

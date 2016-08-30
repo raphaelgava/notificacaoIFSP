@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<h1>Desativar Usuário</h1>
+<h1>Desativar {{ view.get_class }}</h1>
 
 <form class="form-signin" method="post">{% csrf_token %}
-    <h2 class="form-signin-heading">Deseja realmente desativar o usuário: {{ view.get_object.username }}?</h2>
+    <h2 class="form-signin-heading">Deseja realmente desativar: {{ view.get_object }}?</h2>
     <button class="btn btn-lg btn-primary btn-block" type="submit" name="confirm">Sim, desativar</button>
     <button class="btn btn-lg btn-primary btn-block" type="submit" name="cancel">Não, voltar</button>
 </form>

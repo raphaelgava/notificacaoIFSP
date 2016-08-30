@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
 from .models import Aluno
+from .models import Instituto
 from .models import Notificacao
 from .models import Pessoa
 from .models import Professor
+from .models import Remetente
 from .models import Servidor
 from .models import TipoFormacao
 from .models import TipoNotificacao
@@ -21,7 +23,8 @@ class _PessoaSerializer(serializers.ModelSerializer):
         abstract = True
         fields = ('username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',)
 
-class AlunoSerializer(serializers.ModelSerializer):
+
+class AlunoSerializer(_PessoaSerializer):
     class Meta:
         model = Aluno
         fields = _PessoaSerializer.Meta.fields + ('turma',)
@@ -34,14 +37,7 @@ class AlunoSerializer(serializers.ModelSerializer):
         return aluno
 
 
-# class AlunoLoginSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Aluno
-#         fields = ('username', 'password')
-
-
-
-class ServidorSerializer(serializers.ModelSerializer):
+class ServidorSerializer(_PessoaSerializer):
     class Meta:
         model = Servidor
         fields = _PessoaSerializer.Meta.fields + ('funcao',)
@@ -57,19 +53,11 @@ class ServidorSerializer(serializers.ModelSerializer):
 class ProfessorSerializer(ServidorSerializer):
     class Meta:
         model = Professor
-        # fields = ServidorSerializer.Meta.fields + ('formacao', 'id_tipo',)
         fields = _PessoaSerializer.Meta.fields + ('formacao', 'id_tipo',)
 
     def create(self, validated_data):
         professor = ServidorSerializer.create(self, validated_data, True)
         return professor
-
-
-# class ProfessorSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Professor
-#         fields = ('username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',
-#                   'formacao', 'id_tipo')
 
 
 class NotificacaoSerializer(serializers.ModelSerializer):
@@ -87,4 +75,17 @@ class TipoFormacaoSerializer(serializers.ModelSerializer):
 class TipoNotificacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = TipoNotificacao
-        fields = ('titulo', 'cor',)
+        fields = ('descricao', 'cor',)
+
+
+class _RemetenteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Remetente
+        abstract = True
+        fields = ('descricao',)
+
+
+class InstitutoSerializer(_RemetenteSerializer):
+    class Meta:
+        model = Instituto
+        fields = _RemetenteSerializer.Meta.fields + ('datafundacao',)

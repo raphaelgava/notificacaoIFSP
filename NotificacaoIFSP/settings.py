@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'colorfield',
     'notificacao',
 ]
 
@@ -48,6 +49,12 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated',
     # )
 }
+
+# desloga depois de um determinado tempo sem atividade
+TIME = 60 * 10  # 60segundos * X
+SESSION_COOKIE_AGE = TIME
+SESSION_IDLE_TIMEOUT = TIME
+SESSION_SAVE_EVERY_REQUEST = True
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

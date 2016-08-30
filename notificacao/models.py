@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 
 import datetime
 
+from colorfield.fields import ColorField
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import UserManager, PermissionsMixin
 from django.core import validators
@@ -17,12 +18,22 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+
 class Remetente(models.Model):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
+    is_active = models.BooleanField(_('active'), default=True)
 
     class Meta:
         verbose_name = 'Remetente'
         verbose_name_plural = 'Remetentes'
+
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.save()
+
+    def activeAgain(self, *args, **kwargs):
+        self.is_active = True
+        self.save()
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
@@ -135,9 +146,11 @@ class Pessoa(Usuario):
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
-        return '{} - {}'.format(self.username, self.first_name)
+        return '{} {}'.format(self.username, self.first_name)
 
 
+# todo: procurar ppc do curso para tirar os dados
+# todo: definir mascara para os campos de data!
 class Servidor(Pessoa):
     funcao = models.CharField("Função", max_length=30)  # Field name made lowercase.
 
@@ -167,19 +180,27 @@ class Aluno(Pessoa):
 
 class Disciplina(models.Model):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
+    is_active = models.BooleanField(_('active'), default=True)
 
     class Meta:
         verbose_name = 'Disciplina'
         verbose_name_plural = 'Disciplinas'
 
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.save()
+
+    def activeAgain(self, *args, **kwargs):
+        self.is_active = True
+        self.save()
+
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
         return '{}'.format(self.descricao)
 
-
 class Curso(Remetente):
     id_instituto = models.ForeignKey(Instituto)  # Field name made lowercase.
-    ativo = models.BooleanField(default=True)  # Field name made lowercase. This field type is a guess.
+    # ativo = models.BooleanField(default=True)  # Field name made lowercase. This field type is a guess.
     disciplinas = models.ManyToManyField(Disciplina)
 
     class Meta:
@@ -202,8 +223,10 @@ class Local(models.Model):
 
 
 class TipoNotificacao(models.Model):
-    titulo = models.CharField("Título", max_length=20)  # Field name made lowercase.
-    cor = models.CharField(max_length=7)  # Field name made lowercase.
+    descricao = models.CharField("Título", max_length=20)  # Field name made lowercase.
+    cor = ColorField()
+
+    # cor = models.CharField(max_length=7)  # Field name made lowercase.
 
     class Meta:
         verbose_name = 'Tipo Notificação'

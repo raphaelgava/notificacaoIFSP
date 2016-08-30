@@ -1,10 +1,10 @@
-{% extends 'listaPessoas.html' %}
+{% extends 'listaRemetentes.html' %}
 
 {% load staticfiles %}
 
 {% block navbarLista %}
 <li>
-    <a href="{% url 'cadastroAluno' %}" class="addlink">
+    <a href="{% url view.get_link_insert %}" class="addlink">
         <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">
         Adicionar
     </a>
@@ -12,22 +12,22 @@
 {% endblock %}
 
 {% block h1Lista %}
-<h1>Cadastro de Alunos</h1>
+<h1>{{view.get_title}}</h1>
 {% endblock %}
 
 {% block opcoesLista %}
-<td>
-    <a href="{% url 'cadastroUpdateAluno' pessoa.pk %}" class="changelink">
+<td class="col-md-1">
+    <a href="{% url view.get_link_modify remetente.pk %}" class="changelink">
         <img src="{% static 'img/icon-changelink.svg' %}" class="changelink" alt="Alt">
     </a>
 </td>
-<td>
-    {% if pessoa.is_active %}
-    <a href="{% url 'cadastroDeleteAluno' pessoa.pk %}" class="deletelinklink">
+<td class="col-md-1">
+    {% if remetente.is_active %}
+    <a href="{% url view.get_link_delete remetente.pk %}" class="deletelinklink">
         <img src="{% static 'img/icon-deletelink.svg' %}" class="deletelink" alt="Del">
     </a>
     {% else %}
-    <a href="{% url 'cadastroAddAluno' pessoa.pk %}" class="addlink">
+    <a href="{% url view.get_link_add remetente.pk %}" class="addlink">
         <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">
     </a>
     {% endif %}

@@ -4,16 +4,16 @@
     <!--<div class="well well-sm text-center">-->
     {% if user|has_group:"Admin" %}
     <div class="well text-center">
-        <a href="{% url 'listaAlunos' %}">Cadastro Aluno</a>
+        <a href="{% url 'listaInstitutos' %}">Cadastro Instituto</a>
     </div>
     <div class="well text-center">
-        <a href="{% url 'listaServidores' %}">Cadastro Servidor</a>
+        <a href="{% url 'listaServidores' %}">Cadastro Curso</a>
     </div>
     <div class="well text-center">
-        <a href="{% url 'listaProfessores' %}">Cadastro Professor</a>
+        <a href="{% url 'listaDisciplinas' %}">Cadastro Disciplina</a>
     </div>
     <div class="well text-center">
-        <a href="{% url 'listaProfessores' %}">Cadastro Notificação</a>
+        <a href="{% url 'listaTiposNotificacao' %}">Cadastro Tipo Notificação</a>
     </div>
     {% else %}
     <p>teste</p>

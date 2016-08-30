@@ -31,6 +31,22 @@
 
 {% block content %}
 <div class="col-sm-9">
+    {% if user|has_group:"Admin" %}
+    <h1>Bem Vindo Administrador!</h1>
+    {% else %}
+    {% if user|has_group:"Professor" %}
+    <h1>Bem Vindo Professor!</h1>
+    {% else %}
+    {% if user|has_group:"Employee" %}
+    <h1>Bem Vindo Servidor!</h1>
+    {% else %}
+    {% if user|has_group:"Student" %}
+    <h1>Bem Vindo Estudante!</h1>
+    {% else %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endif %}
 
     <!--<div id="section2">-->
     <!--<h1>Section 2</h1>-->
@@ -71,6 +87,7 @@
 {% endblock %}
 
 {% block sidenavRight %}
+{% include "sidenavRight.html" %}
 <!--<div class="well text-center">-->
 <!--<p>ADS</p>-->
 <!--</div>-->

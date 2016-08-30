@@ -28,14 +28,19 @@ from notificacao.stuff.constants import Urls
 from notificacao.views import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
 from notificacao.views import AlunoViewSet
 from notificacao.views import CadastrarAluno, AtualizarAluno, ApagarAluno, ListarAlunos, AddAluno
+from notificacao.views import CadastrarDisciplina, AtualizarDisciplina, ListarDisciplinas, ApagarDisciplina, \
+    AddDisciplina
+from notificacao.views import CadastrarInstituto, AtualizarInstituto, ListarInstitutos, ApagarInstituto, AddInstituto
 from notificacao.views import CadastrarProfessor, AtualizarProfessor, ApagarProfessor, ListarProfessores, AddProfessor
 from notificacao.views import CadastrarServidor, AtualizarServidor, ApagarServidor, ListarServidores, AddServidor
+from notificacao.views import CadastrarTipoNotificacao, AtualizarTipoNotificacao, ListarTiposNotificacao
+from notificacao.views import InstitutoViewSet
+from notificacao.views import Login, Logout
 from notificacao.views import NotificacaoViewSet
 from notificacao.views import ProfessorViewSet
 from notificacao.views import ServidorViewSet
 from notificacao.views import TipoFormacaoViewSet
 from notificacao.views import TipoNotificacaoViewSet
-from notificacao.views import thanks, Login, Logout
 
 router = routers.DefaultRouter()
 router.register(r'aluno_json', AlunoViewSet, base_name='aluno')
@@ -44,9 +49,11 @@ router.register(r'professor_json', ProfessorViewSet, base_name='professor')
 router.register(r'notificacao_json', NotificacaoViewSet, base_name='notificacao')
 router.register(r'tipo_formacao_json', TipoFormacaoViewSet, base_name='tipoformacao')
 router.register(r'tipo_notificacao_json', TipoNotificacaoViewSet, base_name='tiponotificacao')
+router.register(r'instituto_json', InstitutoViewSet, base_name='instituto')
 
 urlpatterns = [
                   url(r'^admin/', admin.site.urls),
+
                   url(r'lista_aluno/$', ListarAlunos.as_view(), name=Urls.LISTAR_ALUNO),
                   url(r'cadastro_aluno/$', CadastrarAluno.as_view(), name=Urls.CADASTRAR_ALUNO),
                   url(r'cadastro_aluno/(?P<pk>\d+)/$', AtualizarAluno.as_view(), name=Urls.ATUALIZAR_ALUNO),
@@ -65,6 +72,25 @@ urlpatterns = [
                   url(r'delete_professor/(?P<pk>\d+)/$', ApagarProfessor.as_view(), name=Urls.DELETAR_PROFESSOR),
                   url(r'add_professor/(?P<pk>\d+)/$', AddProfessor.as_view(), name=Urls.ADD_PROFESSOR),
 
+                  url(r'lista_instituto/$', ListarInstitutos.as_view(), name=Urls.LISTAR_INSTITUTO),
+                  url(r'cadastro_instituto/$', CadastrarInstituto.as_view(), name=Urls.CADASTRAR_INSTITUTO),
+                  url(r'cadastro_instituto/(?P<pk>\d+)/$', AtualizarInstituto.as_view(), name=Urls.ATUALIZAR_INSTITUTO),
+                  url(r'delete_instituto/(?P<pk>\d+)/$', ApagarInstituto.as_view(), name=Urls.DELETAR_INSTITUTO),
+                  url(r'add_instituto/(?P<pk>\d+)/$', AddInstituto.as_view(), name=Urls.ADD_INSTITUTO),
+
+                  url(r'lista_disciplinas/$', ListarDisciplinas.as_view(), name=Urls.LISTAR_DISCIPLINA),
+                  url(r'cadastro_disciplina/$', CadastrarDisciplina.as_view(), name=Urls.CADASTRAR_DISCIPLINA),
+                  url(r'cadastro_disciplina/(?P<pk>\d+)/$', AtualizarDisciplina.as_view(),
+                      name=Urls.ATUALIZAR_DISCIPLINA),
+                  url(r'delete_disciplina/(?P<pk>\d+)/$', ApagarDisciplina.as_view(), name=Urls.DELETAR_DISCIPLINA),
+                  url(r'add_disciplina/(?P<pk>\d+)/$', AddDisciplina.as_view(), name=Urls.ADD_DISCIPLINA),
+
+                  url(r'lista_tipo_notificacao/$', ListarTiposNotificacao.as_view(), name=Urls.LISTAR_TIPO_NOTIFICACAO),
+                  url(r'cadastro_tipo_notificacao/$', CadastrarTipoNotificacao.as_view(),
+                      name=Urls.CADASTRAR_TIPO_NOTIFICACAO),
+                  url(r'cadastro_tipo_notificacao/(?P<pk>\d+)/$', AtualizarTipoNotificacao.as_view(),
+                      name=Urls.ATUALIZAR_TIPO_NOTIFICACAO),
+
                   url(r'aluno/$', AlunoLogado.as_view(), name='loginAluno'),
                   url(r'professor/$', ProfessorLogado.as_view(), name='loginProfessor'),
                   url(r'servidor/$', ServidorLogado.as_view(), name='loginServidor'),
@@ -72,5 +98,5 @@ urlpatterns = [
 
                   url(r'^login/$', Login.as_view(), name='login'),
                   url(r'^logout/$', Logout.as_view(), name='logout'),
-                  url(r'^$', thanks, name="thanks")
+                  url(r'^$', Login.as_view(), name='login')
               ] + router.urls

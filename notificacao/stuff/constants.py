@@ -35,19 +35,33 @@ class Urls:
     DELETAR_PROFESSOR = 'cadastroDeleteProfessor'
     ADD_PROFESSOR = 'cadastroAddProfessor'
 
+    LISTAR_INSTITUTO = 'listaInstitutos'
+    CADASTRAR_INSTITUTO = 'cadastroInstituto'
+    ATUALIZAR_INSTITUTO = 'cadastroUpdateInstituto'
+    DELETAR_INSTITUTO = 'cadastroDeleteInstituto'
+    ADD_INSTITUTO = 'cadastroAddInstituto'
+
+    LISTAR_DISCIPLINA = 'listaDisciplinas'
+    CADASTRAR_DISCIPLINA = 'cadastroDisciplina'
+    ATUALIZAR_DISCIPLINA = 'cadastroUpdateDisciplina'
+    DELETAR_DISCIPLINA = 'cadastroDeleteDisciplina'
+    ADD_DISCIPLINA = 'cadastroAddDisciplina'
+
+    LISTAR_TIPO_NOTIFICACAO = 'listaTiposNotificacao'
+    CADASTRAR_TIPO_NOTIFICACAO = 'cadastroTipoNotificacao'
+    ATUALIZAR_TIPO_NOTIFICACAO = 'cadastroUpdateTipoNotificacao'
+
 
 class HTML:
-    CADASTRO_ALUNO = 'cadastroAluno.html'
-    CADASTRO_SERVIDOR = 'cadastroServidor.html'
-    CADASTRO_PROFESSOR = 'cadastroProfessor.html'
-
-    LISTA_ALUNO = 'listaAlunos.html'
-    LISTA_SERVIDOR = 'listaServidores.html'
-    LISTA_PROFESSOR = 'listaProfessores.html'
+    CADASTRO = 'cadastro.html'
+    LISTA_USUARIOS = 'listaOpcoesUsuario.html'
+    LISTA_REMETENTES = 'listaOpcoesRemetente.html'
+    LISTA_OUTROS = 'listaOpcoesOutros.html'
 
     ADD = 'add.html'
     DELETE = 'delete.html'
 
+    LOGIN_USUARIO = 'loginUsuario.html'
     LOGIN = 'login.html'
     THANKS = 'thanks.html'
 

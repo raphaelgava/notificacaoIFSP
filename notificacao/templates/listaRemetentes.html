@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block navbar %}
+{% block navbarLista %}
+{% endblock %}
+{% endblock %}
+
+{% block sidenavLeft %}
+{% include "sidenavLeft.html" %}
+{% endblock %}
+
+{% block sidenavRight %}
+{% include "sidenavRight.html" %}
+{% endblock %}
+
+{% block content %}
+{% block h1Lista %}
+{% endblock %}
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12" onload="myScript()">
+            <form action="" method="GET" class="form form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Procurar</label>
+                    <div class="col-md-9">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Busca por nomes..."
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Exibir</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline"><input type="radio" name="filtro" value="ativo"
+                                                           id="a">Ativos</label>
+                        <label class="radio-inline"><input type="radio" class="radio-inline" name="filtro"
+                                                           value="inativo" id="i">Inativos</label>
+                        <label class="radio-inline"><input type="radio" class="radio-inline" name="filtro" value="todos"
+                                                           id="t">Todos</label>
+                        <script>
+                            document.getElementById("t").checked = true;
+
+                            var valor;
+                            var params = window.location.search.substr(1).split('&');
+
+                            for (var i = 0; i < params.length; i++) {
+                              var p=params[i].split('=');
+                              if (p[0] == "filtro") {
+                                valor = decodeURIComponent(p[1]);
+                                if (valor == "ativo"){
+                                    document.getElementById("a").checked = true;
+                                }
+                                else{
+                                    if (valor == "inativo"){
+                                        document.getElementById("i").checked = true;
+                                    }
+                                }
+                              }
+                            }
+
+
+                        </script>
+                        <button type="submit" class="btn btn-primary pull-right">Filtrar</button>
+                    </div>
+                </div>
+            </form>
+            <table class="table" id="myTable">
+                <thead>
+                <tr>
+                    <th class="text-center">Descrição</th>
+                    <th colspan="2" class="text-center" class="col-md-1">Ações</th>
+                </tr>
+                </thead>
+                <tbody id="myTableBordy">
+                {% for remetente in lista %}
+                {% if forloop.counter|divisibleby:2 %}
+                <tr class="success">
+                    {% else %}
+                <tr class="info">
+                    {% endif %}
+                    <td>{{ remetente.descricao }}</td>
+                    {% block opcoesLista %}
+                    {% endblock %}
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <script>
+                function myFunction() {
+                  // Declare variables
+                  var input, filter, table, tr, td, i;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("myTable");
+                  tr = table.getElementsByTagName("tr");
+
+                  // Loop through all table rows, and hide those who don't match the search query
+                  for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                      } else {
+                        tr[i].style.display = "none";
+                      }
+                    }
+                  }
+                }
+
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
