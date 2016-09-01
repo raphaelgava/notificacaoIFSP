@@ -101,9 +101,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ifsp',
-        'USER': 'root',
-        'PASSWORD': 'masterkey',
-        'HOST': '127.0.0.1',
+        'USER': 'adminaaMHFrC',
+        'PASSWORD': 'Dz5ZX2hIT3tr',
+        'HOST': 'mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/',
+        # 'USER': 'root',
+        # 'PASSWORD': 'masterkey',
+        # 'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
