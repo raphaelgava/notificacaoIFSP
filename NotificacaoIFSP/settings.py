@@ -35,8 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'colorfield',
+    'rest_framework',  # para envio de json
+    'colorfield',  # para campo de cor
+    'polymodels',  # para polimorfismo
     'notificacao',
 ]
 

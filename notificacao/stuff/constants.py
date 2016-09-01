@@ -41,6 +41,12 @@ class Urls:
     DELETAR_INSTITUTO = 'cadastroDeleteInstituto'
     ADD_INSTITUTO = 'cadastroAddInstituto'
 
+    LISTAR_OFERECIMENTO = 'listaOferecimentos'
+    CADASTRAR_OFERECIMENTO = 'cadastroOferecimento'
+    ATUALIZAR_OFERECIMENTO = 'cadastroUpdateOferecimento'
+    DELETAR_OFERECIMENTO = 'cadastroDeleteOferecimento'
+    ADD_OFERECIMENTO = 'cadastroAddOferecimento'
+
     LISTAR_DISCIPLINA = 'listaDisciplinas'
     CADASTRAR_DISCIPLINA = 'cadastroDisciplina'
     ATUALIZAR_DISCIPLINA = 'cadastroUpdateDisciplina'
@@ -57,6 +63,7 @@ class HTML:
     LISTA_USUARIOS = 'listaOpcoesUsuario.html'
     LISTA_REMETENTES = 'listaOpcoesRemetente.html'
     LISTA_OUTROS = 'listaOpcoesOutros.html'
+    LISTA_DISCIPLINA = 'listaOpcoesDisciplina.html'
 
     ADD = 'add.html'
     DELETE = 'delete.html'

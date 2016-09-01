@@ -17,9 +17,10 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from polymodels.models import PolymorphicModel
 
 
-class Remetente(models.Model):
+class Remetente(PolymorphicModel):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
     is_active = models.BooleanField(_('active'), default=True)
 
@@ -41,7 +42,8 @@ class Remetente(models.Model):
 
 
 class Instituto(Remetente):
-    datafundacao = models.DateField("Data de fundação", blank=True, null=True)  # Field name made lowercase.
+    datafundacao = models.DateField("Data de fundação", help_text=_('dd/mm/yyyy'), blank=True,
+                                    null=True)  # Field name made lowercase.
 
     class Meta:
         verbose_name = 'Instituto'
@@ -49,17 +51,11 @@ class Instituto(Remetente):
 
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
-    """
-    An abstract base class implementing a fully featured User model with
-    admin-compliant permissions.
-
-    Username and password are required. Other fields are optional.
-    """
     username = models.CharField(
         _('username'),
         max_length=30,
         unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=_('Required. 7 characters.'),
         validators=[
             validators.RegexValidator(
                 r'^[\w]+$',
@@ -101,20 +97,13 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         # abstract = True
 
     def get_full_name(self):
-        """
-        Returns the first_name plus the last_name, with a space in between.
-        """
         full_name = '%s %s' % (self.first_name, self.last_name)
         return full_name.strip()
 
     def get_short_name(self):
-        "Returns the short name for the user."
         return self.first_name
 
     def email_user(self, subject, message, from_email=None, **kwargs):
-        """
-        Sends an email to this User.
-        """
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def delete(self, *args, **kwargs):
@@ -132,14 +121,11 @@ class Pessoa(Usuario):
     )
     sexo = models.CharField(max_length=10, default='Masculino',
                             choices=SEXO)  # Field name made lowercase.
-    datanascimento = models.DateField("Data de nascimento", default=timezone.now)  # Field name made lowercase.
-    # id_instituto tem que poder estar null para funcionamento do UserAdmin (na hora de salvar)
+    datanascimento = models.DateField("Data de nascimento", help_text=_('dd/mm/yyyy'),
+                                      default=timezone.now)  # Field name made lowercase.
     id_instituto = models.ForeignKey(Instituto, blank=True, null=True)  # Field name made lowercase.
 
-    # USERNAME_FIELD = 'username'
-
     class Meta(Usuario.Meta):
-        # swappable = 'AUTH_USER_MODEL'
         abstract = True
         verbose_name = 'Pessoa'
         verbose_name_plural = 'Pessoas'
@@ -161,7 +147,6 @@ class Servidor(Pessoa):
 
 class Professor(Servidor):
     formacao = models.CharField("Área", max_length=20)  # Field name made lowercase.
-    # id_tipo tem que poder estar null para funcionamento do UserAdmin (na hora de salvar)
     id_tipo = models.ForeignKey('Tipoformacao', verbose_name="Tipo formação", blank=True,
                                 null=True)  # Field name made lowercase.
 
@@ -200,7 +185,6 @@ class Disciplina(models.Model):
 
 class Curso(Remetente):
     id_instituto = models.ForeignKey(Instituto)  # Field name made lowercase.
-    # ativo = models.BooleanField(default=True)  # Field name made lowercase. This field type is a guess.
     disciplinas = models.ManyToManyField(Disciplina)
 
     class Meta:
@@ -226,8 +210,6 @@ class TipoNotificacao(models.Model):
     descricao = models.CharField("Título", max_length=20)  # Field name made lowercase.
     cor = ColorField()
 
-    # cor = models.CharField(max_length=7)  # Field name made lowercase.
-
     class Meta:
         verbose_name = 'Tipo Notificação'
         verbose_name_plural = 'Tipos Notificações'
@@ -243,8 +225,6 @@ class Notificacao(models.Model):
     id_local = models.ForeignKey(Local, verbose_name="Local", blank=True, null=True)  # Field name made lowercase.
     descricao = models.CharField("Descrição", max_length=255)  # Field name made lowercase.
     titulo = models.CharField("Título", max_length=45)  # Field name made lowercase.
-    # prontuario = model.ForeignKey('Servidor', null=False, blank=False)  # Field name made lowercase.
-    # username = models.ForeignKey('Servidor', null=False, blank=False)  # Field name made lowercase.
     username = models.ForeignKey(Servidor)  # Field name made lowercase.
     remetente = models.ManyToManyField(Remetente)
 
@@ -263,7 +243,11 @@ class Oferecimento(Remetente):
         (2, 'Segundo'),
     )
 
-    ano = models.DateField(default=datetime.date.today)  # Field name made lowercase.
+    YEAR_CHOICES = []
+    for r in range(datetime.datetime.now().year, (datetime.datetime.now().year + 5)):
+        YEAR_CHOICES.append((r, r))
+
+    ano = models.IntegerField(_('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     semestre = models.IntegerField(default=1, choices=SEMESTER)  # Field name made lowercase.
     id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.

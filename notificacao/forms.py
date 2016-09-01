@@ -87,6 +87,10 @@ class InstitutoForm(_RemetenteForm):
 
 
 class OferecimentoForm(_RemetenteForm):
+    id_professor = forms.ModelChoiceField(queryset=Professor.objects.filter(is_active=True))
+    id_disciplina = forms.ModelChoiceField(queryset=Disciplina.objects.filter(is_active=True))
+    alunos = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                            queryset=Aluno.objects.filter(is_active=True))
     class Meta:
         model = Oferecimento
         fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')
@@ -96,7 +100,7 @@ class OferecimentoForm(_RemetenteForm):
 
 
 
-# ==========================================CADASTRO OUTROS==========================================================
+# ==========================================CADASTRO OUTROS=============================================================
 
 class DisciplinaForm(ModelForm):
     class Meta:
@@ -117,4 +121,4 @@ class TipoFormacaoForm(ModelForm):
         model = TipoFormacao
         fields = ('descricao',)
 
-        # ======================================================================================================================
+# ======================================================================================================================

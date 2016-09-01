@@ -25,22 +25,27 @@ from django.contrib import admin
 from rest_framework import routers
 
 from notificacao.stuff.constants import Urls
-from notificacao.views import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
-from notificacao.views import AlunoViewSet
-from notificacao.views import CadastrarAluno, AtualizarAluno, ApagarAluno, ListarAlunos, AddAluno
-from notificacao.views import CadastrarDisciplina, AtualizarDisciplina, ListarDisciplinas, ApagarDisciplina, \
+from notificacao.views.json import AlunoViewSet
+from notificacao.views.json import InstitutoViewSet
+from notificacao.views.json import NotificacaoViewSet
+from notificacao.views.json import ProfessorViewSet
+from notificacao.views.json import ServidorViewSet
+from notificacao.views.json import TipoFormacaoViewSet
+from notificacao.views.json import TipoNotificacaoViewSet
+from notificacao.views.login import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
+from notificacao.views.login import Login, Logout
+from notificacao.views.outros import CadastrarDisciplina, AtualizarDisciplina, ListarDisciplinas, ApagarDisciplina, \
     AddDisciplina
-from notificacao.views import CadastrarInstituto, AtualizarInstituto, ListarInstitutos, ApagarInstituto, AddInstituto
-from notificacao.views import CadastrarProfessor, AtualizarProfessor, ApagarProfessor, ListarProfessores, AddProfessor
-from notificacao.views import CadastrarServidor, AtualizarServidor, ApagarServidor, ListarServidores, AddServidor
-from notificacao.views import CadastrarTipoNotificacao, AtualizarTipoNotificacao, ListarTiposNotificacao
-from notificacao.views import InstitutoViewSet
-from notificacao.views import Login, Logout
-from notificacao.views import NotificacaoViewSet
-from notificacao.views import ProfessorViewSet
-from notificacao.views import ServidorViewSet
-from notificacao.views import TipoFormacaoViewSet
-from notificacao.views import TipoNotificacaoViewSet
+from notificacao.views.outros import CadastrarTipoNotificacao, AtualizarTipoNotificacao, ListarTiposNotificacao
+from notificacao.views.remetente import CadastrarInstituto, AtualizarInstituto, ListarInstitutos, ApagarInstituto, \
+    AddInstituto
+from notificacao.views.remetente import CadastrarOferecimento, AtualizarOferecimento, ListarOferecimentos, \
+    ApagarOferecimento, AddOferecimento
+from notificacao.views.usuario import CadastrarAluno, AtualizarAluno, ApagarAluno, ListarAlunos, AddAluno
+from notificacao.views.usuario import CadastrarProfessor, AtualizarProfessor, ApagarProfessor, ListarProfessores, \
+    AddProfessor
+from notificacao.views.usuario import CadastrarServidor, AtualizarServidor, ApagarServidor, ListarServidores, \
+    AddServidor
 
 router = routers.DefaultRouter()
 router.register(r'aluno_json', AlunoViewSet, base_name='aluno')
@@ -77,6 +82,14 @@ urlpatterns = [
                   url(r'cadastro_instituto/(?P<pk>\d+)/$', AtualizarInstituto.as_view(), name=Urls.ATUALIZAR_INSTITUTO),
                   url(r'delete_instituto/(?P<pk>\d+)/$', ApagarInstituto.as_view(), name=Urls.DELETAR_INSTITUTO),
                   url(r'add_instituto/(?P<pk>\d+)/$', AddInstituto.as_view(), name=Urls.ADD_INSTITUTO),
+
+                  url(r'lista_Oferecimentos/$', ListarOferecimentos.as_view(), name=Urls.LISTAR_OFERECIMENTO),
+                  url(r'cadastro_oferecimento/$', CadastrarOferecimento.as_view(), name=Urls.CADASTRAR_OFERECIMENTO),
+                  url(r'cadastro_oferecimento/(?P<pk>\d+)/$', AtualizarOferecimento.as_view(),
+                      name=Urls.ATUALIZAR_OFERECIMENTO),
+                  url(r'delete_oferecimento/(?P<pk>\d+)/$', ApagarOferecimento.as_view(),
+                      name=Urls.DELETAR_OFERECIMENTO),
+                  url(r'add_oferecimento/(?P<pk>\d+)/$', AddOferecimento.as_view(), name=Urls.ADD_OFERECIMENTO),
 
                   url(r'lista_disciplinas/$', ListarDisciplinas.as_view(), name=Urls.LISTAR_DISCIPLINA),
                   url(r'cadastro_disciplina/$', CadastrarDisciplina.as_view(), name=Urls.CADASTRAR_DISCIPLINA),

@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">Procurar</label>
                     <div class="col-md-9">
-                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Busca por nomes..."
+                        <input type="text" id="myInput" onkeyup="busca(0)" placeholder="Busca por nomes..."
                                class="form-control">
                     </div>
                 </div>
@@ -39,27 +39,7 @@
                         <label class="radio-inline"><input type="radio" class="radio-inline" name="filtro" value="todos"
                                                            id="t">Todos</label>
                         <script>
-                            document.getElementById("t").checked = true;
-
-                            var valor;
-                            var params = window.location.search.substr(1).split('&');
-
-                            for (var i = 0; i < params.length; i++) {
-                              var p=params[i].split('=');
-                              if (p[0] == "filtro") {
-                                valor = decodeURIComponent(p[1]);
-                                if (valor == "ativo"){
-                                    document.getElementById("a").checked = true;
-                                }
-                                else{
-                                    if (valor == "inativo"){
-                                        document.getElementById("i").checked = true;
-                                    }
-                                }
-                              }
-                            }
-
-
+                            ativoInativo();
                         </script>
                         <button type="submit" class="btn btn-primary pull-right">Filtrar</button>
                     </div>
@@ -84,32 +64,8 @@
                     {% endblock %}
                 </tr>
                 {% endfor %}
-
                 </tbody>
             </table>
-            <script>
-                function myFunction() {
-                  // Declare variables
-                  var input, filter, table, tr, td, i;
-                  input = document.getElementById("myInput");
-                  filter = input.value.toUpperCase();
-                  table = document.getElementById("myTable");
-                  tr = table.getElementsByTagName("tr");
-
-                  // Loop through all table rows, and hide those who don't match the search query
-                  for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[0];
-                    if (td) {
-                      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                      } else {
-                        tr[i].style.display = "none";
-                      }
-                    }
-                  }
-                }
-
-            </script>
         </div>
     </div>
 </div>

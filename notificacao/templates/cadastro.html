@@ -21,9 +21,9 @@
                     <div class="form-group error">
                         <label class="control-label col-sm-2">{{ field.label }}</label>
                         <div class="col-sm-10">{{ field }}
-                                    <span class="help-inline">
-                                        {% for error in  field.errors %}{{ error }}{% endfor %}
-                                    </span>
+                            <span class="help-inline">
+                                {% for error in  field.errors %}{{ error }}{% endfor %}
+                            </span>
                         </div>
                     </div>
                     {% else %}
@@ -31,31 +31,41 @@
                                 {% if messages %}
                                     {% for message in messages %}
                                         {% if 'wrongPassword' in message.tags %}
-                                            {% if field.label == 'Senha' or field.label == 'Confirmar senha' %}
+                                            {% if field.html_name == 'password' or field.html_name == 'password_check' %}
                                                 error
                                             {% endif %}
                                         {% else %}
                                             {% if 'wrongUser' in message.tags %}
-                                                {% if field.label == 'Usuário' %}
+                                                {% if field.html_name == 'username' %}
                                                     error
                                                 {% endif %}
                                             {% endif %}
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}">
+                        {% if field.html_name == 'alunos' %}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Procurar {{ field.label }}</label>
+                            <div class="col-md-10">
+                                <input type="text" id="myInput" onkeyup="buscaCheckbox('id_alunos')"
+                                       placeholder="Busca por nomes..."
+                                       class="form-control">
+                            </div>
+                        </div>
+                        {% endif %}
                         <label class="control-label col-sm-2">{{ field.label }}</label>
                         <div class="col-sm-10">{{ field }}
                             {% if messages %}
                             {% for message in messages %}
                             {% if 'wrongPassword' in message.tags %}
-                            {% if field.label == 'Senha' or field.label == 'Confirmar senha' %}
+                            {% if field.html_name == 'password' or field.html_name == 'password_check' %}
                                                                 <span class="help-inline">
                                                                     <small>{{message}}</small>
                                                                 </span>
                             {% endif %}
                             {% else %}
                             {% if 'wrongUser' in message.tags %}
-                            {% if field.label == 'Usuário' %}
+                            {% if field.html_name == 'username' %}
                                                                         <span class="help-inline">
                                                                             <small>{{message}}</small>
                                                                         </span>

@@ -1,0 +1,36 @@
+{% extends 'listaDisciplinas.html' %}
+
+{% load staticfiles %}
+
+{% block navbarLista %}
+<li>
+    <a href="{% url view.get_link_insert %}" class="addlink">
+        <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">
+        Adicionar
+    </a>
+</li>
+{% endblock %}
+
+{% block h1Lista %}
+<h1>{{view.get_title}}</h1>
+{% endblock %}
+
+{% block opcoesLista %}
+<td class="col-md-1">
+    <a href="{% url view.get_link_modify disciplina.pk %}" class="changelink">
+        <img src="{% static 'img/icon-changelink.svg' %}" class="changelink" alt="Alt">
+    </a>
+</td>
+<td class="col-md-1">
+    {% if disciplina.is_active %}
+    <a href="{% url view.get_link_delete disciplina.pk %}" class="deletelinklink">
+        <img src="{% static 'img/icon-deletelink.svg' %}" class="deletelink" alt="Del">
+    </a>
+    {% else %}
+    <a href="{% url view.get_link_add disciplina.pk %}" class="addlink">
+        <img src="{% static 'img/icon-addlink.svg' %}" class="addlink" alt="Add">
+    </a>
+    {% endif %}
+</td>
+{% endblock %}
+

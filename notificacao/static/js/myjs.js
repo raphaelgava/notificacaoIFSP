@@ -22,3 +22,83 @@
          t.value += texto.substring(0,1);
      }
  }
+
+ /*
+ function makeDate(id){
+     obj = document.getElementById(id);
+     vl = obj.value;
+     l = vl.toString().length;
+     switch(l){
+         case 2:
+             obj.value = vl + "/";
+         break;
+         case 5:
+             obj.value = vl + "/";
+         break;
+     }
+ }
+ */
+
+ function busca(pos) {
+   // Declare variables
+   var input, filter, table, tr, td, i;
+   input = document.getElementById("myInput");
+   filter = input.value.toUpperCase();
+   table = document.getElementById("myTable");
+   tr = table.getElementsByTagName("tr");
+
+   // Loop through all table rows, and hide those who don't match the search query
+   for (i = 0; i < tr.length; i++) {
+     td = tr[i].getElementsByTagName("td")[pos];
+     if (td) {
+       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+         tr[i].style.display = "";
+       } else {
+         tr[i].style.display = "none";
+       }
+     }
+   }
+ }
+
+  function buscaCheckbox(campo) {
+    // Declare variables
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById(campo);
+    li = table.getElementsByTagName("li");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      label = li[i].getElementsByTagName("label");
+      if (label) {
+        valor = label[0].innerText.toUpperCase();
+        if (valor.indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+ function ativoInativo(){
+     var valor;
+     var params = window.location.search.substr(1).split('&');
+
+     document.getElementById("t").checked = true;
+     for (var i = 0; i < params.length; i++) {
+       var p=params[i].split('=');
+       if (p[0] == "filtro") {
+         valor = decodeURIComponent(p[1]);
+         if (valor == "ativo"){
+             document.getElementById("a").checked = true;
+         }
+         else{
+             if (valor == "inativo"){
+                 document.getElementById("i").checked = true;
+             }
+         }
+       }
+     }
+ }
