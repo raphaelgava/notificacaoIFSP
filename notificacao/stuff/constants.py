@@ -69,7 +69,7 @@ class HTML:
     DELETE = 'delete.html'
 
     LOGIN_USUARIO = 'loginUsuario.html'
-    LOGIN = 'login.html'
+    LOGIN = 'index.html'
     THANKS = 'thanks.html'
 
 

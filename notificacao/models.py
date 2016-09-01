@@ -52,8 +52,8 @@ class Instituto(Remetente):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
-        _('username'),
-        max_length=30,
+        _('Prontuário'),
+        max_length=8,
         unique=True,
         help_text=_('Required. 7 characters.'),
         validators=[

@@ -33,7 +33,7 @@ class LoginForm(forms.Form):
 
 
 # ==========================================CADASTRO USUARIOS===========================================================
-
+# todo: criar máscara para o campo de prontuário
 class _PersonForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Senha')
     password_check = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Confirmar senha')

@@ -21,7 +21,7 @@ class Logout(TemplateView):
     def get(self, request, *args, **kwargs):
         # logout(request)
         # messages.info(request, 'Out', extra_tags='logged')
-        # response = render(request, 'login.html')
+        # response = render(request, 'index.html')
         # response.set_cookie('logged', 'Out')
         # return response
         return self.out(request)

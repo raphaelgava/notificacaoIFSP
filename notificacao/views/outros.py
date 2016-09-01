@@ -28,7 +28,6 @@ class CadastrarDisciplina(DisciplinaView, CreateView):
         return 'Cadastro Disciplina'
 
 
-# todo: não esta aparecendo cadastro disciplina no template de disciplina!!
 class AtualizarDisciplina(DisciplinaView, UpdateView):
     template_name = HTML.CADASTRO
 

@@ -29,7 +29,7 @@ class ApagarItem(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
             return 'Remetente'
         elif isinstance(self.model, Disciplina):
             return 'Disciplina'
-        else:  # todo: verificar necessidade de isinstance(self.model, Disciplina) pois esse não esta conectado em nada!!!
+        else:
             return 'Tipo'
 
     def delete(self, request, *args, **kwargs):
