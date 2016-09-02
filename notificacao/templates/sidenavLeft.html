@@ -1,30 +1,30 @@
 {% load app_filter %}
 
-<ul class="nav nav-pills nav-stacked" data-offset-top="205">
+<!--<ul class="nav nav-pills nav-stacked" data-offset-top="205">-->
     <!--<div class="well well-sm text-center">-->
     {% if user|has_group:"Admin" %}
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaAlunos' %}'">
         <a href="{% url 'listaAlunos' %}">Cadastro Aluno</a>
     </div>
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaServidores' %}'">
         <a href="{% url 'listaServidores' %}">Cadastro Servidor</a>
     </div>
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaProfessores' %}'">
         <a href="{% url 'listaProfessores' %}">Cadastro Professor</a>
     </div>
-    <div class="well text-center">
-        <a href="{% url 'listaProfessores' %}">Cadastro Notificação</a>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
+    <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
     </div>
     {% else %}
     <p>teste</p>
     {% if user|has_group:"Professor" %}
-    <div class="well text-center">
-        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
+    <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
     </div>
     {% else %}
     {% if user|has_group:"Employee" %}
-    <div class="well text-center">
-        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
+    <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
     </div>
     {% else %}
     {% if user|has_group:"Student" %}
@@ -42,4 +42,4 @@
     {% if bla %}
     <p>TESTEEEEE</p>
     {% endif %}
-</ul>
+<!--</ul>-->

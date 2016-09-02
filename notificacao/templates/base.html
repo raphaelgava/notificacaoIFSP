@@ -16,11 +16,23 @@
     <link type="text/css" href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet" media="all">
     <!--<link type="text/css" href="{% static 'css/bootstrap-glyphicons.css' %}" rel="stylesheet" media="all">-->
     <link type="text/css" href="{% static 'css/mycss.css' %}" rel="stylesheet" media="all">
+    <link type="text/css" href="{% static 'css/geoposition.css' %}" rel="stylesheet" media="all">
 
     <script src="{% static 'js/jquery-2.4.4.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/myjs.js' %}"></script>
     <script src="{% static 'js/jscolor.js' %}"></script>
+    <script src="{% static 'js/geoposition.js' %}"></script>
+    <script type="text/javascript"
+            src="//maps.google.com/maps/api/js?key=AIzaSyCzCd6-cZxPnonmDk996qBWTKc4iv5NzFk"></script>
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/common.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/map.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/util.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/marker.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/geocoder.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/onion.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/stats.js"></script>-->
+    <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/controls.js"></script>-->
 
 </head>
 <body>
@@ -38,29 +50,24 @@
                    href="{% url 'login' %}">
                     <img src="{% static 'img/logo-ifsp.png' %}" alt="IFSP">
                 </a>
-                <!--<a class="pull-left" href="#">-->
-                <!--<img src="{% static 'img/logo-ifsp.png' %}" alt="IFSP">-->
-                <!--</a>-->
             </div>
 
-            <div class="collapse navbar-collapse in" id="myNavbar" aria-expanded="true">
+            <div class="collapse navbar-collapse" id="myNavbar" aria-expanded="false">
                 <ul class="nav navbar-nav">
-                    <!--<li class="active"><a href="#">Home</a></li>-->
-                    <!--<li><a href="#">About</a></li>-->
-                    <!--<li><a href="#">Projects</a></li>-->
-                    <!--<li><a href="#">Contact</a></li>-->
                     {% block navbar %}
                     {% endblock %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <!--<span class="glyphicon glyphicon-log-in" style="color:red;"></span>-->
-                    <!--<i class="glyphicon glyphicon-log-in" style="font-size:48px;color:red;"></i>-->
-                    <!--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
                     {% if request.user.is_authenticated %}
-                    <li><a href="#">{{ request.user.username }}</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        Login</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -68,19 +75,17 @@
     </nav>
 
     <div class="row content totalHeight nopadding">
-        <nav class="col-sm-2 sidenav">
-            <ul class="nav nav-pills nav-stacked" data-offset-top="205">
-                {% block sidenavLeft %}
-                {% endblock %}
-            </ul>
-        </nav>
+        <div class="col-sm-2 sidenav scroll">
+            {% block sidenavLeft %}
+            {% endblock %}
+        </div>
 
         <div class="col-sm-8 text-left scroll">
             {% block content %}
             {% endblock %}
         </div>
 
-        <div class="col-sm-2 sidenav">
+        <div class="col-sm-2 sidenav scroll">
             {% block sidenavRight %}
             {% endblock %}
         </div>

@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'rest_framework',  # para envio de json
     'colorfield',  # para campo de cor
     'polymodels',  # para polimorfismo
+    'geoposition',  # maps
     'notificacao',
 ]
+
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyCzCd6-cZxPnonmDk996qBWTKc4iv5NzFk'
 
 REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
@@ -101,12 +104,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ifsp',
-        'USER': 'adminaaMHFrC',
-        'PASSWORD': 'Dz5ZX2hIT3tr',
-        'HOST': 'mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/',
-        # 'USER': 'root',
-        # 'PASSWORD': 'masterkey',
-        # 'HOST': '127.0.0.1',
+        'USER': 'root',
+        'PASSWORD': 'masterkey',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }

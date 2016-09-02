@@ -36,6 +36,9 @@ from notificacao.views.login import AdminLogado, ServidorLogado, ProfessorLogado
 from notificacao.views.login import Login, Logout
 from notificacao.views.outros import CadastrarDisciplina, AtualizarDisciplina, ListarDisciplinas, ApagarDisciplina, \
     AddDisciplina
+from notificacao.views.outros import CadastrarLocal, AtualizarLocal, ListarLocal
+from notificacao.views.outros import CadastrarNotificacao, AtualizarNotificacao, ListarNotificacoes, ApagarNotificacao, \
+    AddNotificacao
 from notificacao.views.outros import CadastrarTipoNotificacao, AtualizarTipoNotificacao, ListarTiposNotificacao
 from notificacao.views.remetente import CadastrarInstituto, AtualizarInstituto, ListarInstitutos, ApagarInstituto, \
     AddInstituto
@@ -98,11 +101,22 @@ urlpatterns = [
                   url(r'delete_disciplina/(?P<pk>\d+)/$', ApagarDisciplina.as_view(), name=Urls.DELETAR_DISCIPLINA),
                   url(r'add_disciplina/(?P<pk>\d+)/$', AddDisciplina.as_view(), name=Urls.ADD_DISCIPLINA),
 
+                  url(r'lista_notificacoes/$', ListarNotificacoes.as_view(), name=Urls.LISTAR_NOTIFICACAO),
+                  url(r'cadastro_notificacao/$', CadastrarNotificacao.as_view(), name=Urls.CADASTRAR_NOTIFICACAO),
+                  url(r'cadastro_notificacao/(?P<pk>\d+)/$', AtualizarNotificacao.as_view(),
+                      name=Urls.ATUALIZAR_NOTIFICACAO),
+                  url(r'delete_notificacao/(?P<pk>\d+)/$', ApagarNotificacao.as_view(), name=Urls.DELETAR_NOTIFICACAO),
+                  url(r'add_notificacao/(?P<pk>\d+)/$', AddNotificacao.as_view(), name=Urls.ADD_NOTIFICACAO),
+
                   url(r'lista_tipo_notificacao/$', ListarTiposNotificacao.as_view(), name=Urls.LISTAR_TIPO_NOTIFICACAO),
                   url(r'cadastro_tipo_notificacao/$', CadastrarTipoNotificacao.as_view(),
                       name=Urls.CADASTRAR_TIPO_NOTIFICACAO),
                   url(r'cadastro_tipo_notificacao/(?P<pk>\d+)/$', AtualizarTipoNotificacao.as_view(),
                       name=Urls.ATUALIZAR_TIPO_NOTIFICACAO),
+
+                  url(r'lista_local/$', ListarLocal.as_view(), name=Urls.LISTAR_LOCAL),
+                  url(r'cadastro_local/$', CadastrarLocal.as_view(), name=Urls.CADASTRAR_LOCAL),
+                  url(r'cadastro_local/(?P<pk>\d+)/$', AtualizarLocal.as_view(), name=Urls.ATUALIZAR_LOCAL),
 
                   url(r'aluno/$', AlunoLogado.as_view(), name='loginAluno'),
                   url(r'professor/$', ProfessorLogado.as_view(), name='loginProfessor'),

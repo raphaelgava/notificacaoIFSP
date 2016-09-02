@@ -80,14 +80,26 @@
                                     </span>
                             {% endif %}
                             {% endif %}
+
+                            <!--ESTA É A MELHOR OPÇÃO PARA ENCONTRAR O CAMPO DESEJADO-->
+                            {% if field.id_for_label == 'my_description' %}
+                            <div class="col-sm-10">
+                                <!--<span id="spcontando" style="font-family:Georgia;">Ainda não temos nada digitado..</span>-->
+                                <span id="sprestante">Você ainda pode digitar 255 caracteres</span>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                     {% endif %}
+
+
                     {% endfor %}
                 </fieldset>
+
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
+                <br>
             </form>
         </div>
     </div>

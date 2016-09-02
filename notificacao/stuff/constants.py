@@ -53,6 +53,16 @@ class Urls:
     DELETAR_DISCIPLINA = 'cadastroDeleteDisciplina'
     ADD_DISCIPLINA = 'cadastroAddDisciplina'
 
+    LISTAR_NOTIFICACAO = 'listaNotificacoes'
+    CADASTRAR_NOTIFICACAO = 'cadastroNotificacao'
+    ATUALIZAR_NOTIFICACAO = 'cadastroUpdateNotificacao'
+    DELETAR_NOTIFICACAO = 'cadastroDeleteNotificacao'
+    ADD_NOTIFICACAO = 'cadastroAddNotificacao'
+
+    LISTAR_LOCAL = 'listaLocais'
+    CADASTRAR_LOCAL = 'cadastroLocal'
+    ATUALIZAR_LOCAL = 'cadastroUpdateLocal'
+
     LISTAR_TIPO_NOTIFICACAO = 'listaTiposNotificacao'
     CADASTRAR_TIPO_NOTIFICACAO = 'cadastroTipoNotificacao'
     ATUALIZAR_TIPO_NOTIFICACAO = 'cadastroUpdateTipoNotificacao'
@@ -62,8 +72,8 @@ class HTML:
     CADASTRO = 'cadastro.html'
     LISTA_USUARIOS = 'listaOpcoesUsuario.html'
     LISTA_REMETENTES = 'listaOpcoesRemetente.html'
-    LISTA_OUTROS = 'listaOpcoesOutros.html'
-    LISTA_DISCIPLINA = 'listaOpcoesDisciplina.html'
+    LISTA_TIPOS = 'listaOpcoesTipo.html'
+    LISTA_OUTROS = 'listaOpcoesOutro.html'
 
     ADD = 'add.html'
     DELETE = 'delete.html'

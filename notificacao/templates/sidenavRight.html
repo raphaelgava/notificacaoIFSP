@@ -1,37 +1,40 @@
 {% load app_filter %}
 
-<ul class="nav nav-pills nav-stacked" data-offset-top="205">
+<!--<ul class="nav nav-pills nav-stacked" data-offset-top="205">-->
     <!--<div class="well well-sm text-center">-->
     {% if user|has_group:"Admin" %}
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaInstitutos' %}'">
         <a href="{% url 'listaInstitutos' %}">Cadastro Instituto</a>
     </div>
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaServidores' %}'">
         <a href="{% url 'listaServidores' %}">Cadastro Curso</a>
     </div>
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaDisciplinas' %}'">
         <a href="{% url 'listaDisciplinas' %}">Cadastro Disciplina</a>
     </div>
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaOferecimentos' %}'">
         <a href="{% url 'listaOferecimentos' %}">Cadastro Oferecimento</a>
     </div>
-    <div class="well text-center">
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
+    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
+</div>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaTiposNotificacao' %}'">
         <a href="{% url 'listaTiposNotificacao' %}">Cadastro Tipo Notificação</a>
     </div>
     {% else %}
     <p>teste</p>
     {% if user|has_group:"Professor" %}
-    <div class="well text-center">
+<div class="well well-sm text-center">
         <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
     </div>
     {% else %}
     {% if user|has_group:"Employee" %}
-    <div class="well text-center">
+<div class="well well-sm text-center">
         <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
     </div>
     {% else %}
     {% if user|has_group:"Student" %}
-    <div class="well text-center">
+<div class="well well-sm text-center">
         <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
     </div>
     {% else %}
@@ -45,4 +48,4 @@
     {% if bla %}
     <p>TESTEEEEE</p>
     {% endif %}
-</ul>
+<!--</ul>-->

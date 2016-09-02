@@ -17,7 +17,11 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from geoposition.fields import GeopositionField
 from polymodels.models import PolymorphicModel
+
+
+# todo: verificar o pq do unresolved reference (ESTA FUNCIONANDO!!!)
 
 
 class Remetente(PolymorphicModel):
@@ -193,8 +197,9 @@ class Curso(Remetente):
 
 
 class Local(models.Model):
-    latitude = models.IntegerField()  # Field name made lowercase.
-    longitude = models.IntegerField()  # Field name made lowercase.
+    # latitude = models.IntegerField()  # Field name made lowercase.
+    # longitude = models.IntegerField()  # Field name made lowercase.
+    position = GeopositionField()
     descricao = models.CharField("Descrição", max_length=30)  # Field name made lowercase.
 
     class Meta:
@@ -216,8 +221,10 @@ class TipoNotificacao(models.Model):
 
     # essa definição é para mostrar o título na lista dos cadastros
     def __str__(self):
-        return '{}'.format(self.titulo)
+        return '{}'.format(self.descricao)
 
+
+#todo: verificar se será necessário colocar dia e hora de termino assim como o is_active
 class Notificacao(models.Model):
     datahora = models.DateTimeField("Data notificação", primary_key=True,
                                     auto_now_add=True)  # Field name made lowercase.
@@ -247,7 +254,7 @@ class Oferecimento(Remetente):
     for r in range(datetime.datetime.now().year, (datetime.datetime.now().year + 5)):
         YEAR_CHOICES.append((r, r))
 
-    ano = models.IntegerField(_('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    ano = models.IntegerField(_('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     semestre = models.IntegerField(default=1, choices=SEMESTER)  # Field name made lowercase.
     id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.

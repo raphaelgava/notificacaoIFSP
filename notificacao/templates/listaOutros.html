@@ -25,17 +25,32 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">Procurar</label>
                     <div class="col-md-9">
-                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Busca por nomes..."
+                        <input type="text" id="myInput" onkeyup="busca(0)" placeholder="Busca por nomes..."
                                class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Exibir</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline"><input type="radio" name="filtro" value="ativo"
+                                                           id="a">Ativos</label>
+                        <label class="radio-inline"><input type="radio" class="radio-inline" name="filtro"
+                                                           value="inativo" id="i">Inativos</label>
+                        <label class="radio-inline"><input type="radio" class="radio-inline" name="filtro" value="todos"
+                                                           id="t">Todos</label>
+                        <script>
+                            ativoInativo();
+
+                        </script>
+                        <button type="submit" class="btn btn-primary pull-right">Filtrar</button>
                     </div>
                 </div>
             </form>
             <table class="table" id="myTable">
                 <thead>
                 <tr>
-                    <!--soma das colunas tem que dar 12-->
-                    <th class="text-center col-md-11">Descrição</th>
-                    <th colspan="1" class="text-center" class="col-md-1">Ação</th>
+                    <th class="text-center">Descrição</th>
+                    <th colspan="2" class="text-center" class="col-md-1">Ações</th>
                 </tr>
                 </thead>
                 <tbody id="myTableBordy">

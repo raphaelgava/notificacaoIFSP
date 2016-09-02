@@ -8,6 +8,8 @@ from django.forms import ModelForm
 from .models import Aluno
 from .models import Disciplina
 from .models import Instituto
+from .models import Local
+from .models import Notificacao
 from .models import Oferecimento
 from .models import Pessoa
 from .models import Professor
@@ -101,12 +103,31 @@ class OferecimentoForm(_RemetenteForm):
 
 
 # ==========================================CADASTRO OUTROS=============================================================
+# todo: mudar remetente (mesmo esquema do alunos)
+class NotificacaoForm(ModelForm):
+    descricao = forms.CharField(widget=forms.Textarea(
+        attrs={
+            'id': 'my_description',
+            'onkeyup':
+            # 'mostrarResultado(this.value,255,"spcontando");'
+                'contarCaracteres(this.value,255,"sprestante");',
+        }),
+        max_length=255, )
+
+    class Meta:
+        model = Notificacao
+        fields = ('id_tipo', 'id_local', 'remetente', 'titulo', 'descricao',)
 
 class DisciplinaForm(ModelForm):
     class Meta:
         model = Disciplina
         fields = ('descricao',)
 
+
+class LocalForm(ModelForm):
+    class Meta:
+        model = Local
+        fields = ('position', 'descricao',)
 
 class TipoNotificacaoForm(ModelForm):
     cor = ColorField("Data de fundação", default='#FFFFFF')  # Field name made lowercase.
