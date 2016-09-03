@@ -16,21 +16,6 @@ from .models import TipoFormacao
 from .models import TipoNotificacao
 
 
-# from .model.pessoas import Aluno
-# from .model.remetentes import Curso
-# from .model.outros import Disciplina
-# from .model.remetentes import Instituto
-# from .model.outros import Local
-# from .model.outros import Notificacao
-# from .model.remetentes import Oferecimento
-# from .model.pessoas import Professor
-# from .model.remetentes import SalaAlunos
-# from .model.remetentes import SalaProfessores
-# from .model.pessoas import Servidor
-# from .model.outros import TipoFormacao
-# from .model.outros import TipoNotificacao
-
-
 # Register your model here.
 
 class _PersonAdmin(UserAdmin):
@@ -60,16 +45,54 @@ class ProfessorAdmin(_PersonAdmin):
     )
 
 
+# Isso foi feito para não aparecer o Content Type (utilizado no model) como combobox no admin do django
+class _RemetenteAdmin(admin.ModelAdmin):
+    fieldsets = (('Informações Remetente'), {'fields': ('descricao', 'is_active',)}),
+
+    class Meta:
+        abstract = True;
+
+
+class InstitutoAdmin(_RemetenteAdmin):
+    fieldsets = _RemetenteAdmin.fieldsets + (
+        (('Informações Instituto'), {'fields': ('datafundacao',)}),
+    )
+
+
+class CursoAdmin(_RemetenteAdmin):
+    fieldsets = _RemetenteAdmin.fieldsets + (
+        (('Informações Curso'), {'fields': ('id_instituto', 'disciplinas')}),
+    )
+
+
+class OferecimentoAdmin(_RemetenteAdmin):
+    fieldsets = _RemetenteAdmin.fieldsets + (
+        (('Informações Oferecimento'), {'fields': ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')}),
+    )
+
+
+class SalaAlunosAdmin(_RemetenteAdmin):
+    fieldsets = _RemetenteAdmin.fieldsets + (
+        (('Informações Sala Alunos'), {'fields': ('id_curso', 'alunos')}),
+    )
+
+
+class SalaProfessoresAdmin(_RemetenteAdmin):
+    fieldsets = _RemetenteAdmin.fieldsets + (
+        (('Informações Sala Professores'), {'fields': ('id_curso', 'professores')}),
+    )
+
+
 admin.site.register(Aluno, AlunoAdmin)
 admin.site.register(Professor, ProfessorAdmin)
 admin.site.register(Servidor, ServidorAdmin)
-admin.site.register(Curso)
+admin.site.register(Curso, CursoAdmin)
 admin.site.register(Disciplina)
-admin.site.register(Instituto)
+admin.site.register(Instituto, InstitutoAdmin)
 admin.site.register(Local)
 admin.site.register(Notificacao)
-admin.site.register(Oferecimento)
-admin.site.register(SalaAlunos)
-admin.site.register(SalaProfessores)
+admin.site.register(Oferecimento, OferecimentoAdmin)
+admin.site.register(SalaAlunos, SalaAlunosAdmin)
+admin.site.register(SalaProfessores, SalaProfessoresAdmin)
 admin.site.register(TipoNotificacao)
 admin.site.register(TipoFormacao)

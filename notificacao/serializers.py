@@ -63,7 +63,7 @@ class ProfessorSerializer(ServidorSerializer):
 class NotificacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notificacao
-        fields = ('datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'username', 'remetente')
+        fields = ('datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'servidor', 'remetente')
 
 
 class TipoFormacaoSerializer(serializers.ModelSerializer):

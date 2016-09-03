@@ -138,4 +138,10 @@ class ListarOferecimentos(OferecimentoView, ListarRemetentes):
     def get_link_modify(self, **kwargs):
         return Urls.ATUALIZAR_OFERECIMENTO
 
+# todo: verificar lucas como abrir uma nova janela para adicionar campo na janela ja aberta!!!! (como admin do django - exemplo add curso com a opção de add institudo dentro dele )!!!
+
+# todo: fazer cadastro do curso/salaalunos/salaprofessores
+# todo: fazer cadastro do tipo formação do lado esquerdo
+# todo: passar tiponotificacao/local para o lado esquerdo
+
 # ======================================================================================================================

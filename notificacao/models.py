@@ -23,6 +23,8 @@ from polymodels.models import PolymorphicModel
 
 # todo: verificar o pq do unresolved reference (ESTA FUNCIONANDO!!!)
 
+# todo: tipo formacao ainda falta cadastrar
+
 
 class Remetente(PolymorphicModel):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
@@ -226,13 +228,12 @@ class TipoNotificacao(models.Model):
 
 #todo: verificar se será necessário colocar dia e hora de termino assim como o is_active
 class Notificacao(models.Model):
-    datahora = models.DateTimeField("Data notificação", primary_key=True,
-                                    auto_now_add=True)  # Field name made lowercase.
+    datahora = models.DateTimeField("Data notificação", auto_now_add=True)  # Field name made lowercase.
     id_tipo = models.ForeignKey(TipoNotificacao, verbose_name="Tipo notificação")  # Field name made lowercase.
     id_local = models.ForeignKey(Local, verbose_name="Local", blank=True, null=True)  # Field name made lowercase.
     descricao = models.CharField("Descrição", max_length=255)  # Field name made lowercase.
     titulo = models.CharField("Título", max_length=45)  # Field name made lowercase.
-    username = models.ForeignKey(Servidor)  # Field name made lowercase.
+    servidor = models.ForeignKey(Servidor)  # Field name made lowercase.
     remetente = models.ManyToManyField(Remetente)
 
     class Meta:

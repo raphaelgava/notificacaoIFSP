@@ -49,7 +49,11 @@
             <table class="table" id="myTable">
                 <thead>
                 <tr>
+                    {% if itemLista.titulo%}
+                    <th class="text-center">Título</th>
+                    {% else %}
                     <th class="text-center">Descrição</th>
+                    {% endif %}
                     <th colspan="2" class="text-center" class="col-md-1">Ações</th>
                 </tr>
                 </thead>
@@ -60,7 +64,11 @@
                     {% else %}
                 <tr class="info">
                     {% endif %}
+                    {% if itemLista.titulo%}
+                    <td>{{ itemLista.titulo }}</td>
+                    {% else %}
                     <td>{{ itemLista.descricao }}</td>
+                    {% endif %}
                     {% block opcoesLista %}
                     {% endblock %}
                 </tr>

@@ -51,6 +51,7 @@ class AlunoView:
     success_url = reverse_lazy(Urls.LISTAR_ALUNO)
 
 
+# todo: Titulo da tela sumindo quando insere a senha errada por exemplo por conta do render!!! (tem mais itens assim!)
 class CadastrarAluno(AlunoView, CadastrarUsuario):
     def form_valid(self, form):
         form.save(commit=False)

@@ -1,5 +1,8 @@
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
+from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -10,10 +13,14 @@ from notificacao.forms import TipoNotificacaoForm
 from notificacao.models import Disciplina
 from notificacao.models import Local
 from notificacao.models import Notificacao
+from notificacao.models import Remetente
+from notificacao.models import Servidor
 from notificacao.models import TipoNotificacao
-from notificacao.stuff.constants import GroupConst, HTML, Urls
+from notificacao.stuff.constants import GroupConst, HTML, Urls, Mensagens
 from .deleteAdd import AddItem, ApagarItem
 
+
+# todo: perguntar como não exibir a senha e dados importantes (uglify os arquivos de configuracao)
 
 class NotificacaoView(LoginRequiredMixin, GroupRequiredMixin):
     model = Notificacao
@@ -24,8 +31,46 @@ class NotificacaoView(LoginRequiredMixin, GroupRequiredMixin):
     group_required = [GroupConst.ADMIN, GroupConst.EMPLOYEE, GroupConst.PROFESSOR]
 
 
+#todo: inserir campo data da alteração e texto da ultima alteração (evitar problemas!!!)
 class CadastrarNotificacao(NotificacaoView, CreateView):
     template_name = HTML.CADASTRO
+
+    def form_valid(self, form):
+        form.save(commit=False)
+
+        servidor = Servidor.objects.get(username=self.request.user.username)
+
+        if (servidor):
+            descRemetente = form.cleaned_data['remetente']
+            id_tipo = form.cleaned_data['id_tipo']
+            id_local = form.cleaned_data['id_local']
+            descricao = form.cleaned_data['descricao']
+            titulo = form.cleaned_data['titulo']
+
+            # get_or_create returns a tuple = objeto, boolean
+            notificacao, objCreated = Notificacao.objects.get_or_create(id_tipo=id_tipo, id_local=id_local,
+                                                                        descricao=descricao, titulo=titulo,
+                                                                        servidor=servidor)
+            for desc in descRemetente:
+                # remetente = Remetente.objects.get(descricao=desc)
+                remet = Remetente.objects.filter(descricao=desc).first()
+
+                if (remet):
+                    notificacao.remetente.add(remet)
+                    # id_tipo = form.cleaned_data['id_tipo']
+                    # id_local = form.cleaned_data['id_local']
+                    # descricao = form.cleaned_data['descricao']
+                    # titulo = form.cleaned_data['titulo']
+                    #
+                    #
+                    # notificacao = Notificacao.objects.update_or_create(id_tipo=id_tipo, id_local=id_local, descricao=descricao, titulo=titulo,
+                    #                                          servidor=servidor, remetente=remetente)
+
+            return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_NOTIFICACAO))
+        else:
+            messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
+
+        return render(self.request, HTML.CADASTRO, {'form': form})
 
     def get_title(self, **kwargs):
         return 'Cadastro Notificação'
@@ -54,6 +99,7 @@ class ListarNotificacoes(NotificacaoView, ListView):
     def get_context_data(self, **kwargs):
         context = super(ListarNotificacoes, self).get_context_data(**kwargs)
 
+        #context['lista'] = Notificacao.objects.filter(username=self.request.user.username)
         context['lista'] = Notificacao.objects.all()
         return context
 

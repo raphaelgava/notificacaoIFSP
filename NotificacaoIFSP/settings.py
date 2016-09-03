@@ -143,7 +143,8 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# tem que estar falso para não ter problema de fuso horário
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
