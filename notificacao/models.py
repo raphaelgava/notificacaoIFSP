@@ -21,11 +21,6 @@ from geoposition.fields import GeopositionField
 from polymodels.models import PolymorphicModel
 
 
-# todo: verificar o pq do unresolved reference (ESTA FUNCIONANDO!!!)
-
-# todo: tipo formacao ainda falta cadastrar
-
-
 class Remetente(PolymorphicModel):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
     is_active = models.BooleanField(_('active'), default=True)
@@ -125,11 +120,16 @@ class Pessoa(Usuario):
         ('Masculino', 'Masculino'),
         ('Feminino', 'Feminino'),
     )
-    sexo = models.CharField(max_length=10, default='Masculino',
-                            choices=SEXO)  # Field name made lowercase.
+    sexo = models.CharField(max_length=10, default='Masculino', choices=SEXO)  # Field name made lowercase.
     datanascimento = models.DateField("Data de nascimento", help_text=_('dd/mm/yyyy'),
                                       default=timezone.now)  # Field name made lowercase.
-    id_instituto = models.ForeignKey(Instituto, blank=True, null=True)  # Field name made lowercase.
+
+    #   null=True sets NULL (versus NOT NULL) on the column in your DB. Blank values for Django field types such as
+    #   DateTimeField or ForeignKey will be stored as NULL in the DB.
+    #
+    #   blank=True determines whether the field will be required in forms. This includes the admin and your own custom
+    #   forms. If blank=True then the field will not be required, whereas if it's False the field cannot be blank.
+    id_instituto = models.ForeignKey(Instituto, blank=False, null=True)  # Field name made lowercase.
 
     class Meta(Usuario.Meta):
         abstract = True
@@ -142,7 +142,6 @@ class Pessoa(Usuario):
 
 
 # todo: procurar ppc do curso para tirar os dados
-# todo: definir mascara para os campos de data!
 class Servidor(Pessoa):
     funcao = models.CharField("Função", max_length=30)  # Field name made lowercase.
 
@@ -152,9 +151,17 @@ class Servidor(Pessoa):
 
 
 class Professor(Servidor):
+    TIPO_FORMACAO = (
+        ('Graduação', 'Graduação'),
+        ('Pós Graduação', 'Pós Graduação'),
+        ('Mestrado', 'Mestrado'),
+        ('Doutorado', 'Doutorado'),
+        ('Pós Doutorado', 'Pós Doutorado'),
+        ('Livre Docência', 'Livre Docência'),
+    )
     formacao = models.CharField("Área", max_length=20)  # Field name made lowercase.
-    id_tipo = models.ForeignKey('Tipoformacao', verbose_name="Tipo formação", blank=True,
-                                null=True)  # Field name made lowercase.
+    tipo_formacao = models.CharField(verbose_name="Tipo formação", default='Graduação', max_length=15,
+                                     choices=TIPO_FORMACAO)  # Field name made lowercase.
 
     class Meta:
         verbose_name = 'Professor'
@@ -226,7 +233,7 @@ class TipoNotificacao(models.Model):
         return '{}'.format(self.descricao)
 
 
-#todo: verificar se será necessário colocar dia e hora de termino assim como o is_active
+# todo: verificar com o pedro verificar se será necessário colocar dia e hora de termino assim como o is_active
 class Notificacao(models.Model):
     datahora = models.DateTimeField("Data notificação", auto_now_add=True)  # Field name made lowercase.
     id_tipo = models.ForeignKey(TipoNotificacao, verbose_name="Tipo notificação")  # Field name made lowercase.
@@ -266,6 +273,7 @@ class Oferecimento(Remetente):
         verbose_name_plural = 'Oferecimentos'
 
 
+#TODO: VERIFICAR COM O PEDRO SE O CAMPO TURMA NA VERDADE NÃO DEVERIA ESTAR AQUI!!!!
 class SalaAlunos(Remetente):
     id_curso = models.ForeignKey(Curso, blank=True, null=True)  # Field name made lowercase.
     alunos = models.ManyToManyField(Aluno)
@@ -283,14 +291,3 @@ class SalaProfessores(Remetente):
         verbose_name = 'Sala Professores'
         verbose_name_plural = 'Salas Professores'
 
-
-class TipoFormacao(models.Model):
-    descricao = models.CharField("Descrição", max_length=30)  # Field name made lowercase.
-
-    class Meta:
-        verbose_name = 'Tipo Formação'
-        verbose_name_plural = 'Tipos Formações'
-
-    # essa definição é para mostrar a descrição na lista dos cadastros
-    def __str__(self):
-        return '{}'.format(self.descricao)

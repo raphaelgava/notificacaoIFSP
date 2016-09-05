@@ -5,14 +5,12 @@ from notificacao.models import Instituto
 from notificacao.models import Notificacao
 from notificacao.models import Professor
 from notificacao.models import Servidor
-from notificacao.models import TipoFormacao
 from notificacao.models import TipoNotificacao
 from notificacao.serializers import AlunoSerializer
 from notificacao.serializers import InstitutoSerializer
 from notificacao.serializers import NotificacaoSerializer
 from notificacao.serializers import ProfessorSerializer
 from notificacao.serializers import ServidorSerializer
-from notificacao.serializers import TipoFormacaoSerializer
 from notificacao.serializers import TipoNotificacaoSerializer
 
 
@@ -51,15 +49,6 @@ class NotificacaoViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Notificacao.objects.all()
-
-
-class TipoFormacaoViewSet(viewsets.ModelViewSet):
-    model = TipoFormacao
-    lookup_field = 'pk'
-    serializer_class = TipoFormacaoSerializer
-
-    def get_queryset(self):
-        return TipoFormacao.objects.all()
 
 
 class TipoNotificacaoViewSet(viewsets.ModelViewSet):

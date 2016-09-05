@@ -1,11 +1,9 @@
-from datetime import datetime
-
 from colorfield.fields import ColorField
 from django import forms
-from django.db import models
 from django.forms import ModelForm
 
 from .models import Aluno
+from .models import Curso
 from .models import Disciplina
 from .models import Instituto
 from .models import Local
@@ -14,8 +12,9 @@ from .models import Oferecimento
 from .models import Pessoa
 from .models import Professor
 from .models import Remetente
+from .models import SalaAlunos
+from .models import SalaProfessores
 from .models import Servidor
-from .models import TipoFormacao
 from .models import TipoNotificacao
 
 
@@ -35,11 +34,19 @@ class LoginForm(forms.Form):
 
 
 # ==========================================CADASTRO USUARIOS===========================================================
-# todo: criar máscara para o campo de prontuário
 class _PersonForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Senha')
     password_check = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Confirmar senha')
-    datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
+    datanascimento = forms.DateInput.input_type = "date"
+    # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
+
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'id': 'username',
+            'placeholder': 'XXXXXX-X',
+            'onkeypress': 'mascara(this, "######-#");',
+        }),
+        max_length=8, )
 
     class Meta:
         model = Pessoa
@@ -48,8 +55,6 @@ class _PersonForm(ModelForm):
             'username', 'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
             'id_instituto',)
 
-
-# todo: tornar obrigatório selecionar um instituto!!!!
 
 class AlunoForm(_PersonForm):
     class Meta:
@@ -66,7 +71,7 @@ class ServidorForm(_PersonForm):
 class ProfessorForm(ServidorForm):
     class Meta:
         model = Professor
-        fields = _PersonForm.Meta.fields + ('formacao', 'id_tipo',)
+        fields = _PersonForm.Meta.fields + ('formacao', 'tipo_formacao',)
 
 
 # ======================================================================================================================
@@ -80,12 +85,20 @@ class _RemetenteForm(ModelForm):
         fields = ('descricao',)
 
 
+# class DateInput(forms.DateInput):
+#     input_type = 'date'
+
 class InstitutoForm(_RemetenteForm):
-    datafundacao = models.DateField("Data de fundação", default=datetime.now())  # Field name made lowercase.
+    datafundacao = forms.DateInput.input_type = "date"
+
+    # datafundacao = models.DateField("Data de fundação", default=datetime.now())  # Field name made lowercase.
 
     class Meta:
         model = Instituto
         fields = _RemetenteForm.Meta.fields + ('datafundacao',)
+        # widgets = {
+        #     'datafundacao': DateInput(),
+        # }
 
 
 class OferecimentoForm(_RemetenteForm):
@@ -98,12 +111,41 @@ class OferecimentoForm(_RemetenteForm):
         fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')
 
 
+class CursoForm(_RemetenteForm):
+    id_instituto = forms.ModelChoiceField(queryset=Instituto.objects.filter(is_active=True))
+    disciplinas = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                                 queryset=Disciplina.objects.filter(is_active=True))
+
+    class Meta:
+        model = Curso
+        fields = _RemetenteForm.Meta.fields + ('id_instituto', 'disciplinas')
+
+
+class SalaAlunosForm(_RemetenteForm):
+    id_curso = forms.ModelChoiceField(queryset=Curso.objects.filter(is_active=True))
+    alunos = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                            queryset=Aluno.objects.filter(is_active=True))
+
+    class Meta:
+        model = SalaAlunos
+        fields = _RemetenteForm.Meta.fields + ('id_curso', 'alunos')
+
+
+class SalaProfessoresForm(_RemetenteForm):
+    id_curso = forms.ModelChoiceField(queryset=Curso.objects.filter(is_active=True))
+    professores = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                                 queryset=Professor.objects.filter(is_active=True))
+
+    class Meta:
+        model = SalaProfessores
+        fields = _RemetenteForm.Meta.fields + ('id_curso', 'professores')
+
+
 # ======================================================================================================================
 
 
 
 # ==========================================CADASTRO OUTROS=============================================================
-# todo: mudar remetente (mesmo esquema do alunos)
 class NotificacaoForm(ModelForm):
     descricao = forms.CharField(widget=forms.Textarea(
         attrs={
@@ -113,6 +155,9 @@ class NotificacaoForm(ModelForm):
                 'contarCaracteres(this.value,255,"sprestante");',
         }),
         max_length=255, )
+
+    remetente = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                               queryset=Remetente.objects.filter(is_active=True))
 
     class Meta:
         model = Notificacao
@@ -135,11 +180,5 @@ class TipoNotificacaoForm(ModelForm):
     class Meta:
         model = TipoNotificacao
         fields = ('descricao', 'cor',)
-
-
-class TipoFormacaoForm(ModelForm):
-    class Meta:
-        model = TipoFormacao
-        fields = ('descricao',)
 
 # ======================================================================================================================

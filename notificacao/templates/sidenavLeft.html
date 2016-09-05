@@ -15,17 +15,23 @@
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
     <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
     </div>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
+    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
+</div>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaTiposNotificacao' %}'">
+    <a href="{% url 'listaTiposNotificacao' %}">Cadastro Tipo Notificação</a>
+</div>
     {% else %}
-    <p>teste</p>
+<!--<p>teste</p>-->
     {% if user|has_group:"Professor" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
     <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
-    </div>
+</div>
     {% else %}
     {% if user|has_group:"Employee" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
     <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
-    </div>
+</div>
     {% else %}
     {% if user|has_group:"Student" %}
     <div class="well text-center">
@@ -36,10 +42,3 @@
     {% endif %}
     {% endif %}
     {% endif %}
-
-    <!-- APAGAR DEPOIS -->
-    <p>{{bla}}</p>
-    {% if bla %}
-    <p>TESTEEEEE</p>
-    {% endif %}
-<!--</ul>-->

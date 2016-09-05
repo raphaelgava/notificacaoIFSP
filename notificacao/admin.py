@@ -12,7 +12,6 @@ from .models import Professor
 from .models import SalaAlunos
 from .models import SalaProfessores
 from .models import Servidor
-from .models import TipoFormacao
 from .models import TipoNotificacao
 
 
@@ -41,7 +40,7 @@ class ServidorAdmin(_PersonAdmin):
 
 class ProfessorAdmin(_PersonAdmin):
     fieldsets = ServidorAdmin.fieldsets + (
-        (('Informações Professor'), {'fields': ('formacao', 'id_tipo',)}),
+        (('Informações Professor'), {'fields': ('formacao', 'tipo_formacao',)}),
     )
 
 
@@ -95,4 +94,3 @@ admin.site.register(Oferecimento, OferecimentoAdmin)
 admin.site.register(SalaAlunos, SalaAlunosAdmin)
 admin.site.register(SalaProfessores, SalaProfessoresAdmin)
 admin.site.register(TipoNotificacao)
-admin.site.register(TipoFormacao)

@@ -30,7 +30,8 @@ from notificacao.views.json import InstitutoViewSet
 from notificacao.views.json import NotificacaoViewSet
 from notificacao.views.json import ProfessorViewSet
 from notificacao.views.json import ServidorViewSet
-from notificacao.views.json import TipoFormacaoViewSet
+
+# from notificacao.views.json import TipoFormacaoViewSet
 from notificacao.views.json import TipoNotificacaoViewSet
 from notificacao.views.login import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
 from notificacao.views.login import Login, Logout
@@ -44,6 +45,11 @@ from notificacao.views.remetente import CadastrarInstituto, AtualizarInstituto, 
     AddInstituto
 from notificacao.views.remetente import CadastrarOferecimento, AtualizarOferecimento, ListarOferecimentos, \
     ApagarOferecimento, AddOferecimento
+from notificacao.views.remetente import CadastrarCurso, AtualizarCurso, ListarCursos, ApagarCurso, AddCurso
+from notificacao.views.remetente import CadastrarSalaAlunos, AtualizarSalaAlunos, ListarSalaAlunos, \
+    ApagarSalaAlunos, AddSalaAlunos
+from notificacao.views.remetente import CadastrarSalaProfessores, AtualizarSalaProfessores, ListarSalaProfessores, \
+    ApagarSalaProfessores, AddSalaProfessores
 from notificacao.views.usuario import CadastrarAluno, AtualizarAluno, ApagarAluno, ListarAlunos, AddAluno
 from notificacao.views.usuario import CadastrarProfessor, AtualizarProfessor, ApagarProfessor, ListarProfessores, \
     AddProfessor
@@ -55,7 +61,6 @@ router.register(r'aluno_json', AlunoViewSet, base_name='aluno')
 router.register(r'servidor_json', ServidorViewSet, base_name='servidor')
 router.register(r'professor_json', ProfessorViewSet, base_name='professor')
 router.register(r'notificacao_json', NotificacaoViewSet, base_name='notificacao')
-router.register(r'tipo_formacao_json', TipoFormacaoViewSet, base_name='tipoformacao')
 router.register(r'tipo_notificacao_json', TipoNotificacaoViewSet, base_name='tiponotificacao')
 router.register(r'instituto_json', InstitutoViewSet, base_name='instituto')
 
@@ -86,13 +91,36 @@ urlpatterns = [
                   url(r'delete_instituto/(?P<pk>\d+)/$', ApagarInstituto.as_view(), name=Urls.DELETAR_INSTITUTO),
                   url(r'add_instituto/(?P<pk>\d+)/$', AddInstituto.as_view(), name=Urls.ADD_INSTITUTO),
 
-                  url(r'lista_Oferecimentos/$', ListarOferecimentos.as_view(), name=Urls.LISTAR_OFERECIMENTO),
+                  url(r'lista_oferecimentos/$', ListarOferecimentos.as_view(), name=Urls.LISTAR_OFERECIMENTO),
                   url(r'cadastro_oferecimento/$', CadastrarOferecimento.as_view(), name=Urls.CADASTRAR_OFERECIMENTO),
                   url(r'cadastro_oferecimento/(?P<pk>\d+)/$', AtualizarOferecimento.as_view(),
                       name=Urls.ATUALIZAR_OFERECIMENTO),
                   url(r'delete_oferecimento/(?P<pk>\d+)/$', ApagarOferecimento.as_view(),
                       name=Urls.DELETAR_OFERECIMENTO),
                   url(r'add_oferecimento/(?P<pk>\d+)/$', AddOferecimento.as_view(), name=Urls.ADD_OFERECIMENTO),
+
+                  url(r'lista_cursos/$', ListarCursos.as_view(), name=Urls.LISTAR_CURSO),
+                  url(r'cadastro_curso/$', CadastrarCurso.as_view(), name=Urls.CADASTRAR_CURSO),
+                  url(r'cadastro_curso/(?P<pk>\d+)/$', AtualizarCurso.as_view(), name=Urls.ATUALIZAR_CURSO),
+                  url(r'delete_curso/(?P<pk>\d+)/$', ApagarCurso.as_view(), name=Urls.DELETAR_CURSO),
+                  url(r'add_curso/(?P<pk>\d+)/$', AddCurso.as_view(), name=Urls.ADD_CURSO),
+
+                  url(r'lista_sala_alunos/$', ListarSalaAlunos.as_view(), name=Urls.LISTAR_SALA_ALUNOS),
+                  url(r'cadastro_sala_alunos/$', CadastrarSalaAlunos.as_view(), name=Urls.CADASTRAR_SALA_ALUNOS),
+                  url(r'cadastro_sala_alunos/(?P<pk>\d+)/$', AtualizarSalaAlunos.as_view(),
+                      name=Urls.ATUALIZAR_SALA_ALUNOS),
+                  url(r'delete_sala_alunos/(?P<pk>\d+)/$', ApagarSalaAlunos.as_view(), name=Urls.DELETAR_SALA_ALUNOS),
+                  url(r'add_sala_alunos/(?P<pk>\d+)/$', AddSalaAlunos.as_view(), name=Urls.ADD_SALA_ALUNOS),
+
+                  url(r'lista_sala_professores/$', ListarSalaProfessores.as_view(), name=Urls.LISTAR_SALA_PROFESSORES),
+                  url(r'cadastro_sala_professores/$', CadastrarSalaProfessores.as_view(),
+                      name=Urls.CADASTRAR_SALA_PROFESSOR),
+                  url(r'cadastro_sala_professores/(?P<pk>\d+)/$', AtualizarSalaProfessores.as_view(),
+                      name=Urls.ATUALIZAR_SALA_PROFESSOR),
+                  url(r'delete_sala_professores/(?P<pk>\d+)/$', ApagarSalaProfessores.as_view(),
+                      name=Urls.DELETAR_SALA_PROFESSOR),
+                  url(r'add_sala_professores/(?P<pk>\d+)/$', AddSalaProfessores.as_view(),
+                      name=Urls.ADD_SALA_PROFESSOR),
 
                   url(r'lista_disciplinas/$', ListarDisciplinas.as_view(), name=Urls.LISTAR_DISCIPLINA),
                   url(r'cadastro_disciplina/$', CadastrarDisciplina.as_view(), name=Urls.CADASTRAR_DISCIPLINA),

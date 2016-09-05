@@ -3,6 +3,12 @@ html, body{
     min-width: 250px;
 }
 
+/* uppercase em todos os inputs*/
+input{
+    text-transform: uppercase;
+}
+
+/*opções das barras de navegação*/
 .well:hover, .navbar-nav:hover {
    background: #76EE00;
 }

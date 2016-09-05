@@ -6,8 +6,8 @@
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaInstitutos' %}'">
         <a href="{% url 'listaInstitutos' %}">Cadastro Instituto</a>
     </div>
-<div class="well well-sm text-center" onclick="location.href='{% url 'listaServidores' %}'">
-        <a href="{% url 'listaServidores' %}">Cadastro Curso</a>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaCursos' %}'">
+    <a href="{% url 'listaCursos' %}">Cadastro Curso</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaDisciplinas' %}'">
         <a href="{% url 'listaDisciplinas' %}">Cadastro Disciplina</a>
@@ -15,14 +15,14 @@
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaOferecimentos' %}'">
         <a href="{% url 'listaOferecimentos' %}">Cadastro Oferecimento</a>
     </div>
-<div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
-    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaAlunos' %}'">
+    <a href="{% url 'listaSalaAlunos' %}">Cadastro Sala Alunos</a>
 </div>
-<div class="well well-sm text-center" onclick="location.href='{% url 'listaTiposNotificacao' %}'">
-        <a href="{% url 'listaTiposNotificacao' %}">Cadastro Tipo Notificação</a>
-    </div>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaProfessores' %}'">
+    <a href="{% url 'listaSalaProfessores' %}">Cadastro Sala Professores</a>
+</div>
     {% else %}
-    <p>teste</p>
+<!--<p>teste</p>-->
     {% if user|has_group:"Professor" %}
 <div class="well well-sm text-center">
         <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
@@ -42,10 +42,3 @@
     {% endif %}
     {% endif %}
     {% endif %}
-
-    <!-- APAGAR DEPOIS -->
-    <p>{{bla}}</p>
-    {% if bla %}
-    <p>TESTEEEEE</p>
-    {% endif %}
-<!--</ul>-->

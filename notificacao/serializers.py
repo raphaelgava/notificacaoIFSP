@@ -7,7 +7,6 @@ from .models import Pessoa
 from .models import Professor
 from .models import Remetente
 from .models import Servidor
-from .models import TipoFormacao
 from .models import TipoNotificacao
 from .stuff.helpers import CreatePerson
 
@@ -53,7 +52,7 @@ class ServidorSerializer(_PessoaSerializer):
 class ProfessorSerializer(ServidorSerializer):
     class Meta:
         model = Professor
-        fields = _PessoaSerializer.Meta.fields + ('formacao', 'id_tipo',)
+        fields = _PessoaSerializer.Meta.fields + ('formacao', 'tipo_formacao',)
 
     def create(self, validated_data):
         professor = ServidorSerializer.create(self, validated_data, True)
@@ -64,12 +63,6 @@ class NotificacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notificacao
         fields = ('datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'servidor', 'remetente')
-
-
-class TipoFormacaoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TipoFormacao
-        fields = ('descricao',)
 
 
 class TipoNotificacaoSerializer(serializers.ModelSerializer):

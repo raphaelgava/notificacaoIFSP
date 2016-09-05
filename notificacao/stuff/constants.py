@@ -47,6 +47,24 @@ class Urls:
     DELETAR_OFERECIMENTO = 'cadastroDeleteOferecimento'
     ADD_OFERECIMENTO = 'cadastroAddOferecimento'
 
+    LISTAR_CURSO = 'listaCursos'
+    CADASTRAR_CURSO = 'cadastroCurso'
+    ATUALIZAR_CURSO = 'cadastroUpdateCurso'
+    DELETAR_CURSO = 'cadastroDeleteCurso'
+    ADD_CURSO = 'cadastroAddCurso'
+
+    LISTAR_SALA_ALUNOS = 'listaSalaAlunos'
+    CADASTRAR_SALA_ALUNOS = 'cadastroSalaAluno'
+    ATUALIZAR_SALA_ALUNOS = 'cadastroUpdateSalaAluno'
+    DELETAR_SALA_ALUNOS = 'cadastroDeleteSalaAluno'
+    ADD_SALA_ALUNOS = 'cadastroAddSalaAluno'
+
+    LISTAR_SALA_PROFESSORES = 'listaSalaProfessores'
+    CADASTRAR_SALA_PROFESSOR = 'cadastroSalaProfessor'
+    ATUALIZAR_SALA_PROFESSOR = 'cadastroUpdateSalaProfessor'
+    DELETAR_SALA_PROFESSOR = 'cadastroDeleteSalaProfessor'
+    ADD_SALA_PROFESSOR = 'cadastroAddSalaProfessor'
+
     LISTAR_DISCIPLINA = 'listaDisciplinas'
     CADASTRAR_DISCIPLINA = 'cadastroDisciplina'
     ATUALIZAR_DISCIPLINA = 'cadastroUpdateDisciplina'

@@ -20,7 +20,7 @@ from notificacao.stuff.constants import GroupConst, HTML, Urls, Mensagens
 from .deleteAdd import AddItem, ApagarItem
 
 
-# todo: perguntar como não exibir a senha e dados importantes (uglify os arquivos de configuracao)
+# todo: perguntar para lucas como não exibir a senha e dados importantes (uglify os arquivos de configuracao)
 
 class NotificacaoView(LoginRequiredMixin, GroupRequiredMixin):
     model = Notificacao
@@ -31,7 +31,7 @@ class NotificacaoView(LoginRequiredMixin, GroupRequiredMixin):
     group_required = [GroupConst.ADMIN, GroupConst.EMPLOYEE, GroupConst.PROFESSOR]
 
 
-#todo: inserir campo data da alteração e texto da ultima alteração (evitar problemas!!!)
+# todo: verificar com o pedro inserir campo data da alteração e texto da ultima alteração (evitar problemas!!!)
 class CadastrarNotificacao(NotificacaoView, CreateView):
     template_name = HTML.CADASTRO
 
@@ -187,8 +187,6 @@ class LocalView(LoginRequiredMixin, GroupRequiredMixin):
 
     group_required = [GroupConst.ADMIN]
 
-
-# todo: procurar por APAGAR DEPOIS nos htmls!!!
 
 # todo: como manter o efeito do hover da classe well quando acessar a página?
 

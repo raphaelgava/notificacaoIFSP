@@ -201,7 +201,7 @@ class CadastrarServidor(ServidorView, CadastrarUsuario):
                                                sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
                                                funcao=funcao)
 
-            CreatePerson.create_student(servidor, password)
+            CreatePerson.create_employee(servidor, password, False)
 
             return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SERVIDOR))
 
@@ -238,7 +238,7 @@ class AtualizarServidor(ServidorView, AtualizarUsuario):
                 servidor.id_instituto = instituto
                 servidor.funcao = funcao
 
-                CreatePerson.create_student(servidor, password)
+                CreatePerson.create_employee(servidor, password, False)
                 return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SERVIDOR))
             else:
                 messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
@@ -322,7 +322,7 @@ class CadastrarProfessor(ProfessorView, CadastrarUsuario):
             datanascimento = form.cleaned_data['datanascimento']
             instituto = form.cleaned_data['id_instituto']
             funcao = 'Professor'
-            id_tipo = form.cleaned_data['id_tipo']
+            tipo_formacao = form.cleaned_data['tipo_formacao']
             formacao = form.cleaned_data['formacao']
 
             professor = Professor.objects.create(username=username, password=password, email=email,
@@ -330,9 +330,9 @@ class CadastrarProfessor(ProfessorView, CadastrarUsuario):
                                                  last_name=last_name,
                                                  sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
                                                  funcao=funcao,
-                                                 formacao=formacao, id_tipo=id_tipo)
+                                                 formacao=formacao, tipo_formacao=tipo_formacao)
 
-            CreatePerson.create_student(professor, password)
+            CreatePerson.create_employee(professor, password, True)
 
             return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_PROFESSOR))
 
@@ -356,7 +356,7 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
         sexo = form.cleaned_data['sexo']
         datanascimento = form.cleaned_data['datanascimento']
         instituto = form.cleaned_data['id_instituto']
-        id_tipo = form.cleaned_data['id_tipo']
+        tipo_formacao = form.cleaned_data['tipo_formacao']
         formacao = form.cleaned_data['formacao']
 
         professor = Professor.objects.filter(username=username).first()
@@ -368,10 +368,10 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
                 professor.sexo = sexo
                 professor.datanascimento = datanascimento
                 professor.id_instituto = instituto
-                professor.id_tipo = id_tipo
+                professor.tipo_formacao = tipo_formacao
                 professor.formacao = formacao
 
-                CreatePerson.create_student(professor, password)
+                CreatePerson.create_employee(professor, password, True)
                 return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_PROFESSOR))
             else:
                 messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
