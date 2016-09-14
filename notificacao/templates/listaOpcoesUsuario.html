@@ -23,7 +23,7 @@
 </td>
 <td class="col-md-1">
     {% if pessoa.is_active %}
-    <a href="{% url view.get_link_delete pessoa.pk %}" class="deletelinklink">
+    <a href="{% url view.get_link_delete pessoa.pk %}" class="deletelink">
         <img src="{% static 'img/icon-deletelink.svg' %}" class="deletelink" alt="Del">
     </a>
     {% else %}

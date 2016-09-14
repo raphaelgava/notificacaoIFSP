@@ -3,7 +3,7 @@
 <!--<ul class="nav nav-pills nav-stacked" data-offset-top="205">-->
     <!--<div class="well well-sm text-center">-->
     {% if user|has_group:"Admin" %}
-<div class="well well-sm text-center" onclick="location.href='{% url 'listaAlunos' %}'">
+<div class="well well-sm text-center active" onclick="location.href='{% url 'listaAlunos' %}'">
         <a href="{% url 'listaAlunos' %}">Cadastro Aluno</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaServidores' %}'">

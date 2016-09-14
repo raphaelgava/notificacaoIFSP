@@ -50,7 +50,8 @@ class Instituto(Remetente):
         verbose_name = 'Instituto'
         verbose_name_plural = 'Institutos'
 
-
+#todo: fazer o esqueci a senha e enviar por email!!!
+#todo: criar a opção de alterar os meus dados!
 class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         _('Prontuário'),

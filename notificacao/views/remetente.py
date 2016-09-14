@@ -274,6 +274,7 @@ class ListarSalaProfessores(SalaProfessoresView, ListarRemetentes):
         return Urls.ATUALIZAR_SALA_PROFESSOR
 
 # todo: verificar lucas como abrir uma nova janela para adicionar campo na janela ja aberta!!!! (como admin do django - exemplo add curso com a opção de add institudo dentro dele )!!!
+# modal window
 #todo: verificar lucas como enviar para o openshift!!!!
 
 # ======================================================================================================================

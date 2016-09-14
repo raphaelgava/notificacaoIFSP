@@ -50,8 +50,6 @@ class AlunoView:
     form_class = AlunoForm
     success_url = reverse_lazy(Urls.LISTAR_ALUNO)
 
-
-# todo: Titulo da tela sumindo quando insere a senha errada por exemplo por conta do render!!! (tem mais itens assim!)
 class CadastrarAluno(AlunoView, CadastrarUsuario):
     def form_valid(self, form):
         form.save(commit=False)
@@ -78,9 +76,9 @@ class CadastrarAluno(AlunoView, CadastrarUsuario):
             return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_ALUNO))
 
         messages.error(self.request, Mensagens.DADOS_INVALIDOS, extra_tags='wrongPassword')
-        return render(self.request, HTML.CADASTRO, {'form': form})
+        return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
-    def get_title(self, **kwargs):
+    def get_title(self):
         return 'Cadastrar Aluno'
 
 
@@ -119,7 +117,7 @@ class AtualizarAluno(AlunoView, AtualizarUsuario):
                 messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
             messages.error(self.request, Mensagens.DADOS_INVALIDOS, extra_tags='wrongPassword')
 
-        return render(self.request, HTML.CADASTRO, {'form': form})
+        return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
         return 'Atualizar Aluno'
@@ -206,7 +204,7 @@ class CadastrarServidor(ServidorView, CadastrarUsuario):
             return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SERVIDOR))
 
         messages.error(self.request, Mensagens.DADOS_INVALIDOS, extra_tags='wrongPassword')
-        return render(self.request, HTML.CADASTRO, {'form': form})
+        return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
         return 'Cadastrar Servidor'
@@ -247,7 +245,7 @@ class AtualizarServidor(ServidorView, AtualizarUsuario):
                 messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
             messages.error(self.request, Mensagens.DADOS_INVALIDOS, extra_tags='wrongPassword')
 
-        return render(self.request, HTML.CADASTRO, {'form': form})
+        return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
         return 'Atualizar Servidor'
@@ -337,7 +335,7 @@ class CadastrarProfessor(ProfessorView, CadastrarUsuario):
             return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_PROFESSOR))
 
         messages.error(self.request, Mensagens.DADOS_INVALIDOS, extra_tags='wrongPassword')
-        return render(self.request, HTML.CADASTRO, {'form': form})
+        return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
         return 'Cadastrar Professor'
@@ -380,7 +378,7 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
                 messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')
             messages.error(self.request, Mensagens.DADOS_INVALIDOS, extra_tags='wrongPassword')
 
-        return render(self.request, HTML.CADASTRO, {'form': form})
+        return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
         return 'Atualizar Professor'
