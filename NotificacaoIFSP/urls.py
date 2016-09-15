@@ -65,7 +65,7 @@ router.register(r'tipo_notificacao_json', TipoNotificacaoViewSet, base_name='tip
 router.register(r'instituto_json', InstitutoViewSet, base_name='instituto')
 
 urlpatterns = [
-                url(r'^', include(router.urls)),
+                # url(r'^', include(router.urls)),
                 url(r'^admin/', admin.site.urls),
 
                 url(r'lista_aluno/$', ListarAlunos.as_view(), name=Urls.LISTAR_ALUNO),
@@ -156,4 +156,4 @@ urlpatterns = [
                 url(r'^logout/$', Logout.as_view(), name='logout'),
                 url(r'^$', Login.as_view(), name='login')
 
-              ] #+ router.urls
+              ] + router.urls
