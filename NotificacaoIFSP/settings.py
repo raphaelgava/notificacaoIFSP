@@ -169,7 +169,8 @@ STATICFILES_FINDERS = (
 # MEDIA_ROOT = str(ROOT_DIR('media'))
 # MEDIA_URL = '/media/'
 
-
+# https://devcenter.heroku.com/articles/django-assets
+# https://devcenter.heroku.com/articles/buildpacks
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
