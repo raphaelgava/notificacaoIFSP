@@ -158,7 +158,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    str(BASE_DIR.path('static')),
+    os.path.join(BASE_DIR, "static")
 )
 
 STATICFILES_FINDERS = (
@@ -166,8 +166,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-MEDIA_ROOT = str(ROOT_DIR('media'))
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = str(ROOT_DIR('media'))
+# MEDIA_URL = '/media/'
 
 
 import dj_database_url

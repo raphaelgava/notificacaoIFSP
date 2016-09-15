@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="all inputs use uppercase by css now / created curso, salaalunos and salaprofessores / deleted TipoFormacao. It's a choice in Professor now / inserted a mask to username (prontuario) in Pessoa / fixed the problem when it was tryied to create a servidor or professor (it was calling a wrong function).">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NotificacaoIFSP/settings.py" afterPath="$PROJECT_DIR$/NotificacaoIFSP/settings.py" />
     </list>
     <ignored path="NotificacaoIFSP.iws" />
@@ -26,8 +27,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NotificacaoIFSP/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="159" column="20" selection-start-line="159" selection-start-column="20" selection-end-line="159" selection-end-column="20" />
+            <state relative-caret-position="216">
+              <caret line="168" column="22" selection-start-line="168" selection-start-column="22" selection-end-line="169" selection-end-column="23" />
               <folding>
                 <element signature="e#316#325#0" expanded="true" />
               </folding>
@@ -1099,8 +1100,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NotificacaoIFSP/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="159" column="20" selection-start-line="159" selection-start-column="20" selection-end-line="159" selection-end-column="20" />
+        <state relative-caret-position="216">
+          <caret line="168" column="22" selection-start-line="168" selection-start-column="22" selection-end-line="169" selection-end-column="23" />
           <folding>
             <element signature="e#316#325#0" expanded="true" />
           </folding>
