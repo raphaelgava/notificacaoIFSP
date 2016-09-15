@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="all inputs use uppercase by css now / created curso, salaalunos and salaprofessores / deleted TipoFormacao. It's a choice in Professor now / inserted a mask to username (prontuario) in Pessoa / fixed the problem when it was tryied to create a servidor or professor (it was calling a wrong function).">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NotificacaoIFSP/local_settings.py" afterPath="$PROJECT_DIR$/NotificacaoIFSP/local_settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NotificacaoIFSP/settings.py" afterPath="$PROJECT_DIR$/NotificacaoIFSP/settings.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/static/css/bootstrap-theme.min.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/css/geoposition.css" afterPath="$PROJECT_DIR$/static/css/geoposition.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/css/mycss.css" afterPath="$PROJECT_DIR$/static/css/mycss.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/static/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/colorPicker/arrow.gif" afterPath="$PROJECT_DIR$/static/img/colorPicker/arrow.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/colorPicker/cross.gif" afterPath="$PROJECT_DIR$/static/img/colorPicker/cross.gif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/colorPicker/hs.png" afterPath="$PROJECT_DIR$/static/img/colorPicker/hs.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/colorPicker/hv.png" afterPath="$PROJECT_DIR$/static/img/colorPicker/hv.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/icon-addlink.svg" afterPath="$PROJECT_DIR$/static/img/icon-addlink.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/icon-changelink.svg" afterPath="$PROJECT_DIR$/static/img/icon-changelink.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/icon-deletelink.svg" afterPath="$PROJECT_DIR$/static/img/icon-deletelink.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/img/logo-ifsp.png" afterPath="$PROJECT_DIR$/static/img/logo-ifsp.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/static/js/bootstrap.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/js/geoposition.js" afterPath="$PROJECT_DIR$/static/js/geoposition.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/js/jquery-2.4.4.min.js" afterPath="$PROJECT_DIR$/static/js/jquery-2.4.4.min.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/js/jscolor.js" afterPath="$PROJECT_DIR$/static/js/jscolor.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/notificacao/static/js/myjs.js" afterPath="$PROJECT_DIR$/static/js/myjs.js" />
-    </list>
+    <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="all inputs use uppercase by css now / created curso, salaalunos and salaprofessores / deleted TipoFormacao. It's a choice in Professor now / inserted a mask to username (prontuario) in Pessoa / fixed the problem when it was tryied to create a servidor or professor (it was calling a wrong function)." />
     <ignored path="NotificacaoIFSP.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -671,7 +649,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="745" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22462687" sideWeight="0.6028708" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3504823" sideWeight="0.66592264" order="9" side_tool="true" content_ui="tabs" />
@@ -679,7 +657,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31647635" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267148" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30668843" sideWeight="0.3340774" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30668843" sideWeight="0.3340774" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
