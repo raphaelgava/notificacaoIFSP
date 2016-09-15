@@ -11,20 +11,17 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = environ.Path(__file__)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'a_mdpvzfm*q+7qx=kx982xz@%!3pkhs684frs=5qxfv=k)ybws'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -37,8 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # para envio de json
     # 'rest_framework.authtoken',  # para envio de json
-    'provider',
-    'provider.oauth2',
+    # 'provider',
+    # 'provider.oauth2',
     'colorfield',  # para campo de cor
     'polymodels',  # para polimorfismo
     'geoposition',  # maps
@@ -152,7 +149,25 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = str(ROOT_DIR('staticfiles'))
 STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    str(ROOT_DIR.path('static')),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+MEDIA_ROOT = str(ROOT_DIR('media'))
+MEDIA_URL = '/media/'
 
 
 import dj_database_url
