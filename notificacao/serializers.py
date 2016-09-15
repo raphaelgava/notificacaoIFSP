@@ -11,11 +11,6 @@ from .models import TipoNotificacao
 from .stuff.helpers import CreatePerson
 
 
-class PessoaLoginSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Pessoa
-        fields = ('username', 'password')
-
 class _PessoaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pessoa

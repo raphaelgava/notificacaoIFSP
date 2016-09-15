@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # para envio de json
+    # 'rest_framework.authtoken',  # para envio de json
+    'provider',
+    'provider.oauth2',
     'colorfield',  # para campo de cor
     'polymodels',  # para polimorfismo
     'geoposition',  # maps

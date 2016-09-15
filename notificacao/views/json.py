@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-# from rest_framework import permissions
 
+from notificacao.models import Pessoa
 from notificacao.models import Aluno
 from notificacao.models import Instituto
 from notificacao.models import Notificacao
@@ -16,6 +16,8 @@ from notificacao.serializers import TipoNotificacaoSerializer
 
 
 # All objects
+
+
 class AlunoViewSet(viewsets.ModelViewSet):
     model = Aluno
     lookup_field = 'pk'

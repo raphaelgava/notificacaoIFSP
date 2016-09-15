@@ -31,7 +31,6 @@ from notificacao.views.json import NotificacaoViewSet
 from notificacao.views.json import ProfessorViewSet
 from notificacao.views.json import ServidorViewSet
 
-# from notificacao.views.json import TipoFormacaoViewSet
 from notificacao.views.json import TipoNotificacaoViewSet
 from notificacao.views.login import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
 from notificacao.views.login import Login, Logout
@@ -55,6 +54,7 @@ from notificacao.views.usuario import CadastrarProfessor, AtualizarProfessor, Ap
     AddProfessor
 from notificacao.views.usuario import CadastrarServidor, AtualizarServidor, ApagarServidor, ListarServidores, \
     AddServidor
+
 
 router = routers.DefaultRouter()
 router.register(r'aluno_json', AlunoViewSet, base_name='aluno')
