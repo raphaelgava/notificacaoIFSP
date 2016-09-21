@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+
 import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -33,9 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # para envio de json
-    # 'rest_framework.authtoken',  # para envio de json
-    # 'provider',
-    # 'provider.oauth2',
+    'rest_framework.authtoken',
     'colorfield',  # para campo de cor
     'polymodels',  # para polimorfismo
     'geoposition',  # maps
@@ -171,6 +170,7 @@ STATICFILES_FINDERS = (
 
 # https://devcenter.heroku.com/articles/django-assets
 # https://devcenter.heroku.com/articles/buildpacks
+# https://djangogirls.gitbooks.io/django-girls-tutorial-extensions/content/heroku/
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 

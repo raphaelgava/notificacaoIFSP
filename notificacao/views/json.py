@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 
-from notificacao.models import Pessoa
 from notificacao.models import Aluno
 from notificacao.models import Instituto
 from notificacao.models import Notificacao
@@ -13,9 +12,6 @@ from notificacao.serializers import NotificacaoSerializer
 from notificacao.serializers import ProfessorSerializer
 from notificacao.serializers import ServidorSerializer
 from notificacao.serializers import TipoNotificacaoSerializer
-
-
-# All objects
 
 
 class AlunoViewSet(viewsets.ModelViewSet):
@@ -62,7 +58,8 @@ class TipoNotificacaoViewSet(viewsets.ModelViewSet):
     model = TipoNotificacao
     lookup_field = 'pk'
     serializer_class = TipoNotificacaoSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+
+    # permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return TipoNotificacao.objects.all()

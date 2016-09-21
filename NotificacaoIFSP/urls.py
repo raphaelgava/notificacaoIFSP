@@ -20,9 +20,10 @@ Including another URLconf
 #     url(r'^cadastro/', admin.site.urls),
 # ]
 
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.contrib import admin
 from rest_framework import routers
+from rest_framework.authtoken import views
 
 from notificacao.stuff.constants import Urls
 from notificacao.views.json import AlunoViewSet
@@ -30,7 +31,6 @@ from notificacao.views.json import InstitutoViewSet
 from notificacao.views.json import NotificacaoViewSet
 from notificacao.views.json import ProfessorViewSet
 from notificacao.views.json import ServidorViewSet
-
 from notificacao.views.json import TipoNotificacaoViewSet
 from notificacao.views.login import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
 from notificacao.views.login import Login, Logout
@@ -40,11 +40,11 @@ from notificacao.views.outros import CadastrarLocal, AtualizarLocal, ListarLocal
 from notificacao.views.outros import CadastrarNotificacao, AtualizarNotificacao, ListarNotificacoes, ApagarNotificacao, \
     AddNotificacao
 from notificacao.views.outros import CadastrarTipoNotificacao, AtualizarTipoNotificacao, ListarTiposNotificacao
+from notificacao.views.remetente import CadastrarCurso, AtualizarCurso, ListarCursos, ApagarCurso, AddCurso
 from notificacao.views.remetente import CadastrarInstituto, AtualizarInstituto, ListarInstitutos, ApagarInstituto, \
     AddInstituto
 from notificacao.views.remetente import CadastrarOferecimento, AtualizarOferecimento, ListarOferecimentos, \
     ApagarOferecimento, AddOferecimento
-from notificacao.views.remetente import CadastrarCurso, AtualizarCurso, ListarCursos, ApagarCurso, AddCurso
 from notificacao.views.remetente import CadastrarSalaAlunos, AtualizarSalaAlunos, ListarSalaAlunos, \
     ApagarSalaAlunos, AddSalaAlunos
 from notificacao.views.remetente import CadastrarSalaProfessores, AtualizarSalaProfessores, ListarSalaProfessores, \
@@ -55,6 +55,8 @@ from notificacao.views.usuario import CadastrarProfessor, AtualizarProfessor, Ap
 from notificacao.views.usuario import CadastrarServidor, AtualizarServidor, ApagarServidor, ListarServidores, \
     AddServidor
 
+# from notificacao.views.json import UserViewSet, GroupViewSet
+
 
 router = routers.DefaultRouter()
 router.register(r'aluno_json', AlunoViewSet, base_name='aluno')
@@ -64,8 +66,9 @@ router.register(r'notificacao_json', NotificacaoViewSet, base_name='notificacao'
 router.register(r'tipo_notificacao_json', TipoNotificacaoViewSet, base_name='tiponotificacao')
 router.register(r'instituto_json', InstitutoViewSet, base_name='instituto')
 
+
 urlpatterns = [
-                # url(r'^', include(router.urls)),
+                  url(r'^api-token-auth/', views.obtain_auth_token),
                 url(r'^admin/', admin.site.urls),
 
                 url(r'lista_aluno/$', ListarAlunos.as_view(), name=Urls.LISTAR_ALUNO),

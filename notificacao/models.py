@@ -10,16 +10,30 @@ from __future__ import unicode_literals
 import datetime
 
 from colorfield.fields import ColorField
+from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import UserManager, PermissionsMixin
 from django.core import validators
 from django.core.mail import send_mail
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from geoposition.fields import GeopositionField
 from polymodels.models import PolymorphicModel
+from rest_framework.authtoken.models import Token
 
+
+# http://cheng.logdown.com/posts/2015/10/27/how-to-use-django-rest-frameworks-token-based-authentication
+# This code is triggered whenever a new user has been created and saved to the database
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
+
+
+# todo: mudar a classe ObtainAuthToken em authtokenn\view para fazer a retirada da criptografia!!!
 
 class Remetente(PolymorphicModel):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
