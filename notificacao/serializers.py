@@ -8,6 +8,7 @@ from .models import Professor
 from .models import Remetente
 from .models import Servidor
 from .models import TipoNotificacao
+from .models import Oferecimento
 from .stuff.helpers import CreatePerson
 
 
@@ -77,3 +78,9 @@ class InstitutoSerializer(_RemetenteSerializer):
     class Meta:
         model = Instituto
         fields = _RemetenteSerializer.Meta.fields + ('datafundacao',)
+
+class OferecimentoSerializer(_RemetenteSerializer):
+    class Meta:
+        model = Oferecimento
+        #fields = _RemetenteSerializer.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina')
+        fields = _RemetenteSerializer.Meta.fields + ('dataInicio', 'qtdAulas', 'id_professor', 'id_disciplina')

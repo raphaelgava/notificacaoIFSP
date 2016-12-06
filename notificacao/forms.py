@@ -108,7 +108,8 @@ class OferecimentoForm(_RemetenteForm):
                                             queryset=Aluno.objects.filter(is_active=True))
     class Meta:
         model = Oferecimento
-        fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')
+        # fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')
+        fields = _RemetenteForm.Meta.fields + ('dataInicio', 'qtdAulas', 'id_professor', 'id_disciplina', 'alunos')
 
 
 class CursoForm(_RemetenteForm):

@@ -268,20 +268,27 @@ class Notificacao(models.Model):
 
 
 class Oferecimento(Remetente):
-    SEMESTER = (
-        (1, 'Primeiro'),
-        (2, 'Segundo'),
-    )
+    # SEMESTER = (
+    #     (1, 'Primeiro'),
+    #     (2, 'Segundo'),
+    # )
 
-    YEAR_CHOICES = []
-    for r in range(datetime.datetime.now().year, (datetime.datetime.now().year + 5)):
-        YEAR_CHOICES.append((r, r))
+    # YEAR_CHOICES = []
+    # for r in range(datetime.datetime.now().year, (datetime.datetime.now().year + 5)):
+    #     YEAR_CHOICES.append((r, r))
 
-    ano = models.IntegerField(_('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    semestre = models.IntegerField(default=1, choices=SEMESTER)  # Field name made lowercase.
+    AULAS = (
+            (1, 10),
+            (2, 20),
+        )
+
+    #ano = models.IntegerField(_('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    #semestre = models.IntegerField(default=1, choices=SEMESTER)  # Field name made lowercase.
     id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.
     alunos = models.ManyToManyField(Aluno)
+    dataInicio = models.DateField("Data Início", help_text=_('dd/mm/yyyy'), default=timezone.now)
+    qtdAulas = models.IntegerField("Quantidade Aulas", choices=AULAS, default=2)
 
     class Meta:
         verbose_name = 'Oferecimento'

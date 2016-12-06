@@ -66,7 +66,8 @@ class CursoAdmin(_RemetenteAdmin):
 
 class OferecimentoAdmin(_RemetenteAdmin):
     fieldsets = _RemetenteAdmin.fieldsets + (
-        (('Informações Oferecimento'), {'fields': ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')}),
+        # (('Informações Oferecimento'), {'fields': ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')}),
+        (('Informações Oferecimento'), {'fields': ('dataInicio', 'qtdAulas', 'id_professor', 'id_disciplina', 'alunos')}),
     )
 
 

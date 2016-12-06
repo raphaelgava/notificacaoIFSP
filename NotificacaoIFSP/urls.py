@@ -28,6 +28,7 @@ from rest_framework.authtoken import views
 from notificacao.stuff.constants import Urls
 from notificacao.views.json import AlunoViewSet
 from notificacao.views.json import InstitutoViewSet
+from notificacao.views.json import OferecimentoViewSet
 from notificacao.views.json import NotificacaoViewSet
 from notificacao.views.json import ProfessorViewSet
 from notificacao.views.json import ServidorViewSet
@@ -65,6 +66,7 @@ router.register(r'professor_json', ProfessorViewSet, base_name='professor')
 router.register(r'notificacao_json', NotificacaoViewSet, base_name='notificacao')
 router.register(r'tipo_notificacao_json', TipoNotificacaoViewSet, base_name='tiponotificacao')
 router.register(r'instituto_json', InstitutoViewSet, base_name='instituto')
+router.register(r'oferecimento_json', OferecimentoViewSet, base_name='oferecimento')
 
 
 urlpatterns = [
