@@ -167,6 +167,7 @@ class Servidor(Pessoa):
 
 class Professor(Servidor):
     TIPO_FORMACAO = (
+        ('Técnico', 'Técnico'),
         ('Graduação', 'Graduação'),
         ('Pós Graduação', 'Pós Graduação'),
         ('Mestrado', 'Mestrado'),
@@ -247,7 +248,7 @@ class TipoNotificacao(models.Model):
     def __str__(self):
         return '{}'.format(self.descricao)
 
-
+# todo: verificar se o tempo da notificaçao esta em 24h
 # todo: verificar com o pedro verificar se será necessário colocar dia e hora de termino assim como o is_active
 class Notificacao(models.Model):
     datahora = models.DateTimeField("Data notificação", auto_now_add=True)  # Field name made lowercase.
