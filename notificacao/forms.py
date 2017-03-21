@@ -1,8 +1,7 @@
 from colorfield.fields import ColorField
 from django import forms
 from django.forms import ModelForm
-
-from django.forms.widgets import DateInput
+from django.forms.widgets import TextInput
 
 from .models import Aluno
 from .models import Curso
@@ -44,7 +43,7 @@ class _PersonForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(_PersonForm, self).__init__(*args, **kwargs)
-        self.fields['datanascimento'].widget = DateInput(format=('%d/%m/%Y'), attrs={
+        self.fields['datanascimento'].widget = TextInput(attrs={
             'class': 'datas',
             'placeholder': 'Data de nascimento'
         })

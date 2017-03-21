@@ -136,8 +136,9 @@ class Pessoa(Usuario):
         ('Feminino', 'Feminino'),
     )
     sexo = models.CharField(max_length=10, default='Masculino', choices=SEXO)  # Field name made lowercase.
-    datanascimento = models.DateField("Data de nascimento", help_text=_('dd/mm/yyyy'),
-                                      default=timezone.now)  # Field name made lowercase.
+    datanascimento = models.DateField()
+    # datanascimento = models.DateField("Data de nascimento", help_text=_('dd/mm/yyyy'),
+    #                                  default=timezone.now)  # Field name made lowercase.
 
     #   null=True sets NULL (versus NOT NULL) on the column in your DB. Blank values for Django field types such as
     #   DateTimeField or ForeignKey will be stored as NULL in the DB.
