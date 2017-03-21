@@ -44,9 +44,9 @@ class _PersonForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(_PersonForm, self).__init__(*args, **kwargs)
-        self.fields['datanascimento'].widget = DateInput(attrs={
+        self.fields['datanascimento'].widget = DateInput(format=('%d/%m/%Y'), attrs={
             'class': 'datas',
-            'placeholder': 'Teste'
+            'placeholder': 'Data de nascimento'
         })
 
     username = forms.CharField(widget=forms.TextInput(
@@ -63,11 +63,6 @@ class _PersonForm(ModelForm):
         fields = (
             'username', 'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
             'id_instituto',)
-        widgets = {
-            'datanascimento': DateInput(attrs={
-                'class': 'datas'
-            })
-        }
 
 
 class AlunoForm(_PersonForm):
