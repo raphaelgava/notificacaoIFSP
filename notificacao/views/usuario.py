@@ -304,6 +304,7 @@ class ProfessorView:
     success_url = reverse_lazy(Urls.LISTAR_PROFESSOR)
 
 
+# todo:NÃO ESTA SALVANDO AS DATAS!!!
 class CadastrarProfessor(ProfessorView, CadastrarUsuario):
     def form_valid(self, form):
         form.save(commit=False)

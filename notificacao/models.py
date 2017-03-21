@@ -7,8 +7,6 @@
 # Feel free to rename the model, but don't rename db_table values or field names.
 from __future__ import unicode_literals
 
-import datetime
-
 from colorfield.fields import ColorField
 from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -38,6 +36,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 class Remetente(PolymorphicModel):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
     is_active = models.BooleanField(_('active'), default=True)
+
+    # tipo_remetente = models.CharField("Tipo Remetente", max_length=20)
 
     class Meta:
         verbose_name = 'Remetente'
@@ -74,7 +74,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         help_text=_('Required. 7 characters.'),
         validators=[
             validators.RegexValidator(
-                r'^[\w]+$',
+                r'^[0-9]+(-[0-9])$',
                 _('Enter a valid username. This value may contain only '
                   'letters, numbers ' 'characters.')
             ),
@@ -148,8 +148,8 @@ class Pessoa(Usuario):
 
     class Meta(Usuario.Meta):
         abstract = True
-        verbose_name = 'Pessoa'
-        verbose_name_plural = 'Pessoas'
+        # verbose_name = 'Pessoa'
+        #verbose_name_plural = 'Pessoas'
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
