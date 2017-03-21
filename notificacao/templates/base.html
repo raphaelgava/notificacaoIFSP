@@ -34,6 +34,8 @@
     <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/stats.js"></script>-->
     <!--<script type="text/javascript" charset="UTF-8" src="http://maps.google.com/maps-api-v3/api/js/26/2/intl/pt_br/controls.js"></script>-->
 
+    <link type="text/css" href="{% static 'date/datepicker3.css' %}" rel="stylesheet" media="all">
+    <script type="text/javascript" src="{% static 'date/bootstrap-datepicker.js' %}"></script>
 </head>
 <body>
 <section class="wrapper">
@@ -98,6 +100,20 @@
         </div>
     </footer>
 </section>
+<script type="text/javascript">
+$(".datas").datepicker({
+        days: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabádo"],
+        daysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+        months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+        monthsShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+        today: "Today",
+        clear: "Clear",
+        format: "dd/mm/yyyy",
+        autoclose: true,
+        titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+        weekStart: 0
+    });
+</script>
 </body>
 </html>
 

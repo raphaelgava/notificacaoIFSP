@@ -2,6 +2,8 @@ from colorfield.fields import ColorField
 from django import forms
 from django.forms import ModelForm
 
+from django.forms.widgets import DateInput
+
 from .models import Aluno
 from .models import Curso
 from .models import Disciplina
@@ -37,7 +39,7 @@ class LoginForm(forms.Form):
 class _PersonForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Senha')
     password_check = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Confirmar senha')
-    datanascimento = forms.CharField()  # forms.DateInput.input_type = "date"
+    #datanascimento = forms.CharField()  # forms.DateInput.input_type = "date"
     # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
 
     username = forms.CharField(widget=forms.TextInput(
@@ -54,6 +56,11 @@ class _PersonForm(ModelForm):
         fields = (
             'username', 'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
             'id_instituto',)
+        widgets = {
+            'datanascimento': DateInput(attrs={
+                'class': 'datas'
+            })
+        }
 
 
 class AlunoForm(_PersonForm):
