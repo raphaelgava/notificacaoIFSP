@@ -16,7 +16,7 @@ class _PessoaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pessoa
         abstract = True
-        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',)
+        fields = ('pk','username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',)
 
 
 class AlunoSerializer(_PessoaSerializer):
@@ -58,20 +58,20 @@ class ProfessorSerializer(ServidorSerializer):
 class NotificacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notificacao
-        fields = ('datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'servidor', 'remetente')
+        fields = ('pk','datahora', 'id_tipo', 'id_local', 'descricao', 'titulo', 'servidor', 'remetente')
 
 
 class TipoNotificacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = TipoNotificacao
-        fields = ('descricao', 'cor',)
+        fields = ('pk','descricao', 'cor',)
 
 
 class _RemetenteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Remetente
         abstract = True
-        fields = ('descricao',)
+        fields = ('pk','descricao',)
 
 
 class InstitutoSerializer(_RemetenteSerializer):

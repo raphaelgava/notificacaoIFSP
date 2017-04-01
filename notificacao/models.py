@@ -30,8 +30,13 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
+# def token_request(request):
+#     if user_requested_token() and token_request_is_warranted():
+#         new_token = Token.objects.create(user=request.user)
 
 # todo: mudar a classe ObtainAuthToken em authtokenn\view para fazer a retirada da criptografia!!!
+
+
 
 class Remetente(PolymorphicModel):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.

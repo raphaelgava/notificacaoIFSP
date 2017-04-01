@@ -70,7 +70,7 @@ router.register(r'oferecimento_json', OferecimentoViewSet, base_name='oferecimen
 
 
 urlpatterns = [
-                  url(r'^api-token-auth/', views.obtain_auth_token),
+                url(r'^api-token-auth/', views.obtain_auth_token),
                 url(r'^admin/', admin.site.urls),
 
                 url(r'lista_aluno/$', ListarAlunos.as_view(), name=Urls.LISTAR_ALUNO),
