@@ -2,13 +2,31 @@ from braces.views import LoginRequiredMixin, GroupRequiredMixin
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.response import Response
 
 from notificacao.forms import LoginForm
 from notificacao.stuff.constants import GroupConst, HTML, Paginas, Mensagens
 
+
+class MyObtainAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        #groups.values_list('name', flat=True).first()
+        name = 'NONE'
+        if user.groups.filter(Q(name=GroupConst.PROFESSOR) | Q(name=GroupConst.PROFESSOR) | Q(name=GroupConst.STUDENT) | Q(name=GroupConst.ADMIN)).exists():
+            name = user.groups.all()[0].name
+
+        return Response({'token': token.key, 'id': token.user_id, 'group': name})
 
 class Logout(TemplateView):
     template_name = HTML.LOGIN

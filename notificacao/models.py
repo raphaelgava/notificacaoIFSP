@@ -23,6 +23,8 @@ from polymodels.models import PolymorphicModel
 from rest_framework.authtoken.models import Token
 
 
+
+
 # http://cheng.logdown.com/posts/2015/10/27/how-to-use-django-rest-frameworks-token-based-authentication
 # This code is triggered whenever a new user has been created and saved to the database
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -33,6 +35,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 # def token_request(request):
 #     if user_requested_token() and token_request_is_warranted():
 #         new_token = Token.objects.create(user=request.user)
+
 
 # todo: mudar a classe ObtainAuthToken em authtokenn\view para fazer a retirada da criptografia!!!
 
@@ -134,6 +137,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def activeAgain(self, *args, **kwargs):
         self.is_active = True
         self.save()
+
+    def checkGroup(self, *args, **kwargs):
+        return self.groups.first()
 
 class Pessoa(Usuario):
     SEXO = (

@@ -38,7 +38,9 @@ class CadastrarNotificacao(NotificacaoView, CreateView):
     def form_valid(self, form):
         form.save(commit=False)
 
-        servidor = Servidor.objects.get(username=self.request.user.username)
+        #todo: fazer verificação pela pk!
+        #servidor = Servidor.objects.get(username=self.request.user.username)
+        servidor = Servidor.objects.get(pk=self.request.user.pk)
 
         if (servidor):
             descRemetente = form.cleaned_data['remetente']
@@ -53,7 +55,8 @@ class CadastrarNotificacao(NotificacaoView, CreateView):
                                                                         servidor=servidor)
             for desc in descRemetente:
                 # remetente = Remetente.objects.get(descricao=desc)
-                remet = Remetente.objects.filter(descricao=desc).first()
+                #remet = Remetente.objects.filter(descricao=desc).first()
+                remet = Remetente.objects.get(pk=desc.pk)
 
                 if (remet):
                     notificacao.remetente.add(remet)

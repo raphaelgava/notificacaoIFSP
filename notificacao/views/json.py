@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
 
 from notificacao.models import Aluno
 from notificacao.models import Instituto
@@ -26,6 +27,8 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
     model = Oferecimento
     lookup_field = 'pk'
     serializer_class = OferecimentoSerializer
+    authentication_classes = (TokenAuthentication,) #Agora para acessar o jsnon tem que enviar o token na authorization do http!!!
+
     # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
@@ -47,32 +50,30 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
         # return Oferecimento.objects.filter(alunos__username="0000002")
         # return Oferecimento.objects.filter(alunos__username=self.request.user.username).count()
 
-
-class AlunoViewSet(viewsets.ModelViewSet):
-    model = Aluno
+class PessoaViewSet(viewsets.ModelViewSet):
     lookup_field = 'pk'
-    serializer_class = AlunoSerializer
     # permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+
+class AlunoViewSet(PessoaViewSet):
+    model = Aluno
+    serializer_class = AlunoSerializer
 
     def get_queryset(self):
         return Aluno.objects.all()
 
 
-class ServidorViewSet(viewsets.ModelViewSet):
+class ServidorViewSet(PessoaViewSet):
     model = Servidor
-    lookup_field = 'pk'
     serializer_class = ServidorSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):  # todo: verificar se de fato aqui é necessario essa verificacao!!!
         return Servidor.objects.all().exclude(funcao='Professor')
 
 
-class ProfessorViewSet(viewsets.ModelViewSet):
+class ProfessorViewSet(PessoaViewSet):
     model = Professor
-    lookup_field = 'pk'
     serializer_class = ProfessorSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         return Professor.objects.all()
@@ -82,6 +83,7 @@ class NotificacaoViewSet(viewsets.ModelViewSet):
     model = Notificacao
     lookup_field = 'pk'
     serializer_class = NotificacaoSerializer
+    authentication_classes = (TokenAuthentication,)
     # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
@@ -92,7 +94,7 @@ class TipoNotificacaoViewSet(viewsets.ModelViewSet):
     model = TipoNotificacao
     lookup_field = 'pk'
     serializer_class = TipoNotificacaoSerializer
-
+    authentication_classes = (TokenAuthentication,)
     # permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
@@ -103,6 +105,7 @@ class InstitutoViewSet(viewsets.ModelViewSet):
     model = Instituto
     lookup_field = 'pk'
     serializer_class = InstitutoSerializer
+    authentication_classes = (TokenAuthentication,)
     # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):

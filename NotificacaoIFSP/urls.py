@@ -23,18 +23,17 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from rest_framework import routers
-from rest_framework.authtoken import views
 
 from notificacao.stuff.constants import Urls
 from notificacao.views.json import AlunoViewSet
 from notificacao.views.json import InstitutoViewSet
-from notificacao.views.json import OferecimentoViewSet
 from notificacao.views.json import NotificacaoViewSet
+from notificacao.views.json import OferecimentoViewSet
 from notificacao.views.json import ProfessorViewSet
 from notificacao.views.json import ServidorViewSet
 from notificacao.views.json import TipoNotificacaoViewSet
 from notificacao.views.login import AdminLogado, ServidorLogado, ProfessorLogado, AlunoLogado
-from notificacao.views.login import Login, Logout
+from notificacao.views.login import Login, Logout, MyObtainAuthToken
 from notificacao.views.outros import CadastrarDisciplina, AtualizarDisciplina, ListarDisciplinas, ApagarDisciplina, \
     AddDisciplina
 from notificacao.views.outros import CadastrarLocal, AtualizarLocal, ListarLocal
@@ -70,7 +69,8 @@ router.register(r'oferecimento_json', OferecimentoViewSet, base_name='oferecimen
 
 
 urlpatterns = [
-                url(r'^api-token-auth/', views.obtain_auth_token),
+                #url(r'^api-token-auth/', views.obtain_auth_token),
+                url(r'^api-token-auth/', MyObtainAuthToken.as_view()),
                 url(r'^admin/', admin.site.urls),
 
                 url(r'lista_aluno/$', ListarAlunos.as_view(), name=Urls.LISTAR_ALUNO),
