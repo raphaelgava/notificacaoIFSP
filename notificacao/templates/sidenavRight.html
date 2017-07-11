@@ -24,19 +24,20 @@
     {% else %}
 <!--<p>teste</p>-->
     {% if user|has_group:"Professor" %}
-<div class="well well-sm text-center">
-        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaOferecimentos' %}'">
+        <a href="{% url 'listaOferecimentos' %}">Cadastro Oferecimento</a>
     </div>
+        <div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaProfessores' %}'">
+            <a href="{% url 'listaSalaProfessores' %}">Cadastro Sala Professores</a>
+        </div>
     {% else %}
     {% if user|has_group:"Employee" %}
-<div class="well well-sm text-center">
-        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
-    </div>
+
     {% else %}
     {% if user|has_group:"Student" %}
-<div class="well well-sm text-center">
-        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
-    </div>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaAlunos' %}'">
+    <a href="{% url 'listaSalaAlunos' %}">Cadastro Sala Alunos</a>
+</div>
     {% else %}
     {% endif %}
     {% endif %}

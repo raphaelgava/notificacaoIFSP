@@ -26,17 +26,20 @@
     {% if user|has_group:"Professor" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
     <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
+    </div>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
+    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
 </div>
     {% else %}
     {% if user|has_group:"Employee" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
     <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
+    </div>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
+    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
 </div>
     {% else %}
     {% if user|has_group:"Student" %}
-    <div class="well text-center">
-        <a href="{% url 'listaAlunos' %}">Message Cadastro Aluno</a>
-    </div>
     {% else %}
     {% endif %}
     {% endif %}

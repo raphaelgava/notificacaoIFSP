@@ -107,6 +107,8 @@ class OferecimentoView:
     form_class = OferecimentoForm
     success_url = reverse_lazy(Urls.LISTAR_OFERECIMENTO)
 
+    group_required = [GroupConst.ADMIN, GroupConst.PROFESSOR]
+
 
 class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
     def get_title(self, **kwargs):
@@ -235,6 +237,8 @@ class SalaProfessoresView:
     model = SalaProfessores
     form_class = SalaProfessoresForm
     success_url = reverse_lazy(Urls.LISTAR_SALA_PROFESSORES)
+
+    group_required = [GroupConst.ADMIN, GroupConst.PROFESSOR]
 
 
 class CadastrarSalaProfessores(SalaProfessoresView, CadastrarRemetente):

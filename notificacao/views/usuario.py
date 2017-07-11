@@ -9,10 +9,10 @@ from django.views.generic.edit import CreateView, UpdateView
 from notificacao.forms import AlunoForm
 from notificacao.forms import ProfessorForm
 from notificacao.forms import ServidorForm
-from notificacao.models import Aluno
+from notificacao.models import Aluno, Usuario
 from notificacao.models import Professor
 from notificacao.models import Servidor
-from notificacao.stuff.constants import GroupConst, HTML, Paginas, Mensagens, Urls
+from notificacao.stuff.constants import GroupConst, HTML, Paginas, Mensagens, Urls, PersonConst
 from notificacao.stuff.helpers import CreatePerson
 from .deleteAdd import AddItem, ApagarItem
 
@@ -57,15 +57,18 @@ class CadastrarAluno(AlunoView, CadastrarUsuario):
         password = form.cleaned_data['password']
         password_check = form.cleaned_data['password_check']
 
-        if password == password_check:
-            username = form.cleaned_data['username']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
+        if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
+            # username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name'].upper()
+            last_name = form.cleaned_data['last_name'].upper()
+            email = form.cleaned_data['email'].upper()
             sexo = form.cleaned_data['sexo']
             datanascimento = form.cleaned_data['datanascimento']
             instituto = form.cleaned_data['id_instituto']
-            turma = form.cleaned_data['turma']
+            turma = form.cleaned_data['turma'].upper()
+
+            user = Usuario.objects.latest('pk')
+            username = '{0:07d}'.format(user.pk + 1)
 
             aluno = Aluno.objects.create(username=username, password=password, email=email, first_name=first_name,
                                          last_name=last_name,
@@ -89,16 +92,16 @@ class AtualizarAluno(AlunoView, AtualizarUsuario):
         password = form.cleaned_data['password']
         password_check = form.cleaned_data['password_check']
         username = form.cleaned_data['username']
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-        email = form.cleaned_data['email']
+        first_name = form.cleaned_data['first_name'].upper()
+        last_name = form.cleaned_data['last_name'].upper()
+        email = form.cleaned_data['email'].upper()
         sexo = form.cleaned_data['sexo']
         datanascimento = form.cleaned_data['datanascimento']
         instituto = form.cleaned_data['id_instituto']
-        turma = form.cleaned_data['turma']
+        turma = form.cleaned_data['turma'].upper()
 
         aluno = Aluno.objects.filter(username=username).first()
-        if password == password_check:
+        if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
             if aluno is not None:
                 aluno.email = email
                 aluno.first_name = first_name
@@ -184,20 +187,26 @@ class CadastrarServidor(ServidorView, CadastrarUsuario):
         password = form.cleaned_data['password']
         password_check = form.cleaned_data['password_check']
 
-        if password == password_check:
-            username = form.cleaned_data['username']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
+        if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
+            #username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name'].upper()
+            last_name = form.cleaned_data['last_name'].upper()
+            email = form.cleaned_data['email'].upper()
             sexo = form.cleaned_data['sexo']
             datanascimento = form.cleaned_data['datanascimento']
             instituto = form.cleaned_data['id_instituto']
-            funcao = form.cleaned_data['funcao']
+            funcao = form.cleaned_data['funcao'].upper()
+            admin = form.cleaned_data['admin']
 
-            servidor = Servidor.objects.create(username=username, password=password, email=email, first_name=first_name,
+            #Servidor.objects.filter(username=username).filter(first_name=first_name).filter(last_name=last_name).filter(datanascimento=datanascimento).delete()
+
+            user = Usuario.objects.latest('pk')
+            username = '{0:07d}'.format(user.pk + 1)
+
+            servidor = Servidor.objects.create(username=username,password=password, email=email, first_name=first_name,
                                                last_name=last_name,
                                                sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
-                                               funcao=funcao)
+                                               funcao=funcao, admin=admin)
 
             CreatePerson.create_employee(servidor, password, False)
 
@@ -217,16 +226,16 @@ class AtualizarServidor(ServidorView, AtualizarUsuario):
         password = form.cleaned_data['password']
         password_check = form.cleaned_data['password_check']
         username = form.cleaned_data['username']
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-        email = form.cleaned_data['email']
+        first_name = form.cleaned_data['first_name'].upper()
+        last_name = form.cleaned_data['last_name'].upper()
+        email = form.cleaned_data['email'].upper()
         sexo = form.cleaned_data['sexo']
         datanascimento = form.cleaned_data['datanascimento']
         instituto = form.cleaned_data['id_instituto']
-        funcao = form.cleaned_data['funcao']
+        funcao = form.cleaned_data['funcao'].upper()
 
         servidor = Servidor.objects.filter(username=username).first()
-        if password == password_check:
+        if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
             if servidor is not None:
                 servidor.email = email
                 servidor.first_name = first_name
@@ -296,6 +305,7 @@ class ListarServidores(ServidorView, ListarUsuario):
 
 # ======================================================================================================================
 
+#todo: enviar para o heroku e testar comunicação!!! fazer parte de atualização do cadastro no android!!!
 
 # ==========================================CADASTRO PROFESSOR==========================================================
 class ProfessorView:
@@ -303,8 +313,6 @@ class ProfessorView:
     form_class = ProfessorForm
     success_url = reverse_lazy(Urls.LISTAR_PROFESSOR)
 
-
-# todo:NÃO ESTA SALVANDO AS DATAS!!!
 class CadastrarProfessor(ProfessorView, CadastrarUsuario):
     def form_valid(self, form):
         form.save(commit=False)
@@ -312,24 +320,29 @@ class CadastrarProfessor(ProfessorView, CadastrarUsuario):
         password = form.cleaned_data['password']
         password_check = form.cleaned_data['password_check']
 
-        if password == password_check:
-            username = form.cleaned_data['username']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
+        if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
+            # username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name'].upper()
+            last_name = form.cleaned_data['last_name'].upper()
+            email = form.cleaned_data['email'].upper()
             sexo = form.cleaned_data['sexo']
             datanascimento = form.cleaned_data['datanascimento']
             instituto = form.cleaned_data['id_instituto']
-            funcao = 'Professor'
+            funcao = 'Professor'.upper()
             tipo_formacao = form.cleaned_data['tipo_formacao']
-            formacao = form.cleaned_data['formacao']
+            formacao = form.cleaned_data['formacao'].upper()
+
+            admin = form.cleaned_data['admin']
+
+            user = Usuario.objects.latest('pk')
+            username = '{0:07d}'.format(user.pk + 1)
 
             professor = Professor.objects.create(username=username, password=password, email=email,
                                                  first_name=first_name,
                                                  last_name=last_name,
                                                  sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
                                                  funcao=funcao,
-                                                 formacao=formacao, tipo_formacao=tipo_formacao)
+                                                 formacao=formacao, tipo_formacao=tipo_formacao, admin=admin)
 
             CreatePerson.create_employee(professor, password, True)
 
@@ -349,17 +362,17 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
         password = form.cleaned_data['password']
         password_check = form.cleaned_data['password_check']
         username = form.cleaned_data['username']
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-        email = form.cleaned_data['email']
+        first_name = form.cleaned_data['first_name'].upper()
+        last_name = form.cleaned_data['last_name'].upper()
+        email = form.cleaned_data['email'].upper()
         sexo = form.cleaned_data['sexo']
         datanascimento = form.cleaned_data['datanascimento']
         instituto = form.cleaned_data['id_instituto']
         tipo_formacao = form.cleaned_data['tipo_formacao']
-        formacao = form.cleaned_data['formacao']
+        formacao = form.cleaned_data['formacao'].upper()
 
         professor = Professor.objects.filter(username=username).first()
-        if password == password_check:
+        if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
             if professor is not None:
                 professor.email = email
                 professor.first_name = first_name

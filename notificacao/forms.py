@@ -48,19 +48,22 @@ class _PersonForm(ModelForm):
             'placeholder': 'Data de nascimento'
         })
 
-    username = forms.CharField(widget=forms.TextInput(
-        attrs={
-            'id': 'username',
-            'placeholder': 'XXXXXX-X',
-            'onkeypress': 'mascara(this, "######-#");',
-        }),
-        max_length=8, )
+    # username = forms.CharField(widget=forms.TextInput(
+    #     attrs={
+    #         'id': 'username',
+    #         #'placeholder': 'XXXXXX-X',
+    #         #'onkeypress': 'mascara(this, "######-#");',
+    #         'placeholder': 'XXXXXXX',
+    #         'onkeypress': 'mascara(this, "#######");',
+    #     }),
+    #     max_length=7, )
 
     class Meta:
         model = Pessoa
         abstract = True
         fields = (
-            'username', 'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
+            # 'username',
+            'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
             'id_instituto',)
 
 
@@ -73,13 +76,13 @@ class AlunoForm(_PersonForm):
 class ServidorForm(_PersonForm):
     class Meta:
         model = Servidor
-        fields = _PersonForm.Meta.fields + ('funcao',)
+        fields = _PersonForm.Meta.fields + ('funcao','admin',)
 
 
 class ProfessorForm(ServidorForm):
     class Meta:
         model = Professor
-        fields = _PersonForm.Meta.fields + ('formacao', 'tipo_formacao',)
+        fields = _PersonForm.Meta.fields + ('formacao', 'tipo_formacao', 'admin',)
 
 
 # ======================================================================================================================
@@ -116,18 +119,17 @@ class OferecimentoForm(_RemetenteForm):
                                             queryset=Aluno.objects.filter(is_active=True))
     class Meta:
         model = Oferecimento
-        # fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')
-        fields = _RemetenteForm.Meta.fields + ('dataInicio', 'qtdAulas', 'id_professor', 'id_disciplina', 'alunos')
+        fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina', 'alunos')
 
 
 class CursoForm(_RemetenteForm):
     id_instituto = forms.ModelChoiceField(queryset=Instituto.objects.filter(is_active=True))
-    disciplinas = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                                 queryset=Disciplina.objects.filter(is_active=True))
+    # disciplinas = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+    #                                              queryset=Disciplina.objects.filter(is_active=True))
 
     class Meta:
         model = Curso
-        fields = _RemetenteForm.Meta.fields + ('id_instituto', 'disciplinas')
+        fields = _RemetenteForm.Meta.fields + ('id_instituto', 'sigla', 'qtd_modulos', 'carga_horaria')
 
 
 class SalaAlunosForm(_RemetenteForm):
@@ -138,6 +140,7 @@ class SalaAlunosForm(_RemetenteForm):
     class Meta:
         model = SalaAlunos
         fields = _RemetenteForm.Meta.fields + ('id_curso', 'alunos')
+
 
 
 class SalaProfessoresForm(_RemetenteForm):
@@ -172,10 +175,15 @@ class NotificacaoForm(ModelForm):
         model = Notificacao
         fields = ('id_tipo', 'id_local', 'remetente', 'titulo', 'descricao',)
 
+
 class DisciplinaForm(ModelForm):
+    id_curso = forms.ModelChoiceField(queryset=Curso.objects.filter(is_active=True))
     class Meta:
         model = Disciplina
-        fields = ('descricao',)
+        fields = ('descricao',
+        #           'sigla',
+        #            'id_curso'
+                   )
 
 
 class LocalForm(ModelForm):

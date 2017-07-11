@@ -22,7 +22,7 @@ from geoposition.fields import GeopositionField
 from polymodels.models import PolymorphicModel
 from rest_framework.authtoken.models import Token
 
-
+import datetime
 
 
 # http://cheng.logdown.com/posts/2015/10/27/how-to-use-django-rest-frameworks-token-based-authentication
@@ -31,6 +31,7 @@ from rest_framework.authtoken.models import Token
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
 
 # def token_request(request):
 #     if user_requested_token() and token_request_is_warranted():
@@ -72,17 +73,19 @@ class Instituto(Remetente):
         verbose_name = 'Instituto'
         verbose_name_plural = 'Institutos'
 
-#todo: fazer o esqueci a senha e enviar por email!!!
-#todo: criar a opção de alterar os meus dados!
+
+# todo: fazer o esqueci a senha e enviar por email!!!
+# todo: criar a opção de alterar os meus dados!
 class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         _('Prontuário'),
-        max_length=8,
+        max_length=7,
         unique=True,
         help_text=_('Required. 7 characters.'),
         validators=[
             validators.RegexValidator(
-                r'^[0-9]+(-[0-9])$',
+                #r'^([0-9]{6}-?[0-9]{1})(?!\w|\.)$', #999999-9
+                r'([0-9]{7})(?!\w|\.)$',#9999999
                 _('Enter a valid username. This value may contain only '
                   'letters, numbers ' 'characters.')
             ),
@@ -141,13 +144,14 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def checkGroup(self, *args, **kwargs):
         return self.groups.first()
 
+
 class Pessoa(Usuario):
     SEXO = (
         ('Masculino', 'Masculino'),
         ('Feminino', 'Feminino'),
     )
     sexo = models.CharField(max_length=10, default='Masculino', choices=SEXO)  # Field name made lowercase.
-    datanascimento = models.DateField()
+    datanascimento = models.DateField("Data de nascimento", default=timezone.now)
     # datanascimento = models.DateField("Data de nascimento", help_text=_('dd/mm/yyyy'),
     #                                  default=timezone.now)  # Field name made lowercase.
 
@@ -161,7 +165,7 @@ class Pessoa(Usuario):
     class Meta(Usuario.Meta):
         abstract = True
         # verbose_name = 'Pessoa'
-        #verbose_name_plural = 'Pessoas'
+        # verbose_name_plural = 'Pessoas'
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
@@ -171,6 +175,7 @@ class Pessoa(Usuario):
 # todo: procurar ppc do curso para tirar os dados
 class Servidor(Pessoa):
     funcao = models.CharField("Função", max_length=30)  # Field name made lowercase.
+    admin = models.BooleanField("Admin sistema", default=False)
 
     class Meta:
         verbose_name = 'Servidor'
@@ -204,8 +209,21 @@ class Aluno(Pessoa):
         verbose_name_plural = 'Alunos'
 
 
+class Curso(Remetente):
+    id_instituto = models.ForeignKey(Instituto)  # Field name made lowercase.
+    sigla = models.CharField("Sigla", max_length=4, blank=False, default='CCC')
+    qtd_modulos = models.IntegerField("Módulos", blank=False, default=8)
+    carga_horaria = models.IntegerField("Carga horária", blank=False, default=80)
+
+    class Meta:
+        verbose_name = 'Curso'
+        verbose_name_plural = 'Cursos'
+
+
 class Disciplina(models.Model):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
+    sigla = models.CharField("Sigla", max_length=4, blank=False)  # Field name made lowercase.
+    id_curso = models.ForeignKey(Curso, verbose_name="Curso")
     is_active = models.BooleanField(_('active'), default=True)
 
     class Meta:
@@ -223,14 +241,6 @@ class Disciplina(models.Model):
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
         return '{}'.format(self.descricao)
-
-class Curso(Remetente):
-    id_instituto = models.ForeignKey(Instituto)  # Field name made lowercase.
-    disciplinas = models.ManyToManyField(Disciplina)
-
-    class Meta:
-        verbose_name = 'Curso'
-        verbose_name_plural = 'Cursos'
 
 
 class Local(models.Model):
@@ -260,8 +270,9 @@ class TipoNotificacao(models.Model):
     def __str__(self):
         return '{}'.format(self.descricao)
 
+
 # todo: verificar se o tempo da notificaçao esta em 24h
-# todo: verificar com o pedro verificar se será necessário colocar dia e hora de termino assim como o is_active
+# todo: esse dia e hora é o fim da notificação o dia do evento!!!
 class Notificacao(models.Model):
     datahora = models.DateTimeField("Data notificação", auto_now_add=True)  # Field name made lowercase.
     id_tipo = models.ForeignKey(TipoNotificacao, verbose_name="Tipo notificação")  # Field name made lowercase.
@@ -281,34 +292,55 @@ class Notificacao(models.Model):
 
 
 class Oferecimento(Remetente):
-    # SEMESTER = (
-    #     (1, 'Primeiro'),
-    #     (2, 'Segundo'),
-    # )
+    YEAR_CHOICES = []
+    for r in range(datetime.datetime.now().year, (datetime.datetime.now().year + 5)):
+        YEAR_CHOICES.append((r, r))
 
-    # YEAR_CHOICES = []
-    # for r in range(datetime.datetime.now().year, (datetime.datetime.now().year + 5)):
-    #     YEAR_CHOICES.append((r, r))
 
-    AULAS = (
-            (1, 10),
-            (2, 20),
-        )
+    SEMESTER = (
+        (1, 'Primeiro'),
+        (2, 'Segundo'),
+    )
 
-    #ano = models.IntegerField(_('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
-    #semestre = models.IntegerField(default=1, choices=SEMESTER)  # Field name made lowercase.
+    WEEK = (
+        (1, 'Segunda'),
+        (2, 'Terça'),
+        (3, 'Quarta'),
+        (4, 'Quinta'),
+        (5, 'Sexta'),
+    )
+
+    TIME = (
+        (1, 'Primeiro'),
+        (2, 'Segundo'),
+        (3, 'Terceiro'),
+        (4, 'Quarto'),
+        (5, 'Quinto'),
+    )
+
+    PERIOD = (
+        (1, 'Matutino'),
+        (2, 'Vespertino'),
+        (3, 'Noturno'),
+    )
+
+    ano = models.IntegerField(_('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    semestre = models.IntegerField(default=1, choices=SEMESTER)  # Field name made lowercase.
+    week = models.IntegerField("Dia da semana", default=1, choices=WEEK)  # Field name made lowercase.
+    time = models.IntegerField("Horário", default=1, choices=TIME)  # Field name made lowercase.
+    period = models.IntegerField("Período", default=1, choices=PERIOD)  # Field name made lowercase.
+    qtd = models.IntegerField("Quantidade de aulas", default=1)
     id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.
     alunos = models.ManyToManyField(Aluno)
     dataInicio = models.DateField("Data Início", help_text=_('dd/mm/yyyy'), default=timezone.now)
-    qtdAulas = models.IntegerField("Quantidade Aulas", choices=AULAS, default=2)
+
 
     class Meta:
         verbose_name = 'Oferecimento'
         verbose_name_plural = 'Oferecimentos'
 
 
-#TODO: VERIFICAR COM O PEDRO SE O CAMPO TURMA NA VERDADE NÃO DEVERIA ESTAR AQUI!!!!
 class SalaAlunos(Remetente):
     id_curso = models.ForeignKey(Curso, blank=True, null=True)  # Field name made lowercase.
     alunos = models.ManyToManyField(Aluno)
@@ -325,4 +357,3 @@ class SalaProfessores(Remetente):
     class Meta:
         verbose_name = 'Sala Professores'
         verbose_name_plural = 'Salas Professores'
-

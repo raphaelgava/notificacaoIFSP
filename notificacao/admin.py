@@ -64,14 +64,19 @@ class InstitutoAdmin(_RemetenteAdmin):
 
 class CursoAdmin(_RemetenteAdmin):
     fieldsets = _RemetenteAdmin.fieldsets + (
-        (('Informações Curso'), {'fields': ('id_instituto', 'disciplinas')}),
+        (('Informações Curso'), {'fields': ('id_instituto', 'sigla', 'qtd_modulos', 'carga_horaria')}),
     )
+
+# class DisciplinaAdmin(_RemetenteAdmin):
+#     fieldsets = _RemetenteAdmin.fieldsets + (
+#         (('Informações Disciplina'), {'fields': ('descricao', 'sigla', 'id_curso')}),
+#     )
 
 
 class OferecimentoAdmin(_RemetenteAdmin):
     fieldsets = _RemetenteAdmin.fieldsets + (
-        # (('Informações Oferecimento'), {'fields': ('ano', 'semestre', 'id_professor', 'id_disciplina', 'alunos')}),
-        (('Informações Oferecimento'), {'fields': ('dataInicio', 'qtdAulas', 'id_professor', 'id_disciplina', 'alunos')}),
+        (('Informações Oferecimento'), {'fields': ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina', 'alunos')}),
+
     )
 
 

@@ -98,7 +98,7 @@ class Migration(migrations.Migration):
             name='Remetente',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('descricao', models.CharField(max_length=50, verbose_name='Descrição')),
+                ('nome', models.CharField(max_length=50, verbose_name='Descrição')),
                 ('is_active', models.BooleanField(default=True, verbose_name='active')),
             ],
             options={

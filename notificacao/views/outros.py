@@ -20,7 +20,8 @@ from notificacao.stuff.constants import GroupConst, HTML, Urls, Mensagens
 from .deleteAdd import AddItem, ApagarItem
 
 
-# todo: perguntar para lucas como não exibir a senha e dados importantes (uglify os arquivos de configuracao)
+# todo: perguntar para lucas como não exibir a senha e dados importantes (uglify os arquivos de configuracao) "How to uglyfy files in heroku"
+
 
 class NotificacaoView(LoginRequiredMixin, GroupRequiredMixin):
     model = Notificacao
@@ -188,7 +189,7 @@ class LocalView(LoginRequiredMixin, GroupRequiredMixin):
     success_url = reverse_lazy(Urls.LISTAR_LOCAL)
     login_url = '/login/'
 
-    group_required = [GroupConst.ADMIN]
+    group_required = [GroupConst.ADMIN, GroupConst.PROFESSOR, GroupConst.EMPLOYEE]
 
 
 # todo: como manter o efeito do hover da classe well quando acessar a página?

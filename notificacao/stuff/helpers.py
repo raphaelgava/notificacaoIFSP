@@ -20,12 +20,14 @@ class CreatePerson:
                 self.set_password(password)
                 if not Group.objects.filter(name=GroupConst.EMPLOYEE).exists():
                     Group.objects.create(name=GroupConst.EMPLOYEE)
-
-                if professor == True:
-                    self.funcao = 'Professor'
-                    self.groups.add(Group.objects.get(name=GroupConst.PROFESSOR))
+                if self.admin == True:
+                    self.groups.add(Group.objects.get(name=GroupConst.ADMIN))
                 else:
-                    self.groups.add(Group.objects.get(name=GroupConst.EMPLOYEE))
+                    if professor == True:
+                        self.funcao = 'Professor'
+                        self.groups.add(Group.objects.get(name=GroupConst.PROFESSOR))
+                    else:
+                        self.groups.add(Group.objects.get(name=GroupConst.EMPLOYEE))
                 self.save()
 
         return self

@@ -82,5 +82,4 @@ class InstitutoSerializer(_RemetenteSerializer):
 class OferecimentoSerializer(_RemetenteSerializer):
     class Meta:
         model = Oferecimento
-        #fields = _RemetenteSerializer.Meta.fields + ('ano', 'semestre', 'id_professor', 'id_disciplina')
-        fields = _RemetenteSerializer.Meta.fields + ('dataInicio', 'qtdAulas', 'id_professor', 'id_disciplina')
+        fields = _RemetenteSerializer.Meta.fields + ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina')

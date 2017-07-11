@@ -9,6 +9,7 @@ class GroupConst:
 # Person data
 class PersonConst:
     PASSWORD = 'password'
+    PASSWORD_LENGTH = 5
 
 
 class Paginas:

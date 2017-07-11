@@ -8,22 +8,23 @@
 {% block content %}
 <div class="col-sm-9">
     {% if user|has_group:"Admin" %}
-    <h1>Bem Vindo Administrador!</h1>
+    <h1>Bem Vindo Administrador {{ request.user.first_name }}!</h1>
     {% else %}
     {% if user|has_group:"Professor" %}
-    <h1>Bem Vindo Professor!</h1>
+    <h1>Bem Vindo Professor {{ request.user.first_name }}!</h1>
     {% else %}
     {% if user|has_group:"Employee" %}
-    <h1>Bem Vindo Servidor!</h1>
+    <h1>Bem Vindo Servidor {{ request.user.first_name }}!</h1>
     {% else %}
     {% if user|has_group:"Student" %}
-    <h1>Bem Vindo Estudante!</h1>
+    <h1>Bem Vindo Estudante {{ request.user.first_name }}!</h1>
     {% else %}
     {% endif %}
     {% endif %}
     {% endif %}
     {% endif %}
 </div>
+    <!--<iframe align="right" scrolling="no" frameborder="no" clocktype="html5" src="http://www.clocklink.com/html5embed.php?clock=004&timezone=BRST&color=red&size=120&Title=&Message=&Target=&From=2017,1,1,0,0,0&Color=red"></iframe>-->
 {% endblock %}
 
 {% block sidenavRight %}
