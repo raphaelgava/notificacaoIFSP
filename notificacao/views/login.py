@@ -1,3 +1,5 @@
+import datetime
+
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -21,12 +23,31 @@ class MyObtainAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        #groups.values_list('name', flat=True).first()
-        name = 'NONE'
-        if user.groups.filter(Q(name=GroupConst.PROFESSOR) | Q(name=GroupConst.PROFESSOR) | Q(name=GroupConst.STUDENT) | Q(name=GroupConst.ADMIN)).exists():
-            name = user.groups.all()[0].name
 
-        return Response({'token': token.key, 'id': token.user_id, 'group': name})
+        utc_now = datetime.datetime.utcnow()
+        if not created and token.created < utc_now - datetime.timedelta(
+                minutes=15):  # token de 24 horas de duração -> hours=24
+            token.delete()
+            token = Token.objects.create(user=user)
+            token.created = datetime.datetime.utcnow()
+            token.save()
+
+        prof = False
+        if user.is_active == True:
+            # groups.values_list('name', flat=True).first()
+            name = 'NONE'
+            if user.groups.filter(Q(name=GroupConst.PROFESSOR) | Q(name=GroupConst.PROFESSOR) | Q(
+                    name=GroupConst.STUDENT) | Q(name=GroupConst.ADMIN)).exists():
+                name = user.groups.all()[0].name
+
+            if name == GroupConst.ADMIN:
+                prof = user.isProfessor(user)
+            else:
+                if name == GroupConst.PROFESSOR:
+                    prof = True
+
+            return Response({'token': token.key, 'id': token.user_id, 'group': name, 'prof': prof})
+        return Response({'token': token.key, 'id': '', 'group': '', 'prof': prof})
 
 class Logout(TemplateView):
     template_name = HTML.LOGIN

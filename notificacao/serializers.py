@@ -3,12 +3,12 @@ from rest_framework import serializers
 from .models import Aluno
 from .models import Instituto
 from .models import Notificacao
+from .models import Oferecimento
 from .models import Pessoa
 from .models import Professor
 from .models import Remetente
 from .models import Servidor
 from .models import TipoNotificacao
-from .models import Oferecimento
 from .stuff.helpers import CreatePerson
 
 
@@ -16,7 +16,8 @@ class _PessoaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pessoa
         abstract = True
-        fields = ('pk','username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',)
+        # fields = ('pk','username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',)
+        fields = ('pk', 'username', 'first_name', 'last_name', 'email', 'sexo', 'datanascimento', 'id_instituto',)
 
 
 class AlunoSerializer(_PessoaSerializer):

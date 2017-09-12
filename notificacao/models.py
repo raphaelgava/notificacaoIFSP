@@ -7,6 +7,8 @@
 # Feel free to rename the model, but don't rename db_table values or field names.
 from __future__ import unicode_literals
 
+import datetime
+
 from colorfield.fields import ColorField
 from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
@@ -21,8 +23,6 @@ from django.utils.translation import ugettext_lazy as _
 from geoposition.fields import GeopositionField
 from polymodels.models import PolymorphicModel
 from rest_framework.authtoken.models import Token
-
-import datetime
 
 
 # http://cheng.logdown.com/posts/2015/10/27/how-to-use-django-rest-frameworks-token-based-authentication
@@ -144,6 +144,13 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def checkGroup(self, *args, **kwargs):
         return self.groups.first()
 
+    def isProfessor(self, *args, **kwargs):
+        prof = Professor.objects.filter(pk=self.pk)
+        if prof is not None:
+            if len(prof) > 0:
+                return True
+
+        return False
 
 class Pessoa(Usuario):
     SEXO = (
@@ -222,7 +229,7 @@ class Curso(Remetente):
 
 class Disciplina(models.Model):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
-    sigla = models.CharField("Sigla", max_length=4, blank=False)  # Field name made lowercase.
+    sigla = models.CharField("Sigla", max_length=4, blank=False, default='DDD')  # Field name made lowercase.
     id_curso = models.ForeignKey(Curso, verbose_name="Curso")
     is_active = models.BooleanField(_('active'), default=True)
 

@@ -47,14 +47,16 @@ class ListarRemetentes(LoginRequiredMixin, GroupRequiredMixin, ListView):
             if 'filtro' in self.request.GET:
                 parametro = self.request.GET['filtro']
                 if parametro == 'ativo':
-                    context['lista'] = Remetente.objects.filter(is_active=True).select_subclasses(self.model)
+                    context['lista'] = Remetente.objects.order_by('-pk').filter(is_active=True).select_subclasses(
+                        self.model)
                     return context
                 else:
                     if parametro == 'inativo':
-                        context['lista'] = Remetente.objects.filter(is_active=False).select_subclasses(self.model)
+                        context['lista'] = Remetente.objects.order_by('-pk').filter(is_active=False).select_subclasses(
+                            self.model)
                         return context
 
-        context['lista'] = Remetente.objects.select_subclasses(self.model)
+        context['lista'] = Remetente.objects.order_by('-pk').select_subclasses(self.model)
         return context
 
 

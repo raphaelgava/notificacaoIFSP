@@ -104,7 +104,7 @@ class ListarNotificacoes(NotificacaoView, ListView):
         context = super(ListarNotificacoes, self).get_context_data(**kwargs)
 
         #context['lista'] = Notificacao.objects.filter(username=self.request.user.username)
-        context['lista'] = Notificacao.objects.all()
+        context['lista'] = Notificacao.objects.order_by('-pk').all()
         return context
 
     def get_title(self, **kwargs):

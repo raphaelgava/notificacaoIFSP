@@ -144,14 +144,14 @@ class ListarAlunos(AlunoView, ListarUsuario):
             if 'filtro' in self.request.GET:
                 parametro = self.request.GET['filtro']
                 if parametro == 'ativo':
-                    context['lista'] = Aluno.objects.filter(is_active=True)
+                    context['lista'] = Aluno.objects.order_by('-pk').filter(is_active=True)
                     return context
                 else:
                     if parametro == 'inativo':
-                        context['lista'] = Aluno.objects.filter(is_active=False)
+                        context['lista'] = Aluno.objects.order_by('-pk').filter(is_active=False)
                         return context
 
-        context['lista'] = Aluno.objects.all()
+        context['lista'] = Aluno.objects.order_by('-pk').all()
         return context
 
     def get_title(self, **kwargs):
@@ -277,14 +277,16 @@ class ListarServidores(ServidorView, ListarUsuario):
             if 'filtro' in self.request.GET:
                 parametro = self.request.GET['filtro']
                 if parametro == 'ativo':
-                    context['lista'] = Servidor.objects.filter(is_active=True).exclude(funcao='Professor')
+                    context['lista'] = Servidor.objects.order_by('-pk').filter(is_active=True).exclude(
+                        funcao='Professor')
                     return context
                 else:
                     if parametro == 'inativo':
-                        context['lista'] = Servidor.objects.filter(is_active=False).exclude(funcao='Professor')
+                        context['lista'] = Servidor.objects.order_by('-pk').filter(is_active=False).exclude(
+                            funcao='Professor')
                         return context
 
-        context['lista'] = Servidor.objects.all().exclude(funcao='Professor')
+        context['lista'] = Servidor.objects.order_by('-pk').all().exclude(funcao='Professor')
         return context
 
     def get_title(self, **kwargs):
@@ -415,14 +417,14 @@ class ListarProfessores(ProfessorView, ListarUsuario):
             if 'filtro' in self.request.GET:
                 parametro = self.request.GET['filtro']
                 if parametro == 'ativo':
-                    context['lista'] = Professor.objects.filter(is_active=True)
+                    context['lista'] = Professor.objects.order_by('-pk').filter(is_active=True)
                     return context
                 else:
                     if parametro == 'inativo':
-                        context['lista'] = Professor.objects.filter(is_active=False)
+                        context['lista'] = Professor.objects.order_by('-pk').filter(is_active=False)
                         return context
 
-        context['lista'] = Professor.objects.all()
+        context['lista'] = Professor.objects.order_by('-pk').all()
         return context
 
     def get_title(self, **kwargs):

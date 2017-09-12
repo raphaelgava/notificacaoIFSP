@@ -1,35 +1,36 @@
+from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 
 from notificacao.models import Aluno
 from notificacao.models import Instituto
 from notificacao.models import Notificacao
+from notificacao.models import Oferecimento
 from notificacao.models import Professor
 from notificacao.models import Servidor
 from notificacao.models import TipoNotificacao
-from notificacao.models import Oferecimento
 from notificacao.serializers import AlunoSerializer
 from notificacao.serializers import InstitutoSerializer
 from notificacao.serializers import NotificacaoSerializer
+from notificacao.serializers import OferecimentoSerializer
 from notificacao.serializers import ProfessorSerializer
 from notificacao.serializers import ServidorSerializer
 from notificacao.serializers import TipoNotificacaoSerializer
-from notificacao.serializers import OferecimentoSerializer
 from notificacao.stuff.constants import GroupConst
+
 
 # DESCOBRIR COMO FAZER A QUERY DE MANYPRAMANY (TALVEZ UTILIZAR UTILIZAR SELF.USER.PK)
 # LEMBRAR DE DESCOMENTAR OS NOVOS CAMPOS EM OFERECIMENTO!!!
 # PARA ATUALIZAR UM ITEM BASTA FAZER UM PUT POR JSON
 # PARA FAZER A BUSCA POR PK BASTA PASSAR O PK NA URL (POR CONTA DO LOOKUP_FIELD)
-# QUESTIONAR COMO FAZER O USERNAME SER BASEADO NA PK!
 
 class OferecimentoViewSet(viewsets.ModelViewSet):
     model = Oferecimento
     lookup_field = 'pk'
     serializer_class = OferecimentoSerializer
-    authentication_classes = (TokenAuthentication,) #Agora para acessar o jsnon tem que enviar o token na authorization do http!!!
-
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (
+    TokenAuthentication,)  # Agora para acessar o json tem que enviar o token na authorization do http!!!
 
     def get_queryset(self):
         user = self.request.user
@@ -52,7 +53,7 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
 
 class PessoaViewSet(viewsets.ModelViewSet):
     lookup_field = 'pk'
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
 
 class AlunoViewSet(PessoaViewSet):
@@ -84,7 +85,7 @@ class NotificacaoViewSet(viewsets.ModelViewSet):
     lookup_field = 'pk'
     serializer_class = NotificacaoSerializer
     authentication_classes = (TokenAuthentication,)
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         return Notificacao.objects.all()
@@ -106,7 +107,7 @@ class InstitutoViewSet(viewsets.ModelViewSet):
     lookup_field = 'pk'
     serializer_class = InstitutoSerializer
     authentication_classes = (TokenAuthentication,)
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         return Instituto.objects.all()
