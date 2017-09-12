@@ -1,159 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/notificacao/migrations/0002_auto_20161206_2100.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/notificacao/migrations/0002_auto_20170509_2158.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/notificacao/migrations/0003_auto_20170304_1635.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/notificacao/migrations/0003_auto_20170705_2232.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/notificacao/migrations/0004_auto_20170320_2158.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/notificacao/migrations/0004_auto_20170710_2114.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/base.ba3dc2f88fc5.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/base.ba3dc2f88fc5.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/base.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/base.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/changelists.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/changelists.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/dashboard.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/dashboard.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/fonts.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/fonts.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/forms.70b858e61281.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/forms.70b858e61281.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/forms.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/forms.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/login.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/login.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/rtl.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/rtl.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/widgets.a7251c097987.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/widgets.a7251c097987.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/widgets.css.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/css/widgets.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/LICENSE.2c54f4e1ca1c.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/LICENSE.2c54f4e1ca1c.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/LICENSE.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/LICENSE.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/README.837277fa1908.txt.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/README.837277fa1908.txt.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/README.txt.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/README.txt.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/calendar-icons.39b290681a8b.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/calendar-icons.39b290681a8b.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/calendar-icons.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/calendar-icons.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-addlink.d519b3bab011.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-addlink.d519b3bab011.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-addlink.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-addlink.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-alert.034cc7d8a67f.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-alert.034cc7d8a67f.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-alert.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-alert.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-calendar.ac7aea671bea.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-calendar.ac7aea671bea.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-calendar.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-calendar.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-changelink.18d2fd706348.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-changelink.18d2fd706348.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-changelink.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-changelink.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-clock.e1d4dfac3f2b.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-clock.e1d4dfac3f2b.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-clock.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-clock.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-deletelink.564ef9dc3854.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-deletelink.564ef9dc3854.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-deletelink.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-deletelink.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-no.439e821418cd.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-no.439e821418cd.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-no.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-no.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown-alt.81536e128bb6.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown-alt.81536e128bb6.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown-alt.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown-alt.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown.a18cb4398978.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown.a18cb4398978.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-yes.d2f9f035226a.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-yes.d2f9f035226a.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-yes.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/icon-yes.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/inline-delete.fec1b761f254.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/inline-delete.fec1b761f254.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/inline-delete.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/inline-delete.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/search.7cf54ff789c6.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/search.7cf54ff789c6.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/search.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/search.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/selector-icons.b4555096cea2.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/selector-icons.b4555096cea2.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/selector-icons.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/selector-icons.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/sorting-icons.3a097b59f104.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/sorting-icons.3a097b59f104.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/sorting-icons.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/sorting-icons.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-add.e59d620a9742.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-add.e59d620a9742.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-add.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-add.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-arrowright.bbfb788a849e.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-arrowright.bbfb788a849e.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-arrowright.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-arrowright.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/SelectBox.b49f008d186b.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/SelectBox.b49f008d186b.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/SelectBox.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/SelectBox.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/SelectFilter2.17009b6d4428.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/SelectFilter2.17009b6d4428.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/SelectFilter2.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/SelectFilter2.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/actions.32861b6cbdf9.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/actions.32861b6cbdf9.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/actions.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/actions.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/actions.min.f51f04edab28.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/actions.min.f51f04edab28.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/actions.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/actions.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/admin/DateTimeShortcuts.1536fb6bea1d.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/admin/DateTimeShortcuts.1536fb6bea1d.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/admin/DateTimeShortcuts.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/admin/DateTimeShortcuts.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/admin/RelatedObjectLookups.183db436487a.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/admin/RelatedObjectLookups.183db436487a.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/admin/RelatedObjectLookups.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/admin/RelatedObjectLookups.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/calendar.9ac94d055fbd.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/calendar.9ac94d055fbd.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/calendar.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/calendar.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/cancel.1d69cba4b4bf.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/cancel.1d69cba4b4bf.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/cancel.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/cancel.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/change_form.d224f77c6b61.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/change_form.d224f77c6b61.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/change_form.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/change_form.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/collapse.17d715df2104.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/collapse.17d715df2104.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/collapse.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/collapse.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/collapse.min.dc930adb2821.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/collapse.min.dc930adb2821.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/collapse.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/collapse.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/core.fd861d43f0f5.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/core.fd861d43f0f5.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/core.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/core.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/inlines.17981b4df24a.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/inlines.17981b4df24a.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/inlines.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/inlines.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/inlines.min.8ef8b2379896.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/inlines.min.8ef8b2379896.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/inlines.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/inlines.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/jquery.init.95b62fa19378.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/jquery.init.95b62fa19378.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/jquery.init.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/jquery.init.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/popup_response.6ce3197f8fc8.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/popup_response.6ce3197f8fc8.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/popup_response.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/popup_response.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.ff9208865444.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.ff9208865444.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.min.f4057ebb9b62.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.min.f4057ebb9b62.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate_init.0d3b53c37074.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate_init.0d3b53c37074.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate_init.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate_init.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/timeparse.51258861a46a.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/timeparse.51258861a46a.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/timeparse.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/timeparse.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/urlify.411bc3bb651c.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/urlify.411bc3bb651c.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/urlify.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/urlify.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/LICENSE-JQUERY.a158210a2737.txt.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/LICENSE-JQUERY.a158210a2737.txt.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/LICENSE-JQUERY.txt.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/LICENSE-JQUERY.txt.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.aacc43d6f308.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.aacc43d6f308.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.min.33cabfa15c10.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.min.33cabfa15c10.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/LICENSE-XREGEXP.d64cecf4f157.txt.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/LICENSE-XREGEXP.d64cecf4f157.txt.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/LICENSE-XREGEXP.txt.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/LICENSE-XREGEXP.txt.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.1865b1cf5085.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.1865b1cf5085.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.min.c95393b8ca4d.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.min.c95393b8ca4d.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/colorfield/jscolor/jscolor.min.044030aa1f15.js.gz" afterPath="$PROJECT_DIR$/staticfiles/colorfield/jscolor/jscolor.min.044030aa1f15.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/colorfield/jscolor/jscolor.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/colorfield/jscolor/jscolor.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap-tweaks.css.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap-tweaks.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap.min.css.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap.min.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap.min.ec3bb52a00e1.css.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap.min.ec3bb52a00e1.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/default.css.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/default.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/prettify.css.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/prettify.css.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/fonts/glyphicons-halflings-regular.89889688147b.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/fonts/glyphicons-halflings-regular.89889688147b.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/fonts/glyphicons-halflings-regular.svg.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/fonts/glyphicons-halflings-regular.svg.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/ajax-form.8b39b42cbf4e.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/ajax-form.8b39b42cbf4e.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/ajax-form.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/ajax-form.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/bootstrap.min.5869c96cc8f1.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/bootstrap.min.5869c96cc8f1.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/bootstrap.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/bootstrap.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/csrf.753b7a1f2ee7.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/csrf.753b7a1f2ee7.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/csrf.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/csrf.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/default.b846d7d305c9.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/default.b846d7d305c9.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/default.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/default.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/jquery-1.12.4.min.4f252523d4af.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/jquery-1.12.4.min.4f252523d4af.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/jquery-1.12.4.min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/jquery-1.12.4.min.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/prettify-min.709bfcc456c6.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/prettify-min.709bfcc456c6.js.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/js/prettify-min.js.gz" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/js/prettify-min.js.gz" />
+    <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="Testing comunications and user json">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NotificacaoIFSP/settings.py" afterPath="$PROJECT_DIR$/NotificacaoIFSP/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/models.py" afterPath="$PROJECT_DIR$/notificacao/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/serializers.py" afterPath="$PROJECT_DIR$/notificacao/serializers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/json.py" afterPath="$PROJECT_DIR$/notificacao/views/json.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/login.py" afterPath="$PROJECT_DIR$/notificacao/views/login.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/outros.py" afterPath="$PROJECT_DIR$/notificacao/views/outros.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/remetente.py" afterPath="$PROJECT_DIR$/notificacao/views/remetente.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/usuario.py" afterPath="$PROJECT_DIR$/notificacao/views/usuario.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/base.ba3dc2f88fc5.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/base.ba3dc2f88fc5.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/changelists.b1b060f73d37.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/changelists.b1b060f73d37.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/dashboard.4898e2e9983d.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/dashboard.4898e2e9983d.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/fonts.cc6140298ba7.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/fonts.cc6140298ba7.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/forms.70b858e61281.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/forms.70b858e61281.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/login.a846c0e2ef65.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/login.a846c0e2ef65.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/rtl.e024aaf6df25.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/rtl.e024aaf6df25.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/admin/css/widgets.a7251c097987.css" afterPath="$PROJECT_DIR$/staticfiles/admin/css/widgets.a7251c097987.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap-tweaks.b78ca7b14c57.css" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap-tweaks.b78ca7b14c57.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap.min.ec3bb52a00e1.css" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/bootstrap.min.ec3bb52a00e1.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/default.713cbe203060.css" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/default.713cbe203060.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/staticfiles/rest_framework/css/prettify.a987f72342ee.css" afterPath="$PROJECT_DIR$/staticfiles/rest_framework/css/prettify.a987f72342ee.css" />
     </list>
     <ignored path="NotificacaoIFSP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -898,7 +747,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490059607009</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Testing comunications and user json">
+      <created>1505191291036</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1505191291036</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView">
@@ -916,7 +772,8 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2001488" sideWeight="0.49508196" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42282957" sideWeight="0.34300596" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42282957" sideWeight="0.34672618" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329582" sideWeight="0.5029762" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329582" sideWeight="0.49702382" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27009645" sideWeight="0.46875" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31993568" sideWeight="0.48511904" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31028938" sideWeight="0.48214287" order="9" side_tool="false" content_ui="tabs" />
@@ -924,7 +781,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28617364" sideWeight="0.5401786" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42282957" sideWeight="0.6532738" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42282957" sideWeight="0.6532738" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
