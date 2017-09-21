@@ -17,7 +17,9 @@ class _PessoaSerializer(serializers.ModelSerializer):
         model = Pessoa
         abstract = True
         # fields = ('pk','username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',)
-        fields = ('pk', 'username', 'first_name', 'last_name', 'email', 'sexo', 'datanascimento', 'id_instituto',)
+        # esta enviando também o password na busca, porém para fazer update da senha o campo password deve estar declarado!
+        fields = (
+        'pk', 'username', 'first_name', 'last_name', 'email', 'sexo', 'datanascimento', 'id_instituto', 'password',)
 
 
 class AlunoSerializer(_PessoaSerializer):
@@ -29,6 +31,13 @@ class AlunoSerializer(_PessoaSerializer):
         aluno = serializers.ModelSerializer.create(self, validated_data)
         password = validated_data['password']
         aluno = CreatePerson.create_student(aluno, password)
+
+        return aluno
+
+    def update(self, instance, validated_data):
+        aluno = serializers.ModelSerializer.update(self, instance, validated_data)
+        password = validated_data['password']
+        aluno = CreatePerson.update_password(aluno, password)
 
         return aluno
 
@@ -45,6 +54,13 @@ class ServidorSerializer(_PessoaSerializer):
 
         return servidor
 
+    def update(self, instance, validated_data):
+        servidor = serializers.ModelSerializer.update(self, instance, validated_data)
+        password = validated_data['password']
+        servidor = CreatePerson.update_password(servidor, password)
+
+        return servidor
+
 
 class ProfessorSerializer(ServidorSerializer):
     class Meta:
@@ -53,6 +69,13 @@ class ProfessorSerializer(ServidorSerializer):
 
     def create(self, validated_data):
         professor = ServidorSerializer.create(self, validated_data, True)
+        return professor
+
+    def update(self, instance, validated_data):
+        professor = serializers.ModelSerializer.update(self, instance, validated_data)
+        password = validated_data['password']
+        professor = CreatePerson.update_password(professor, password)
+
         return professor
 
 

@@ -38,6 +38,7 @@ class LoginForm(forms.Form):
 class _PersonForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Senha')
     password_check = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Confirmar senha')
+    username = forms.CharField(disabled=True)
     datanascimento = forms.CharField(label='Data de nascimento')  # forms.DateInput.input_type = "date"
     # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
 
@@ -62,7 +63,7 @@ class _PersonForm(ModelForm):
         model = Pessoa
         abstract = True
         fields = (
-            # 'username',
+            'username',
             'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
             'id_instituto',)
 

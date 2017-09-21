@@ -1,6 +1,7 @@
 from django.contrib.auth.models import Group
 
-from notificacao.stuff.constants import GroupConst
+from notificacao.stuff.constants import GroupConst, PersonConst
+
 
 class CreatePerson:
     def create_student(self, password):
@@ -32,4 +33,11 @@ class CreatePerson:
 
         return self
 
+    def update_password(self, password):
+        if self is not None:
+            if password is not None:
+                if len(password) >= PersonConst.PASSWORD_LENGTH:
+                    self.set_password(password)
+                    self.save()
 
+        return self
