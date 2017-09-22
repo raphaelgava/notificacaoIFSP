@@ -35,11 +35,21 @@ class AlunoSerializer(_PessoaSerializer):
         return aluno
 
     def update(self, instance, validated_data):
-        aluno = serializers.ModelSerializer.update(self, instance, validated_data)
-        password = validated_data['password']
-        aluno = CreatePerson.update_password(aluno, password)
+        # aluno = serializers.ModelSerializer.update(self, instance, validated_data)
+        # password = validated_data['password']
+        # aluno = CreatePerson.update_password(aluno, password)
+        #
+        # return aluno
+        for attr, value in validated_data.items():
+            if attr == 'password':
+                # instance.set_password(value)
+                professor = CreatePerson.update_password(instance, value)
+            else:
+                setattr(instance, attr, value)
 
-        return aluno
+        instance.save()
+
+        return instance
 
 
 class ServidorSerializer(_PessoaSerializer):
@@ -55,11 +65,21 @@ class ServidorSerializer(_PessoaSerializer):
         return servidor
 
     def update(self, instance, validated_data):
-        servidor = serializers.ModelSerializer.update(self, instance, validated_data)
-        password = validated_data['password']
-        servidor = CreatePerson.update_password(servidor, password)
+        # servidor = serializers.ModelSerializer.update(self, instance, validated_data)
+        # password = validated_data['password']
+        # servidor = CreatePerson.update_password(servidor, password)
 
-        return servidor
+        # return servidor
+        for attr, value in validated_data.items():
+            if attr == 'password':
+                # instance.set_password(value)
+                professor = CreatePerson.update_password(instance, value)
+            else:
+                setattr(instance, attr, value)
+
+        instance.save()
+
+        return instance
 
 
 class ProfessorSerializer(ServidorSerializer):
@@ -72,11 +92,20 @@ class ProfessorSerializer(ServidorSerializer):
         return professor
 
     def update(self, instance, validated_data):
-        professor = serializers.ModelSerializer.update(self, instance, validated_data)
-        password = validated_data['password']
-        professor = CreatePerson.update_password(professor, password)
+        for attr, value in validated_data.items():
+            if attr == 'password':
+                # instance.set_password(value)
+                professor = CreatePerson.update_password(instance, value)
+            else:
+                setattr(instance, attr, value)
 
-        return professor
+        instance.save()
+
+        # professor = serializers.ModelSerializer.update(self, instance, validated_data)
+        # password = validated_data['password']
+        # professor = CreatePerson.update_password(professor, password)
+        # return professor
+        return instance
 
 
 class NotificacaoSerializer(serializers.ModelSerializer):
