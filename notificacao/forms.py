@@ -94,7 +94,7 @@ class _RemetenteForm(ModelForm):
     class Meta:
         model = Remetente
         abstract = True
-        fields = ('descricao',)
+        fields = ('descricao', 'is_active')
 
 
 # class DateInput(forms.DateInput):
@@ -117,10 +117,22 @@ class OferecimentoForm(_RemetenteForm):
     id_professor = forms.ModelChoiceField(queryset=Professor.objects.filter(is_active=True))
     id_disciplina = forms.ModelChoiceField(queryset=Disciplina.objects.filter(is_active=True))
     alunos = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                            queryset=Aluno.objects.filter(is_active=True))
+                                            queryset=Aluno.objects.filter(is_active=True), required=False)
+    dataInicio = forms.CharField(label='Data Início')  # forms.DateInput.input_type = "date"
+
+    # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
+
+    def __init__(self, *args, **kwargs):
+        super(OferecimentoForm, self).__init__(*args, **kwargs)
+        self.fields['dataInicio'].widget = TextInput(attrs={
+            'class': 'datas',
+            'placeholder': 'Data Início'
+        })
+
     class Meta:
         model = Oferecimento
-        fields = _RemetenteForm.Meta.fields + ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina', 'alunos')
+        fields = _RemetenteForm.Meta.fields + (
+        'ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'qtd', 'id_professor', 'id_disciplina', 'alunos')
 
 
 class CursoForm(_RemetenteForm):
@@ -181,10 +193,10 @@ class DisciplinaForm(ModelForm):
     id_curso = forms.ModelChoiceField(queryset=Curso.objects.filter(is_active=True))
     class Meta:
         model = Disciplina
-        fields = ('descricao',
-        #           'sigla',
-        #            'id_curso'
-                   )
+        fields = ('descricao', 'id_curso', 'is_active'
+                  #           'sigla',
+                  #            'id_curso'
+                  )
 
 
 class LocalForm(ModelForm):

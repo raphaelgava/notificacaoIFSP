@@ -16,7 +16,6 @@ from notificacao.serializers import OferecimentoSerializer
 from notificacao.serializers import ProfessorSerializer
 from notificacao.serializers import ServidorSerializer
 from notificacao.serializers import TipoNotificacaoSerializer
-from notificacao.stuff.constants import GroupConst
 
 
 # DESCOBRIR COMO FAZER A QUERY DE MANYPRAMANY (TALVEZ UTILIZAR UTILIZAR SELF.USER.PK)
@@ -33,15 +32,23 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
     TokenAuthentication,)  # Agora para acessar o json tem que enviar o token na authorization do http!!!
 
     def get_queryset(self):
-        user = self.request.user
-        if user.groups.filter(name=GroupConst.STUDENT).exists():
-            oferecimentos = Oferecimento.objects.filter(alunos__username = user.username)
-        elif user.groups.filter(name=GroupConst.PROFESSOR).exists():
-            oferecimentos = Oferecimento.objects.filter(id_professor__username = user.username)
+        # user = self.request.user
+        # if user.groups.filter(name=GroupConst.STUDENT).exists():
+        #     oferecimentos = Oferecimento.objects.filter(alunos__username = user.username)
+        # elif user.groups.filter(name=GroupConst.PROFESSOR).exists():
+        #     oferecimentos = Oferecimento.objects.filter(id_professor__username = user.username)
+        # else:
+        #     oferecimentos = ''
+
+        ano = self.request.GET.get('ano')
+        semestre = self.request.GET.get('semestre')
+        if ano is not None and semestre is not None:
+            oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
         else:
             oferecimentos = ''
 
         return oferecimentos
+
 
         # oferecimentos = Oferecimento.objects.filter(alunos__username = user.username)
         #

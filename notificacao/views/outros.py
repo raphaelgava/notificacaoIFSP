@@ -160,10 +160,26 @@ class AddDisciplina(DisciplinaView, AddItem):
 class ListarDisciplinas(DisciplinaView, ListView):
     template_name = HTML.LISTA_OUTROS
 
+    # def get_context_data(self, **kwargs):
+    #     context = super(ListarDisciplinas, self).get_context_data(**kwargs)
+    #
+    #     context['lista'] = Disciplina.objects.all()
+    #     return context
+
     def get_context_data(self, **kwargs):
         context = super(ListarDisciplinas, self).get_context_data(**kwargs)
+        if self.request.method == 'GET':
+            if 'filtro' in self.request.GET:
+                parametro = self.request.GET['filtro']
+                if parametro == 'ativo':
+                    context['lista'] = Disciplina.objects.order_by('-pk').filter(is_active=True)
+                    return context
+                else:
+                    if parametro == 'inativo':
+                        context['lista'] = Disciplina.objects.order_by('-pk').filter(is_active=False)
+                        return context
 
-        context['lista'] = Disciplina.objects.all()
+        context['lista'] = Disciplina.objects.order_by('-pk')
         return context
 
     def get_title(self, **kwargs):

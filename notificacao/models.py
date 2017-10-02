@@ -218,9 +218,9 @@ class Aluno(Pessoa):
 
 class Curso(Remetente):
     id_instituto = models.ForeignKey(Instituto)  # Field name made lowercase.
-    sigla = models.CharField("Sigla", max_length=4, blank=False, default='CCC')
+    sigla = models.CharField("Sigla", max_length=4, blank=False)
     qtd_modulos = models.IntegerField("Módulos", blank=False, default=8)
-    carga_horaria = models.IntegerField("Carga horária", blank=False, default=80)
+    carga_horaria = models.IntegerField("Carga horária", blank=False, default=3200)
 
     class Meta:
         verbose_name = 'Curso'
@@ -336,12 +336,12 @@ class Oferecimento(Remetente):
     week = models.IntegerField("Dia da semana", default=1, choices=WEEK)  # Field name made lowercase.
     time = models.IntegerField("Horário", default=1, choices=TIME)  # Field name made lowercase.
     period = models.IntegerField("Período", default=1, choices=PERIOD)  # Field name made lowercase.
-    qtd = models.IntegerField("Quantidade de aulas", default=1)
+    qtd = models.IntegerField("Quantidade de aulas", default=2)
     id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.
-    alunos = models.ManyToManyField(Aluno)
-    dataInicio = models.DateField("Data Início", help_text=_('dd/mm/yyyy'), default=timezone.now)
-
+    alunos = models.ManyToManyField(Aluno, blank=True, null=True)
+    # dataInicio = models.DateField("Data Início", help_text=_('dd/mm/yyyy'), default=timezone.now)
+    dataInicio = models.DateField("Data Início", default=timezone.now)
 
     class Meta:
         verbose_name = 'Oferecimento'

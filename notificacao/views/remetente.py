@@ -113,6 +113,15 @@ class OferecimentoView:
 
 
 class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
+    # def form_valid(self, form):
+    #     form.save(commit=False)
+    #     datainicio = form.cleaned_data['datainicio']
+    #
+    #     oferecimento = Oferecimento.objects.create(dataInicio=datainicio)
+    #     self.save()
+    #
+    #     return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
+
     def get_title(self, **kwargs):
         return 'Cadastro Oferecimento (Remetente)'
 
