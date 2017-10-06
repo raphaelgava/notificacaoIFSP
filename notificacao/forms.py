@@ -120,8 +120,6 @@ class OferecimentoForm(_RemetenteForm):
                                             queryset=Aluno.objects.filter(is_active=True), required=False)
     dataInicio = forms.CharField(label='Data Início')  # forms.DateInput.input_type = "date"
 
-    # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
-
     def __init__(self, *args, **kwargs):
         super(OferecimentoForm, self).__init__(*args, **kwargs)
         self.fields['dataInicio'].widget = TextInput(attrs={
@@ -132,7 +130,8 @@ class OferecimentoForm(_RemetenteForm):
     class Meta:
         model = Oferecimento
         fields = _RemetenteForm.Meta.fields + (
-        'ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'qtd', 'id_professor', 'id_disciplina', 'alunos')
+        'ano', 'semestre', 'week', 'time', 'dataInicio', 'qtd', 'id_professor', 'id_disciplina', 'alunos')
+        # 'ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'qtd', 'id_professor', 'id_disciplina', 'alunos')
 
 
 class CursoForm(_RemetenteForm):

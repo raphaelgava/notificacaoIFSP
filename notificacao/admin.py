@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from rest_framework.authtoken.admin import TokenAdmin
 
 from .models import Aluno
 from .models import Curso
@@ -13,9 +14,6 @@ from .models import SalaAlunos
 from .models import SalaProfessores
 from .models import Servidor
 from .models import TipoNotificacao
-
-
-from rest_framework.authtoken.admin import TokenAdmin
 
 TokenAdmin.raw_id_fields = ('user',)
 
@@ -75,8 +73,9 @@ class CursoAdmin(_RemetenteAdmin):
 
 class OferecimentoAdmin(_RemetenteAdmin):
     fieldsets = _RemetenteAdmin.fieldsets + (
-        (('Informações Oferecimento'), {'fields': ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina', 'alunos')}),
-
+        # (('Informações Oferecimento'), {'fields': ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina', 'alunos')}),
+        (('Informações Oferecimento'), {'fields': (
+            'ano', 'semestre', 'week', 'time', 'dataInicio', 'id_professor', 'id_disciplina', 'alunos')}),
     )
 
 

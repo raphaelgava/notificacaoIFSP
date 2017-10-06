@@ -124,7 +124,7 @@ class _RemetenteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Remetente
         abstract = True
-        fields = ('pk','descricao',)
+        fields = ('pk', 'descricao', 'is_active')
 
 
 class InstitutoSerializer(_RemetenteSerializer):
@@ -135,4 +135,6 @@ class InstitutoSerializer(_RemetenteSerializer):
 class OferecimentoSerializer(_RemetenteSerializer):
     class Meta:
         model = Oferecimento
-        fields = _RemetenteSerializer.Meta.fields + ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina')
+        fields = _RemetenteSerializer.Meta.fields + (
+            'ano', 'semestre', 'week', 'time', 'qtd', 'dataInicio', 'id_professor', 'professor', 'id_disciplina')
+        # fields = _RemetenteSerializer.Meta.fields + ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina')

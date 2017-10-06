@@ -1,5 +1,6 @@
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 
@@ -8,7 +9,7 @@ from notificacao.forms import InstitutoForm
 from notificacao.forms import OferecimentoForm
 from notificacao.forms import SalaAlunosForm
 from notificacao.forms import SalaProfessoresForm
-from notificacao.models import Curso
+from notificacao.models import Curso, Professor
 from notificacao.models import Instituto
 from notificacao.models import Oferecimento
 from notificacao.models import Remetente
@@ -113,20 +114,27 @@ class OferecimentoView:
 
 
 class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
-    # def form_valid(self, form):
-    #     form.save(commit=False)
-    #     datainicio = form.cleaned_data['datainicio']
-    #
-    #     oferecimento = Oferecimento.objects.create(dataInicio=datainicio)
-    #     self.save()
-    #
-    #     return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
+    def form_valid(self, form):
+        offer = form.save(commit=False)
+        prof = Professor.objects.get(pk=offer.id_professor)
+        offer.professor = prof.first_name + ' ' + prof.last_name
+        offer.save()
+
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
 
     def get_title(self, **kwargs):
         return 'Cadastro Oferecimento (Remetente)'
 
 
 class AtualizarOferecimento(OferecimentoView, AtualizarRemetente):
+    def form_valid(self, form):
+        offer = form.save(commit=False)
+        prof = Professor.objects.get(pk=offer.id_professor)
+        offer.professor = prof.first_name + ' ' + prof.last_name
+        offer.save()
+
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
+
     def get_title(self, **kwargs):
         return 'Atualizar Oferecimento (Remetente)'
 
