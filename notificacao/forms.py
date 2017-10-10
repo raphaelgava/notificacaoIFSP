@@ -13,10 +13,10 @@ from .models import Oferecimento
 from .models import Pessoa
 from .models import Professor
 from .models import Remetente
-from .models import SalaAlunos
 from .models import SalaProfessores
 from .models import Servidor
 from .models import TipoNotificacao
+from .models import Turma
 
 
 class LoginForm(forms.Form):
@@ -38,7 +38,7 @@ class LoginForm(forms.Form):
 class _PersonForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Senha')
     password_check = forms.CharField(widget=forms.PasswordInput(), max_length=10, label='Confirmar senha')
-    username = forms.CharField(disabled=True)
+    username = forms.CharField(disabled=True, required=False)
     datanascimento = forms.CharField(label='Data de nascimento')  # forms.DateInput.input_type = "date"
     # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
 
@@ -71,7 +71,7 @@ class _PersonForm(ModelForm):
 class AlunoForm(_PersonForm):
     class Meta:
         model = Aluno
-        fields = _PersonForm.Meta.fields + ('turma',)
+        fields = _PersonForm.Meta.fields + ('pkTurma',)
 
 
 class ServidorForm(_PersonForm):
@@ -144,14 +144,16 @@ class CursoForm(_RemetenteForm):
         fields = _RemetenteForm.Meta.fields + ('id_instituto', 'sigla', 'qtd_modulos', 'carga_horaria')
 
 
-class SalaAlunosForm(_RemetenteForm):
+class TurmaForm(_RemetenteForm):
     id_curso = forms.ModelChoiceField(queryset=Curso.objects.filter(is_active=True))
-    alunos = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                            queryset=Aluno.objects.filter(is_active=True))
+
+    # alunos = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+    #                                         queryset=Aluno.objects.filter(is_active=True))
 
     class Meta:
-        model = SalaAlunos
-        fields = _RemetenteForm.Meta.fields + ('id_curso', 'alunos')
+        model = Turma
+        fields = _RemetenteForm.Meta.fields + ('id_curso', 'sigla')
+        # fields = _RemetenteForm.Meta.fields + ('id_curso', 'alunos')
 
 
 
@@ -192,8 +194,8 @@ class DisciplinaForm(ModelForm):
     id_curso = forms.ModelChoiceField(queryset=Curso.objects.filter(is_active=True))
     class Meta:
         model = Disciplina
-        fields = ('descricao', 'id_curso', 'is_active'
-                  #           'sigla',
+        fields = ('descricao', 'id_curso', 'is_active',
+                  'sigla'
                   #            'id_curso'
                   )
 

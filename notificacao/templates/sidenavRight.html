@@ -15,8 +15,8 @@
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaOferecimentos' %}'">
         <a href="{% url 'listaOferecimentos' %}">Cadastro Oferecimento</a>
     </div>
-<div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaAlunos' %}'">
-    <a href="{% url 'listaSalaAlunos' %}">Cadastro Sala Alunos</a>
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaTurma' %}'">
+    <a href="{% url 'listaTurma' %}">Cadastro Turma</a>
 </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaProfessores' %}'">
     <a href="{% url 'listaSalaProfessores' %}">Cadastro Sala Professores</a>
@@ -34,10 +34,10 @@
     {% if user|has_group:"Employee" %}
 
     {% else %}
-    {% if user|has_group:"Student" %}
-<div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaAlunos' %}'">
-    <a href="{% url 'listaSalaAlunos' %}">Cadastro Sala Alunos</a>
-</div>
+{% if user|has_group:"Student" %}<!--
+<div class="well well-sm text-center" onclick="location.href='{% url 'listaTurma' %}'">
+    <a href="{% url 'listaTurma' %}">Cadastro Turma</a>
+</div>-->
     {% else %}
     {% endif %}
     {% endif %}

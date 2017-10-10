@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from notificacao.forms import AlunoForm
 from notificacao.forms import ProfessorForm
 from notificacao.forms import ServidorForm
-from notificacao.models import Aluno, Usuario
+from notificacao.models import Aluno, Usuario, Turma, Oferecimento
 from notificacao.models import Professor
 from notificacao.models import Servidor
 from notificacao.stuff.constants import GroupConst, HTML, Paginas, Mensagens, Urls, PersonConst
@@ -65,14 +65,17 @@ class CadastrarAluno(AlunoView, CadastrarUsuario):
             sexo = form.cleaned_data['sexo']
             datanascimento = form.cleaned_data['datanascimento']
             instituto = form.cleaned_data['id_instituto']
-            turma = form.cleaned_data['turma'].upper()
+            pkTurma = form.cleaned_data['pkTurma']
+            objTurma = Turma.objects.get(pk=pkTurma)
+            turma = objTurma.sigla
 
             user = Usuario.objects.latest('pk')
             username = '{0:07d}'.format(user.pk + 1)
 
             aluno = Aluno.objects.create(username=username, password=password, email=email, first_name=first_name,
-                                         last_name=last_name,
-                                         sexo=sexo, datanascimento=datanascimento, id_instituto=instituto, turma=turma)
+                                         last_name=last_name, turma=turma,
+                                         sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
+                                         pkTurma=pkTurma)
 
             CreatePerson.create_student(aluno, password)
 
@@ -98,7 +101,9 @@ class AtualizarAluno(AlunoView, AtualizarUsuario):
         sexo = form.cleaned_data['sexo']
         datanascimento = form.cleaned_data['datanascimento']
         instituto = form.cleaned_data['id_instituto']
-        turma = form.cleaned_data['turma'].upper()
+        pkTurma = form.cleaned_data['pkTurma']
+        objTurma = Turma.objects.get(pk=pkTurma)
+        turma = objTurma.sigla
 
         aluno = Aluno.objects.filter(username=username).first()
         if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
@@ -110,6 +115,7 @@ class AtualizarAluno(AlunoView, AtualizarUsuario):
                 aluno.datanascimento = datanascimento
                 aluno.id_instituto = instituto
                 aluno.turma = turma
+                aluno.pkTurma = pkTurma
 
                 CreatePerson.create_student(aluno, password)
                 return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_ALUNO))
@@ -386,6 +392,12 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
                 professor.formacao = formacao
 
                 CreatePerson.create_employee(professor, password, True)
+                oferecimento = Oferecimento.objects.filter(id_professor=professor.pk)
+
+                for offer in oferecimento:
+                    offer.professor = professor.first_name + " " + professor.last_name
+                    offer.save()
+
                 return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_PROFESSOR))
             else:
                 messages.error(self.request, Mensagens.USUARIO_INVALIDO, extra_tags='wrongUser')

@@ -7,14 +7,14 @@ from django.views.generic.edit import CreateView, UpdateView
 from notificacao.forms import CursoForm
 from notificacao.forms import InstitutoForm
 from notificacao.forms import OferecimentoForm
-from notificacao.forms import SalaAlunosForm
 from notificacao.forms import SalaProfessoresForm
-from notificacao.models import Curso, Professor
+from notificacao.forms import TurmaForm
+from notificacao.models import Curso, Professor, Disciplina, Aluno
 from notificacao.models import Instituto
 from notificacao.models import Oferecimento
 from notificacao.models import Remetente
-from notificacao.models import SalaAlunos
 from notificacao.models import SalaProfessores
+from notificacao.models import Turma
 from notificacao.stuff.constants import GroupConst, HTML, Urls, Paginas
 from .deleteAdd import ApagarItem, AddItem
 
@@ -115,9 +115,12 @@ class OferecimentoView:
 
 class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
     def form_valid(self, form):
-        offer = form.save(commit=False)
+        offer = form.save(commit=True)
         prof = Professor.objects.get(pk=offer.id_professor)
         offer.professor = prof.first_name + ' ' + prof.last_name
+        disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
+        offer.sigla = disciplina.sigla
+        offer.id_curso = disciplina.id_curso.pk
         offer.save()
 
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
@@ -128,9 +131,12 @@ class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
 
 class AtualizarOferecimento(OferecimentoView, AtualizarRemetente):
     def form_valid(self, form):
-        offer = form.save(commit=False)
+        offer = form.save(commit=True)
         prof = Professor.objects.get(pk=offer.id_professor)
         offer.professor = prof.first_name + ' ' + prof.last_name
+        disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
+        offer.sigla = disciplina.sigla
+        offer.id_curso = disciplina.id_curso.pk
         offer.save()
 
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
@@ -209,47 +215,58 @@ class ListarCursos(CursoView, ListarRemetentes):
         return Urls.ATUALIZAR_CURSO
 
 
-class SalaAlunosView:
-    model = SalaAlunos
-    form_class = SalaAlunosForm
-    success_url = reverse_lazy(Urls.LISTAR_SALA_ALUNOS)
+class TurmaView:
+    model = Turma
+    form_class = TurmaForm
+    success_url = reverse_lazy(Urls.LISTAR_TURMA)
 
 
-class CadastrarSalaAlunos(SalaAlunosView, CadastrarRemetente):
+class CadastrarTurma(TurmaView, CadastrarRemetente):
     def get_title(self, **kwargs):
-        return 'Cadastro Sala Alunos (Remetente)'
+        return 'Cadastro Turma (Remetente)'
 
 
-class AtualizarSalaAlunos(SalaAlunosView, AtualizarRemetente):
+class AtualizarTurma(TurmaView, AtualizarRemetente):
+    def form_valid(self, form):
+        turma = form.save(commit=True)
+
+        alunos = Aluno.objects.filter(pkTurma=turma.pk)
+
+        for a in alunos:
+            a.turma = turma.sigla
+            a.save()
+
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_TURMA))
+
     def get_title(self, **kwargs):
-        return 'Atualizar Sala Alunos (Remetente)'
+        return 'Atualizar Turma (Remetente)'
 
 
-class ApagarSalaAlunos(SalaAlunosView, ApagarItem):
+class ApagarTurma(TurmaView, ApagarItem):
     def get_success_url(self):
-        return reverse_lazy(Urls.LISTAR_SALA_ALUNOS)
+        return reverse_lazy(Urls.LISTAR_TURMA)
 
 
-class AddSalaAlunos(SalaAlunosView, AddItem):
+class AddTurma(TurmaView, AddItem):
     def get_success_url(self):
-        return reverse_lazy(Urls.LISTAR_SALA_ALUNOS)
+        return reverse_lazy(Urls.LISTAR_TURMA)
 
 
-class ListarSalaAlunos(SalaAlunosView, ListarRemetentes):
+class ListarTurma(TurmaView, ListarRemetentes):
     def get_title(self, **kwargs):
-        return 'Cadastro Sala Alunos (Remetente)'
+        return 'Cadastro Turma (Remetente)'
 
     def get_link_insert(self, **kwargs):
-        return Urls.CADASTRAR_SALA_ALUNOS
+        return Urls.CADASTRAR_TURMA
 
     def get_link_add(self, **kwargs):
-        return Urls.ADD_SALA_ALUNOS
+        return Urls.ADD_TURMA
 
     def get_link_delete(self, **kwargs):
-        return Urls.DELETAR_SALA_ALUNOS
+        return Urls.DELETAR_TURMA
 
     def get_link_modify(self, **kwargs):
-        return Urls.ATUALIZAR_SALA_ALUNOS
+        return Urls.ATUALIZAR_TURMA
 
 
 class SalaProfessoresView:

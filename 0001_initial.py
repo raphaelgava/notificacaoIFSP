@@ -3,13 +3,13 @@
 from __future__ import unicode_literals
 
 import colorfield.fields
-from django.conf import settings
 import django.contrib.auth.models
 import django.core.validators
-from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
 import geoposition.fields
+from django.conf import settings
+from django.db import migrations, models
 
 
 def apply_migration(apps, schema_editor):
@@ -172,14 +172,14 @@ class Migration(migrations.Migration):
             bases=('notificacao.remetente',),
         ),
         migrations.CreateModel(
-            name='SalaAlunos',
+            name='Turma',
             fields=[
                 ('remetente_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='notificacao.Remetente')),
                 ('alunos', models.ManyToManyField(to='notificacao.Aluno')),
                 ('id_curso', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='notificacao.Curso')),
             ],
             options={
-                'verbose_name': 'Sala Alunos',
+                'verbose_name': 'Turma',
                 'verbose_name_plural': 'Salas Alunos',
             },
             bases=('notificacao.remetente',),

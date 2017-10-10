@@ -2,7 +2,7 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 
-from notificacao.models import Aluno
+from notificacao.models import Aluno, Turma
 from notificacao.models import Instituto
 from notificacao.models import Notificacao
 from notificacao.models import Oferecimento
@@ -39,13 +39,26 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
         #     oferecimentos = Oferecimento.objects.filter(id_professor__username = user.username)
         # else:
         #     oferecimentos = ''
-
-        ano = self.request.GET.get('ano')
-        semestre = self.request.GET.get('semestre')
-        if ano is not None and semestre is not None:
-            oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
+        oferecimentos = None
+        if self.request.method == "GET":
+            ano = self.request.GET.get('ano')
+            semestre = self.request.GET.get('semestre')
+            pkTurma = self.request.GET.get('turma')
+            if ano is not None and semestre is not None:
+                if (pkTurma is None):
+                    oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
+                else:
+                    turma = Turma.objects.get(pk=pkTurma)
+                    oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, id_curso=turma.id_curso.pk)
+            else:
+                pk = self.request.GET.get('pk')
+                if (pkTurma is not None):
+                    oferecimentos = Oferecimento.objects.filter(pk=pk)
+                else:
+                    oferecimentos = ''
         else:
-            oferecimentos = ''
+            if self.request.method == "PUT":
+                oferecimentos = Oferecimento.objects.all()
 
         return oferecimentos
 

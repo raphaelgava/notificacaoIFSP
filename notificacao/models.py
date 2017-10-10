@@ -207,17 +207,6 @@ class Professor(Servidor):
         verbose_name = 'Professor'
         verbose_name_plural = 'Professores'
 
-
-class Aluno(Pessoa):
-    turma = models.CharField(max_length=10)  # Field name made lowercase.
-
-    # turma = models.ForeignKey(SalaAlunos, verbose_name="Turma")  # Field name made lowercase.
-
-    class Meta:
-        verbose_name = 'Aluno'
-        verbose_name_plural = 'Alunos'
-
-
 class Curso(Remetente):
     id_instituto = models.ForeignKey(Instituto)  # Field name made lowercase.
     sigla = models.CharField("Sigla", max_length=4, blank=False)
@@ -227,6 +216,30 @@ class Curso(Remetente):
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
+
+
+class Turma(Remetente):
+    id_curso = models.ForeignKey(Curso, blank=True, null=True)  # Field name made lowercase.
+    # alunos = models.ManyToManyField(Aluno, blank=True, null=True)
+    sigla = models.CharField(max_length=10)  # Field name made lowercase.
+
+    class Meta:
+        verbose_name = 'Turma'
+        verbose_name_plural = 'Turma'
+
+
+class Aluno(Pessoa):
+    turma = models.CharField(max_length=10)  # Field name made lowercase.
+    pkTurma = models.ForeignKey(Turma, verbose_name="Turma")  # Field name made lowercase.
+
+    class Meta:
+        verbose_name = 'Aluno'
+        verbose_name_plural = 'Alunos'
+
+    def __str__(self):
+        # turma = Turma.objects.get(pk=self.pkTurma)
+
+        return '{} {} - {}'.format(self.username, self.first_name, self.turma)
 
 
 class Disciplina(models.Model):
@@ -349,8 +362,11 @@ class Oferecimento(Remetente):
     qtd = models.IntegerField("Quantidade de aulas", default=2, choices=QTD)
     id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
     professor = models.CharField("Professor", max_length=61, default="Professor teste")
+    sigla = models.CharField("Sigla", max_length=4, blank=False, default='DDD')  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.
+    # alunos = models.ManyToManyField(Aluno, blank=True, null=True, through='OferecimentoAlunos')
     alunos = models.ManyToManyField(Aluno, blank=True, null=True)
+    id_curso = models.IntegerField("Curso", default=0)
     # dataInicio = models.DateField("Data Início", help_text=_('dd/mm/yyyy'), default=timezone.now)
     dataInicio = models.DateField("Data Início", default=timezone.now)
 
@@ -359,17 +375,14 @@ class Oferecimento(Remetente):
         verbose_name_plural = 'Oferecimentos'
 
 
-# todo: deicidir se SalaAlunos será ou não Turma!!!
-class SalaAlunos(Remetente):
-    id_curso = models.ForeignKey(Curso, blank=True, null=True)  # Field name made lowercase.
-    alunos = models.ManyToManyField(Aluno, blank=True, null=True)
-
-    # turma = models.CharField(max_length=10)  # Field name made lowercase.
-
-    class Meta:
-        verbose_name = 'Turma'
-        verbose_name_plural = 'Turma'
-
+# class OferecimentoAlunos(models.Model):
+#     id_aluno = models.ForeignKey(Aluno, blank=True, null=True)  # Field name made lowercase.
+#     id_oferecimento = models.ForeignKey(Oferecimento, blank=True, null=True)  # Field name made lowercase.
+#
+#     class Meta:
+#         auto_created = True
+#         verbose_name = 'Oferecimento Alunos'
+#         verbose_name_plural = 'Oferecimento Alunos'
 
 class SalaProfessores(Remetente):
     id_curso = models.ForeignKey(Curso, blank=True, null=True)  # Field name made lowercase.

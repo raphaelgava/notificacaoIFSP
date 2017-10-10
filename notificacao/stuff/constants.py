@@ -54,11 +54,11 @@ class Urls:
     DELETAR_CURSO = 'cadastroDeleteCurso'
     ADD_CURSO = 'cadastroAddCurso'
 
-    LISTAR_SALA_ALUNOS = 'listaSalaAlunos'
-    CADASTRAR_SALA_ALUNOS = 'cadastroSalaAluno'
-    ATUALIZAR_SALA_ALUNOS = 'cadastroUpdateSalaAluno'
-    DELETAR_SALA_ALUNOS = 'cadastroDeleteSalaAluno'
-    ADD_SALA_ALUNOS = 'cadastroAddSalaAluno'
+    LISTAR_TURMA = 'listaTurma'
+    CADASTRAR_TURMA = 'cadastroTurma'
+    ATUALIZAR_TURMA = 'cadastroUpdateTurma'
+    DELETAR_TURMA = 'cadastroDeleteTurma'
+    ADD_TURMA = 'cadastroAddTurma'
 
     LISTAR_SALA_PROFESSORES = 'listaSalaProfessores'
     CADASTRAR_SALA_PROFESSOR = 'cadastroSalaProfessor'

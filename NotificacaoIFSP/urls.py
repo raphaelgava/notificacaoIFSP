@@ -45,10 +45,10 @@ from notificacao.views.remetente import CadastrarInstituto, AtualizarInstituto, 
     AddInstituto
 from notificacao.views.remetente import CadastrarOferecimento, AtualizarOferecimento, ListarOferecimentos, \
     ApagarOferecimento, AddOferecimento
-from notificacao.views.remetente import CadastrarSalaAlunos, AtualizarSalaAlunos, ListarSalaAlunos, \
-    ApagarSalaAlunos, AddSalaAlunos
 from notificacao.views.remetente import CadastrarSalaProfessores, AtualizarSalaProfessores, ListarSalaProfessores, \
     ApagarSalaProfessores, AddSalaProfessores
+from notificacao.views.remetente import CadastrarTurma, AtualizarTurma, ListarTurma, \
+    ApagarTurma, AddTurma
 from notificacao.views.usuario import CadastrarAluno, AtualizarAluno, ApagarAluno, ListarAlunos, AddAluno
 from notificacao.views.usuario import CadastrarProfessor, AtualizarProfessor, ApagarProfessor, ListarProfessores, \
     AddProfessor
@@ -111,12 +111,12 @@ urlpatterns = [
                 url(r'delete_curso/(?P<pk>\d+)/$', ApagarCurso.as_view(), name=Urls.DELETAR_CURSO),
                 url(r'add_curso/(?P<pk>\d+)/$', AddCurso.as_view(), name=Urls.ADD_CURSO),
 
-                url(r'lista_sala_alunos/$', ListarSalaAlunos.as_view(), name=Urls.LISTAR_SALA_ALUNOS),
-                url(r'cadastro_sala_alunos/$', CadastrarSalaAlunos.as_view(), name=Urls.CADASTRAR_SALA_ALUNOS),
-                url(r'cadastro_sala_alunos/(?P<pk>\d+)/$', AtualizarSalaAlunos.as_view(),
-                      name=Urls.ATUALIZAR_SALA_ALUNOS),
-                url(r'delete_sala_alunos/(?P<pk>\d+)/$', ApagarSalaAlunos.as_view(), name=Urls.DELETAR_SALA_ALUNOS),
-                url(r'add_sala_alunos/(?P<pk>\d+)/$', AddSalaAlunos.as_view(), name=Urls.ADD_SALA_ALUNOS),
+                  url(r'lista_turma/$', ListarTurma.as_view(), name=Urls.LISTAR_TURMA),
+                  url(r'cadastro_turma/$', CadastrarTurma.as_view(), name=Urls.CADASTRAR_TURMA),
+                  url(r'cadastro_turma/(?P<pk>\d+)/$', AtualizarTurma.as_view(),
+                      name=Urls.ATUALIZAR_TURMA),
+                  url(r'delete_turma/(?P<pk>\d+)/$', ApagarTurma.as_view(), name=Urls.DELETAR_TURMA),
+                  url(r'add_turma/(?P<pk>\d+)/$', AddTurma.as_view(), name=Urls.ADD_TURMA),
 
                 url(r'lista_sala_professores/$', ListarSalaProfessores.as_view(), name=Urls.LISTAR_SALA_PROFESSORES),
                 url(r'cadastro_sala_professores/$', CadastrarSalaProfessores.as_view(),

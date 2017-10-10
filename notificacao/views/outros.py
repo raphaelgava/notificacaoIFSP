@@ -10,7 +10,7 @@ from notificacao.forms import DisciplinaForm
 from notificacao.forms import LocalForm
 from notificacao.forms import NotificacaoForm
 from notificacao.forms import TipoNotificacaoForm
-from notificacao.models import Disciplina
+from notificacao.models import Disciplina, Oferecimento
 from notificacao.models import Local
 from notificacao.models import Notificacao
 from notificacao.models import Remetente
@@ -142,6 +142,16 @@ class CadastrarDisciplina(DisciplinaView, CreateView):
 
 class AtualizarDisciplina(DisciplinaView, UpdateView):
     template_name = HTML.CADASTRO
+
+    def form_valid(self, form):
+        disc = form.save(commit=True)
+        oferecimentos = Oferecimento.objects.filter(id_disciplina=disc.pk)
+
+        for offer in oferecimentos:
+            offer.sigla = disc.sigla
+            offer.save()
+
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_DISCIPLINA))
 
     def get_title(self, **kwargs):
         return 'Atualizar Disciplina'

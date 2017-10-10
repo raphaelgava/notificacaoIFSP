@@ -25,7 +25,7 @@ class _PessoaSerializer(serializers.ModelSerializer):
 class AlunoSerializer(_PessoaSerializer):
     class Meta:
         model = Aluno
-        fields = _PessoaSerializer.Meta.fields + ('turma',)
+        fields = _PessoaSerializer.Meta.fields + ('turma', 'pkTurma')
 
     def create(self, validated_data):
         aluno = serializers.ModelSerializer.create(self, validated_data)
@@ -136,5 +136,6 @@ class OferecimentoSerializer(_RemetenteSerializer):
     class Meta:
         model = Oferecimento
         fields = _RemetenteSerializer.Meta.fields + (
-            'ano', 'semestre', 'week', 'time', 'qtd', 'dataInicio', 'id_professor', 'professor', 'id_disciplina')
+            'ano', 'semestre', 'week', 'time', 'qtd', 'dataInicio', 'id_professor', 'professor', 'id_disciplina',
+            'id_curso', 'sigla', 'alunos')
         # fields = _RemetenteSerializer.Meta.fields + ('ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'id_professor', 'id_disciplina')
