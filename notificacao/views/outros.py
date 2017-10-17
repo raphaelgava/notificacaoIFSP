@@ -38,8 +38,6 @@ class CadastrarNotificacao(NotificacaoView, CreateView):
 
     def form_valid(self, form):
         form.save(commit=False)
-
-        #todo: fazer verificação pela pk!
         #servidor = Servidor.objects.get(username=self.request.user.username)
         servidor = Servidor.objects.get(pk=self.request.user.pk)
 

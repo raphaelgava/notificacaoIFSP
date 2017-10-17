@@ -101,9 +101,17 @@ class _RemetenteForm(ModelForm):
 #     input_type = 'date'
 
 class InstitutoForm(_RemetenteForm):
-    datafundacao = forms.DateInput.input_type = "date"
+    # datafundacao = forms.DateInput.input_type = "date"
+    datafundacao = forms.CharField(label='Data de Fundação')  # forms.DateInput.input_type = "date"
 
     # datafundacao = models.DateField("Data de fundação", default=datetime.now())  # Field name made lowercase.
+
+    def __init__(self, *args, **kwargs):
+        super(InstitutoForm, self).__init__(*args, **kwargs)
+        self.fields['datafundacao'].widget = TextInput(attrs={
+            'class': 'datas',
+            'placeholder': 'Data de Fundação'
+        })
 
     class Meta:
         model = Instituto
@@ -185,9 +193,18 @@ class NotificacaoForm(ModelForm):
     remetente = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
                                                queryset=Remetente.objects.filter(is_active=True))
 
+    datahora = forms.CharField(label='Data Acontecimento')
+
+    def __init__(self, *args, **kwargs):
+        super(NotificacaoForm, self).__init__(*args, **kwargs)
+        self.fields['datahora'].widget = TextInput(attrs={
+            'class': 'datas',
+            'placeholder': 'Data Acontecimento'
+        })
+
     class Meta:
         model = Notificacao
-        fields = ('id_tipo', 'id_local', 'remetente', 'titulo', 'descricao',)
+        fields = ('id_tipo', 'id_local', 'titulo', 'descricao', 'datahora', 'remetente',)
 
 
 class DisciplinaForm(ModelForm):

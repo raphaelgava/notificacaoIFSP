@@ -69,11 +69,21 @@ class InstitutoView:
 
 # todo: data cadastro não pode ser igual ou maior que hoje!!! (não tem porque cadastrar um instituto/aniversario(usuario) amanha!!!)
 class CadastrarInstituto(InstitutoView, CadastrarRemetente):
+    def form_valid(self, form):
+        inst = form.save(commit=True)
+        inst.tipo = "Instituto"
+        inst.save()
+
     def get_title(self, **kwargs):
         return 'Cadastro Instituto (Remetente)'
 
 
 class AtualizarInstituto(InstitutoView, AtualizarRemetente):
+    def form_valid(self, form):
+        inst = form.save(commit=True)
+        inst.tipo = "Instituto"
+        inst.save()
+
     def get_title(self, **kwargs):
         return 'Atualizar Instituto (Remetente)'
 
@@ -116,6 +126,7 @@ class OferecimentoView:
 class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
     def form_valid(self, form):
         offer = form.save(commit=True)
+        offer.tipo = "Oferecimento"
         prof = Professor.objects.get(pk=offer.id_professor)
         offer.professor = prof.first_name + ' ' + prof.last_name
         disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
@@ -132,6 +143,7 @@ class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
 class AtualizarOferecimento(OferecimentoView, AtualizarRemetente):
     def form_valid(self, form):
         offer = form.save(commit=True)
+        offer.tipo = "Oferecimento"
         prof = Professor.objects.get(pk=offer.id_professor)
         offer.professor = prof.first_name + ' ' + prof.last_name
         disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
@@ -179,11 +191,21 @@ class CursoView:
 
 
 class CadastrarCurso(CursoView, CadastrarRemetente):
+    def form_valid(self, form):
+        cur = form.save(commit=True)
+        cur.tipo = "Curso"
+        cur.save()
+
     def get_title(self, **kwargs):
         return 'Cadastro Curso (Remetente)'
 
 
 class AtualizarCurso(CursoView, AtualizarRemetente):
+    def form_valid(self, form):
+        cur = form.save(commit=True)
+        cur.tipo = "Curso"
+        cur.save()
+
     def get_title(self, **kwargs):
         return 'Atualizar Curso (Remetente)'
 
@@ -222,6 +244,11 @@ class TurmaView:
 
 
 class CadastrarTurma(TurmaView, CadastrarRemetente):
+    def form_valid(self, form):
+        tur = form.save(commit=True)
+        tur.tipo = "Turma"
+        tur.save()
+
     def get_title(self, **kwargs):
         return 'Cadastro Turma (Remetente)'
 
@@ -229,7 +256,7 @@ class CadastrarTurma(TurmaView, CadastrarRemetente):
 class AtualizarTurma(TurmaView, AtualizarRemetente):
     def form_valid(self, form):
         turma = form.save(commit=True)
-
+        turma.tipo = "Turma"
         alunos = Aluno.objects.filter(pkTurma=turma.pk)
 
         for a in alunos:
@@ -278,11 +305,21 @@ class SalaProfessoresView:
 
 
 class CadastrarSalaProfessores(SalaProfessoresView, CadastrarRemetente):
+    def form_valid(self, form):
+        sala = form.save(commit=True)
+        sala.tipo = "Sala Professores"
+        sala.save()
+
     def get_title(self, **kwargs):
         return 'Cadastro Sala Professores (Remetente)'
 
 
 class AtualizarSalaProfessores(SalaProfessoresView, AtualizarRemetente):
+    def form_valid(self, form):
+        sala = form.save(commit=True)
+        sala.tipo = "Sala Professores"
+        sala.save()
+
     def get_title(self, **kwargs):
         return 'Atualizar Sala Professores (Remetente)'
 

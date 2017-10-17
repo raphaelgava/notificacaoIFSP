@@ -44,6 +44,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Remetente(PolymorphicModel):
     descricao = models.CharField("Descrição", max_length=50)  # Field name made lowercase.
+    tipo = models.CharField("Tipo", max_length=50, default="Tipo")
     is_active = models.BooleanField(_('active'), default=True)
 
     # tipo_remetente = models.CharField("Tipo Remetente", max_length=20)
@@ -66,8 +67,10 @@ class Remetente(PolymorphicModel):
 
 
 class Instituto(Remetente):
-    datafundacao = models.DateField("Data de fundação", help_text=_('dd/mm/yyyy'), blank=True,
-                                    null=True)  # Field name made lowercase.
+    datafundacao = models.DateField("Data Fundação", default=timezone.now)
+
+    # datafundacao = models.DateField("Data de fundação", help_text=_('dd/mm/yyyy'), blank=True, null=True)  # Field name made lowercase.
+    # objects = Remetente()
 
     class Meta:
         verbose_name = 'Instituto'
@@ -296,7 +299,8 @@ class TipoNotificacao(models.Model):
 # todo: verificar se o tempo da notificaçao esta em 24h
 # todo: esse dia e hora é o fim da notificação o dia do evento!!!
 class Notificacao(models.Model):
-    datahora = models.DateTimeField("Data notificação", auto_now_add=True)  # Field name made lowercase.
+    # datahora = models.DateTimeField("Data notificação", auto_now_add=True)  # Field name made lowercase.
+    datahora = models.DateField("Data Acontecimento", default=timezone.now)
     id_tipo = models.ForeignKey(TipoNotificacao, verbose_name="Tipo notificação")  # Field name made lowercase.
     id_local = models.ForeignKey(Local, verbose_name="Local", blank=True, null=True)  # Field name made lowercase.
     descricao = models.CharField("Descrição", max_length=255)  # Field name made lowercase.

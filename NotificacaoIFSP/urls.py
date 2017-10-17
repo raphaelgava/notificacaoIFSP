@@ -25,7 +25,7 @@ from django.contrib import admin
 from rest_framework import routers
 
 from notificacao.stuff.constants import Urls
-from notificacao.views.json import AlunoViewSet
+from notificacao.views.json import AlunoViewSet, RemetenteViewSet, LocalViewSet
 from notificacao.views.json import InstitutoViewSet
 from notificacao.views.json import NotificacaoViewSet
 from notificacao.views.json import OferecimentoViewSet
@@ -64,8 +64,10 @@ router.register(r'servidor_json', ServidorViewSet, base_name='servidor')
 router.register(r'professor_json', ProfessorViewSet, base_name='professor')
 router.register(r'notificacao_json', NotificacaoViewSet, base_name='notificacao')
 router.register(r'tipo_notificacao_json', TipoNotificacaoViewSet, base_name='tiponotificacao')
+router.register(r'local_json', LocalViewSet, base_name='local')
 router.register(r'instituto_json', InstitutoViewSet, base_name='instituto')
 router.register(r'oferecimento_json', OferecimentoViewSet, base_name='oferecimento')
+router.register(r'remetente_json', RemetenteViewSet, base_name='remetente')
 
 
 urlpatterns = [

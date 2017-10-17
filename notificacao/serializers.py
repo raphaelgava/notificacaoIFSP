@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Aluno
+from .models import Aluno, Local
 from .models import Instituto
 from .models import Notificacao
 from .models import Oferecimento
@@ -120,11 +120,17 @@ class TipoNotificacaoSerializer(serializers.ModelSerializer):
         fields = ('pk','descricao', 'cor',)
 
 
+class LocalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Local
+        fields = ('pk', 'descricao', 'position',)
+
+
 class _RemetenteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Remetente
-        abstract = True
-        fields = ('pk', 'descricao', 'is_active')
+        # abstract = True
+        fields = ('pk', 'descricao', 'is_active', 'tipo')
 
 
 class InstitutoSerializer(_RemetenteSerializer):
