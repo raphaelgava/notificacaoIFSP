@@ -5,7 +5,7 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 
-from notificacao.models import Aluno, Turma, Remetente, Local
+from notificacao.models import Aluno, Turma, Remetente, Local, SalaProfessores
 from notificacao.models import Instituto
 from notificacao.models import Notificacao
 from notificacao.models import Oferecimento
@@ -111,43 +111,103 @@ class NotificacaoViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
-        notificacoes = Notificacao.objects.filter(datahora__gte=datetime.today())
+        notify = set()  # resultado
+        hoje = datetime.today()
+        notificacoes = Notificacao.objects.filter(datahora__gte=hoje)
         if self.request.method == "GET":
             if notificacoes is not None:
                 id = self.request.GET.get('pk')
                 user = self.request.GET.get('user')
                 if id is not None and user is not None:
+                    id = int(id)
+
+                    # RAISING INSTITUTO - EVERYBORY
                     instituto = Instituto.objects.filter(is_active=True)
+                    for noti in notificacoes:
+                        remover = False;
+                        for remet in noti.remetente.all():
+                            for inst in instituto:
+                                if inst.pk == remet.pk:
+                                    notify.add(noti)
+                                    remover = True;
+                                    break;
+                            if remover == True:
+                                break;
+                        if remover == True:
+                            notificacoes = notificacoes.exclude(pk=noti.pk)
 
-                    if (user == '1'):  # ENUM_STUDENT
-                        pessoa = Aluno.objects.filter(id_instituto=instituto.get_pk_val, id=id)
-                    elif (user == '2'):  # ENUM_EMPLOYEE
-                        pessoa = Servidor.objects.filter(id_instituto=instituto.get_pk_val, id=id)
-                    elif (user == '3'):  # ENUM_PROFESSOR
-                        pessoa = Professor.objects.filter(id_instituto=instituto._get_pk_val, id=id)
+                    # RAISING OFERECIMENTO - ALUNO AND PROFESSOR
+                    if ((user == '1') or (user == '3')):
+                        semestre = 1
+                        if (hoje.month > 6):
+                            semestre = 2
 
-                    if (pessoa is not None):
-                        notificacoes = notificacoes.exclude(remetete__in=pessoa.id)
-                        # for noti in notificacoes:
-                        #     for remet in noti.remetente:
-                        #         return Notificacao.objects.all()
-                        # if (user == 1): #ENUM_STUDENT
-                        #     notificacoes = notificacoes.exclude(param=your_param)
-                        # elif (user == 2): #ENUM_EMPLOYEE
-                        # elif (user == 3): #ENUM_PROFESSOR
-                        #     if (pkTurma is None):
-                        #         oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
-                        #     else:
-                        #         turma = Turma.objects.get(pk=pkTurma)
-                        #         oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, id_curso=turma.id_curso.pk)
-                        # else:
-                        #     pk = self.request.GET.get('pk')
-                        #     if (pkTurma is not None):
-                        #         oferecimentos = Oferecimento.objects.filter(pk=pk)
-                        #     else:
-                        #         oferecimentos = ''
+                        oferecimentos = Oferecimento.objects.filter(is_active=True, ano=hoje.year, semestre=semestre)
 
-        return notificacoes
+                        for noti in notificacoes:
+                            remover = False;
+                            for remet in noti.remetente.all():
+                                for offer in oferecimentos:
+                                    if (remet.pk == offer.pk):
+                                        if (user == '1'):
+                                            for al in offer.alunos.all():
+                                                if al.pk == id:
+                                                    notify.add(noti)
+                                                    remover = True;
+                                                    break;
+                                        else:
+                                            if (offer.id_professor_id == id):
+                                                notify.add(noti)
+                                                remover = True;
+                                                break;
+                                    if remover == True:
+                                        break;
+                                if remover == True:
+                                    break;
+
+                            if remover == True:
+                                notificacoes = notificacoes.exclude(pk=noti.pk)
+
+                    if (user == '1'):
+                        # RAISING TRUMA/CURS0 - ALUNO
+                        pessoa = Aluno.objects.filter(id=id).first()
+                        for noti in notificacoes:
+                            remover = False;
+                            for remet in noti.remetente.all():
+                                if pessoa.pkTurma_id == remet.pk:
+                                    notify.add(noti)
+                                    remover = True;
+                                    break;
+                                else:
+                                    turma = Turma.objects.filter(id=pessoa.pkTurma_id).first()
+                                    if turma is not None:
+                                        if turma.id_curso_id == remet.pk:
+                                            notify.add(noti)
+                                            remover = True;
+                                            break;
+
+                            if remover == True:
+                                notificacoes = notificacoes.exclude(pk=noti.pk)
+                    elif (user == '3'):
+                        # RAISING SALA - PROFESSOR
+                        salas = SalaProfessores.objects.filter(is_active=True)
+                        for noti in notificacoes:
+                            remover = False;
+                            for remet in noti.remetente.all():
+                                for sala in salas:
+                                    if (remet.pk == sala.pk):
+                                        for pro in sala.professores.all():
+                                            if pro.pk == id:
+                                                notify.add(noti)
+                                                remover = True;
+                                                break;
+                                    if remover == True:
+                                        break;
+                            if remover == True:
+                                notificacoes = notificacoes.exclude(pk=noti.pk)
+
+        return notify
+        #return notificacoes
         # return Notificacao.objects.all()
 
 

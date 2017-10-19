@@ -63,7 +63,7 @@ class Remetente(PolymorphicModel):
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
-        return '{}'.format(self.descricao)
+        return '{} - {}'.format(self.tipo, self.descricao)
 
 
 class Instituto(Remetente):
@@ -179,7 +179,7 @@ class Pessoa(Usuario):
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
-        return '{} {}'.format(self.username, self.first_name)
+        return '{} - {} {}'.format(self.username, self.first_name, self.last_name)
 
 
 # todo: procurar ppc do curso para tirar os dados

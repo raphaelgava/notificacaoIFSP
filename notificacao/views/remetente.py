@@ -73,6 +73,7 @@ class CadastrarInstituto(InstitutoView, CadastrarRemetente):
         inst = form.save(commit=True)
         inst.tipo = "Instituto"
         inst.save()
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_INSTITUTO))
 
     def get_title(self, **kwargs):
         return 'Cadastro Instituto (Remetente)'
@@ -83,6 +84,7 @@ class AtualizarInstituto(InstitutoView, AtualizarRemetente):
         inst = form.save(commit=True)
         inst.tipo = "Instituto"
         inst.save()
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_INSTITUTO))
 
     def get_title(self, **kwargs):
         return 'Atualizar Instituto (Remetente)'
@@ -195,6 +197,7 @@ class CadastrarCurso(CursoView, CadastrarRemetente):
         cur = form.save(commit=True)
         cur.tipo = "Curso"
         cur.save()
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_CURSO))
 
     def get_title(self, **kwargs):
         return 'Cadastro Curso (Remetente)'
@@ -205,6 +208,7 @@ class AtualizarCurso(CursoView, AtualizarRemetente):
         cur = form.save(commit=True)
         cur.tipo = "Curso"
         cur.save()
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_CURSO))
 
     def get_title(self, **kwargs):
         return 'Atualizar Curso (Remetente)'
@@ -248,6 +252,7 @@ class CadastrarTurma(TurmaView, CadastrarRemetente):
         tur = form.save(commit=True)
         tur.tipo = "Turma"
         tur.save()
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_TURMA))
 
     def get_title(self, **kwargs):
         return 'Cadastro Turma (Remetente)'
@@ -309,6 +314,7 @@ class CadastrarSalaProfessores(SalaProfessoresView, CadastrarRemetente):
         sala = form.save(commit=True)
         sala.tipo = "Sala Professores"
         sala.save()
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SALA_PROFESSORES))
 
     def get_title(self, **kwargs):
         return 'Cadastro Sala Professores (Remetente)'
@@ -319,6 +325,7 @@ class AtualizarSalaProfessores(SalaProfessoresView, AtualizarRemetente):
         sala = form.save(commit=True)
         sala.tipo = "Sala Professores"
         sala.save()
+        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SALA_PROFESSORES))
 
     def get_title(self, **kwargs):
         return 'Atualizar Sala Professores (Remetente)'

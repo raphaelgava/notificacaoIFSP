@@ -41,6 +41,7 @@ class _PersonForm(ModelForm):
     username = forms.CharField(disabled=True, required=False)
     datanascimento = forms.CharField(label='Data de nascimento')  # forms.DateInput.input_type = "date"
     # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
+    id_instituto = forms.ModelChoiceField(label='Id Instituto', queryset=Instituto.objects.filter(is_active=True))
 
     def __init__(self, *args, **kwargs):
         super(_PersonForm, self).__init__(*args, **kwargs)
@@ -69,6 +70,7 @@ class _PersonForm(ModelForm):
 
 
 class AlunoForm(_PersonForm):
+    pkTurma = forms.ModelChoiceField(label='Turma', queryset=Turma.objects.filter(is_active=True))
     class Meta:
         model = Aluno
         fields = _PersonForm.Meta.fields + ('pkTurma',)
@@ -122,10 +124,14 @@ class InstitutoForm(_RemetenteForm):
 
 
 class OferecimentoForm(_RemetenteForm):
-    id_professor = forms.ModelChoiceField(queryset=Professor.objects.filter(is_active=True))
+    id_professor = forms.ModelChoiceField(
+        queryset=Professor.objects.filter(is_active=True).order_by('first_name', 'last_name'))
     id_disciplina = forms.ModelChoiceField(queryset=Disciplina.objects.filter(is_active=True))
     alunos = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                            queryset=Aluno.objects.filter(is_active=True), required=False)
+                                            queryset=Aluno.objects.filter(is_active=True).order_by('turma',
+                                                                                                   'first_name',
+                                                                                                   'last_name'),
+                                            required=False)
     dataInicio = forms.CharField(label='Data Início')  # forms.DateInput.input_type = "date"
 
     def __init__(self, *args, **kwargs):
@@ -168,7 +174,8 @@ class TurmaForm(_RemetenteForm):
 class SalaProfessoresForm(_RemetenteForm):
     id_curso = forms.ModelChoiceField(queryset=Curso.objects.filter(is_active=True))
     professores = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                                 queryset=Professor.objects.filter(is_active=True))
+                                                 queryset=Professor.objects.filter(is_active=True).order_by(
+                                                     'first_name', 'last_name'))
 
     class Meta:
         model = SalaProfessores
@@ -191,7 +198,7 @@ class NotificacaoForm(ModelForm):
         max_length=255, )
 
     remetente = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                               queryset=Remetente.objects.filter(is_active=True))
+                                               queryset=Remetente.objects.filter(is_active=True).order_by('tipo'))
 
     datahora = forms.CharField(label='Data Acontecimento')
 
