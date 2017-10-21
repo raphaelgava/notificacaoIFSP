@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/forms.py" afterPath="$PROJECT_DIR$/notificacao/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/models.py" afterPath="$PROJECT_DIR$/notificacao/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/json.py" afterPath="$PROJECT_DIR$/notificacao/views/json.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/remetente.py" afterPath="$PROJECT_DIR$/notificacao/views/remetente.py" />
     </list>
     <ignored path="NotificacaoIFSP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,9 +25,11 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notificacao/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
+            <state relative-caret-position="1622">
               <caret line="392" column="15" lean-forward="false" selection-start-line="392" selection-start-column="4" selection-end-line="392" selection-end-column="15" />
-              <folding />
+              <folding>
+                <element signature="e#466#505#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -39,9 +37,11 @@
       <file leaf-file-name="remetente.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notificacao/views/remetente.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
+            <state relative-caret-position="529">
               <caret line="355" column="0" lean-forward="false" selection-start-line="355" selection-start-column="0" selection-end-line="355" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,8 +69,8 @@
       <file leaf-file-name="json.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/notificacao/views/json.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="187" column="0" lean-forward="false" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+            <state relative-caret-position="-2627">
+              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
                 <marker date="1508389460280" expanded="true" signature="958:959" ph="import ..." />
@@ -128,9 +128,9 @@
       <find>create</find>
       <find>instituto</find>
       <find>pol</find>
-      <find>first</find>
-      <find>Tipo formacao</find>
       <find>ModelMultipleChoiceField</find>
+      <find>Tipo formacao</find>
+      <find>first</find>
     </findStrings>
     <replaceStrings>
       <replace>TURMA</replace>
@@ -796,7 +796,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508215088311</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Fixed some problems and finished the find for new notifications! Android need to finish">
+      <created>1508389473875</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1508389473875</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView">
@@ -921,11 +928,6 @@
           <url>file://$USER_HOME$/AppData/Local/Programs/Python/Python35-32/Lib/site-packages/rest_framework/mixins.py</url>
           <line>82</line>
           <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/notificacao/views/json.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/notificacao/views/remetente.py</url>
@@ -1252,7 +1254,7 @@
         <state relative-caret-position="291">
           <caret line="482" column="0" lean-forward="false" selection-start-line="482" selection-start-column="0" selection-end-line="482" selection-end-column="0" />
           <folding>
-            <element signature="e#83#122#0" expanded="true" />
+            <element signature="e#83#122#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1261,14 +1263,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1409">
           <caret line="68" column="15" lean-forward="false" selection-start-line="68" selection-start-column="15" selection-end-line="68" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/notificacao/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="392" column="15" lean-forward="false" selection-start-line="392" selection-start-column="4" selection-end-line="392" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -1313,18 +1307,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/notificacao/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1622">
+          <caret line="392" column="15" lean-forward="false" selection-start-line="392" selection-start-column="4" selection-end-line="392" selection-end-column="15" />
+          <folding>
+            <element signature="e#466#505#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/notificacao/views/remetente.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
+        <state relative-caret-position="529">
           <caret line="355" column="0" lean-forward="false" selection-start-line="355" selection-start-column="0" selection-end-line="355" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/notificacao/views/json.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="187" column="0" lean-forward="false" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+        <state relative-caret-position="-2627">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
             <marker date="1508389460280" expanded="true" signature="958:959" ph="import ..." />
