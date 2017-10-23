@@ -29,8 +29,10 @@
         <entry file="file://$PROJECT_DIR$/notificacao/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="295" column="0" lean-forward="false" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
-              <folding />
+              <caret line="295" column="0" lean-forward="true" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+              <folding>
+                <element signature="e#466#505#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,7 +94,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="111">
               <caret line="93" column="27" lean-forward="false" selection-start-line="93" selection-start-column="27" selection-end-line="93" selection-end-column="27" />
-              <folding />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+                <marker date="1508722924008" expanded="true" signature="958:959" ph="import ..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -925,6 +930,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="corrected validation of password and user (create and update)/corrected cadastro.html to better show the wrong fields" />
     <MESSAGE value="created delete/trying to make filter by active user" />
     <MESSAGE value="changin loggin validation (there is only one html now) / added todo on code / finished filter of active on the list views" />
     <MESSAGE value="corrected login files/ deleted some html files / created sidenavLeft to be imported by other html to show option based on user/ corrected functions inside classes" />
@@ -949,8 +955,7 @@
     <MESSAGE value="Receiving notification from android. Sending Notification to Android needs to be finished. Problem of: AttributeError: 'PolymorphicQuerySet' object has no attribute 'get_pk_val'" />
     <MESSAGE value="Fixed some problems and finished the find for new notifications! Android need to finish" />
     <MESSAGE value="Notifications is working. Added staticfiles in versioning" />
-    <MESSAGE value="Fixed problem to send notifications related with different user's Institute" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed problem to send notifications related with different user's Institute" />
+    <option name="LAST_COMMIT_MESSAGE" value="Notifications is working. Added staticfiles in versioning" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1326,7 +1331,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
           <caret line="93" column="27" lean-forward="false" selection-start-line="93" selection-start-column="27" selection-end-line="93" selection-end-column="27" />
-          <folding />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1508722924008" expanded="true" signature="958:959" ph="import ..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1375,8 +1383,10 @@
     <entry file="file://$PROJECT_DIR$/notificacao/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="295" column="0" lean-forward="false" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
-          <folding />
+          <caret line="295" column="0" lean-forward="true" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+          <folding>
+            <element signature="e#466#505#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
