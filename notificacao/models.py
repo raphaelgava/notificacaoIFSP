@@ -181,8 +181,6 @@ class Pessoa(Usuario):
     def __str__(self):
         return '{} - {} {}'.format(self.username, self.first_name, self.last_name)
 
-
-# todo: procurar ppc do curso para tirar os dados
 class Servidor(Pessoa):
     funcao = models.CharField("Função", max_length=30)  # Field name made lowercase.
     admin = models.BooleanField("Admin sistema", default=False)

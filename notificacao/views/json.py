@@ -91,7 +91,7 @@ class ServidorViewSet(PessoaViewSet):
     model = Servidor
     serializer_class = ServidorSerializer
 
-    def get_queryset(self):  # todo: verificar se de fato aqui é necessario essa verificacao!!!
+    def get_queryset(self):
         return Servidor.objects.all().exclude(funcao='Professor')
 
 
@@ -128,9 +128,16 @@ class NotificacaoViewSet(viewsets.ModelViewSet):
                         for remet in noti.remetente.all():
                             for inst in instituto:
                                 if inst.pk == remet.pk:
-                                    notify.add(noti)
-                                    remover = True;
-                                    break;
+                                    pessoa = None
+                                    if (user == '1'):
+                                        pessoa = Aluno.objects.filter(id_instituto=inst.pk, pk=id).first()
+                                    else:
+                                        pessoa = Servidor.objects.filter(id_instituto=inst.pk, pk=id).first()
+
+                                    if pessoa is not None:
+                                        notify.add(noti)
+                                        remover = True;
+                                        break;
                             if remover == True:
                                 break;
                         if remover == True:
