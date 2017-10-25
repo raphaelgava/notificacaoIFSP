@@ -47,6 +47,7 @@ class Urls:
     ATUALIZAR_OFERECIMENTO = 'cadastroUpdateOferecimento'
     DELETAR_OFERECIMENTO = 'cadastroDeleteOferecimento'
     ADD_OFERECIMENTO = 'cadastroAddOferecimento'
+    WARNING_OFERECIMENTO = 'cadastroWarningOferecimento'
 
     LISTAR_CURSO = 'listaCursos'
     CADASTRAR_CURSO = 'cadastroCurso'
@@ -96,6 +97,7 @@ class HTML:
 
     ADD = 'add.html'
     DELETE = 'delete.html'
+    WARNING = 'warning.html'
 
     LOGIN_USUARIO = 'loginUsuario.html'
     LOGIN = 'index.html'

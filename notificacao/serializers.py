@@ -19,7 +19,8 @@ class _PessoaSerializer(serializers.ModelSerializer):
         # fields = ('pk','username', 'first_name', 'last_name', 'email', 'password', 'sexo', 'datanascimento', 'id_instituto',)
         # esta enviando também o password na busca, porém para fazer update da senha o campo password deve estar declarado!
         fields = (
-        'pk', 'username', 'first_name', 'last_name', 'email', 'sexo', 'datanascimento', 'id_instituto', 'password',)
+            'pk', 'username', 'first_name', 'last_name', 'cpf', 'email', 'sexo', 'datanascimento', 'id_instituto',
+            'password',)
 
 
 class AlunoSerializer(_PessoaSerializer):

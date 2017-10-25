@@ -16,7 +16,7 @@ from notificacao.models import Remetente
 from notificacao.models import SalaProfessores
 from notificacao.models import Turma
 from notificacao.stuff.constants import GroupConst, HTML, Urls, Paginas
-from .deleteAdd import ApagarItem, AddItem
+from .deleteAdd import ApagarItem, AddItem, WarningItem
 
 
 # ==========================================CADASTRO REMETENTE==========================================================
@@ -127,37 +127,59 @@ class OferecimentoView:
 
 class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
     def form_valid(self, form):
-        offer = form.save(commit=True)
+        offer = form.save(commit=False)
         offer.tipo = "Oferecimento"
-        prof = Professor.objects.get(pk=offer.id_professor)
-        offer.professor = prof.first_name + ' ' + prof.last_name
-        disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
-        offer.sigla = disciplina.sigla
-        offer.id_curso = disciplina.id_curso.pk
-        offer.save()
 
-        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
+        prof = Professor.objects.filter(pk=self.request.user.id).first()  # self.kwargs.get('pk'))
+        if (prof is not None):
+            offer.id_professor = prof
+            offer.professor = prof.first_name + ' ' + prof.last_name
+            disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
+            offer.sigla = disciplina.sigla
+            offer.id_curso = disciplina.id_curso.pk
+            # prof = Professor.objects.get(pk=offer.id_professor)
+            # offer.professor = prof.first_name + ' ' + prof.last_name
+            # disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
+            # offer.sigla = disciplina.sigla
+            # offer.id_curso = disciplina.id_curso.pk
+
+            offer.save()
+
+            return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
+        return HttpResponseRedirect(reverse_lazy(Urls.WARNING_OFERECIMENTO))
 
     def get_title(self, **kwargs):
         return 'Cadastro Oferecimento (Remetente)'
 
+        # def get_link_warning(self, **kwargs):
+        #     return Urls.WARNING_OFERECIMENTO
+
 
 class AtualizarOferecimento(OferecimentoView, AtualizarRemetente):
     def form_valid(self, form):
-        offer = form.save(commit=True)
+        offer = form.save(commit=False)
         offer.tipo = "Oferecimento"
-        prof = Professor.objects.get(pk=offer.id_professor)
-        offer.professor = prof.first_name + ' ' + prof.last_name
-        disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
-        offer.sigla = disciplina.sigla
-        offer.id_curso = disciplina.id_curso.pk
-        offer.save()
+        # prof = Professor.objects.get(pk=offer.id_professor)
+        # offer.professor = prof.first_name + ' ' + prof.last_name
+        prof = Professor.objects.filter(pk=self.request.user.id).first()  # self.kwargs.get('pk'))
+        if (prof is not None):
+            offer.id_professor = prof
+            offer.professor = prof.first_name + ' ' + prof.last_name
+            disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
+            offer.sigla = disciplina.sigla
+            offer.id_curso = disciplina.id_curso.pk
+            offer.save()
 
-        return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
+            return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
+        return HttpResponseRedirect(reverse_lazy(Urls.WARNING_OFERECIMENTO))
 
     def get_title(self, **kwargs):
         return 'Atualizar Oferecimento (Remetente)'
 
+
+class WarningOferecimento(OferecimentoView, WarningItem):
+    def get_success_url(self):
+        return reverse_lazy(Urls.LISTAR_OFERECIMENTO)
 
 class ApagarOferecimento(OferecimentoView, ApagarItem):
     def get_success_url(self):

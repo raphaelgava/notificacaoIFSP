@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'colorfield',  # para campo de cor
     'polymodels',  # para polimorfismo
     'geoposition',  # maps
+    'localflavor',  # CPF
     'notificacao',
 ]
 

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Aviso sobre {{ view.get_class }}</h1>
+
+<form class="form-signin" method="post">{% csrf_token %}
+    <h2 class="form-signin-heading">Apenas professores podem criar/alterar um {{ view.get_class }}</h2>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="confirm">Entendido</button>
+</form>
+
+{% endblock %}

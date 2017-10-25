@@ -78,4 +78,38 @@ class AddItem(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
         return HttpResponseRedirect(success_url)
 
 
+class WarningItem(LoginRequiredMixin, GroupRequiredMixin, TemplateView):
+    template_name = HTML.WARNING
+    login_url = Paginas.LOGIN_URL
+
+    group_required = [GroupConst.ADMIN, GroupConst.EMPLOYEE]
+
+    # def get_object(self, **kwargs):
+    #     return self.model.objects.filter(pk=self.kwargs.get('pk')).first()
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(AddPessoa, self).get_context_data(**kwargs)
+    #     context['teste'] = Usuario.objects.filter(pk=self.kwargs.get('pk')).first()
+    #     return context
+
+    def get_class(self):
+        return 'Oferecimento'
+        # if issubclass(self.model, Usuario):
+        #     return 'Usuário'
+        # elif issubclass(self.model, Remetente):
+        #     return 'Remetente'
+        # elif isinstance(self.model, Disciplina):
+        #     return 'Disciplina'
+        # else:
+        #     return 'Tipo'
+
+    def post(self, request, *args, **kwargs):
+        success_url = self.get_success_url()
+        # if request.method == 'POST':
+        #     if 'confirm' in request.POST:
+        # item = self.get_object()
+        # item.activeAgain()
+        return HttpResponseRedirect(success_url)
+
+
         # ======================================================================================================================

@@ -68,12 +68,13 @@ class CadastrarAluno(AlunoView, CadastrarUsuario):
             pkTurma = form.cleaned_data['pkTurma']
             objTurma = Turma.objects.get(pk=pkTurma)
             turma = objTurma.sigla
+            cpf = form.cleaned_data['cpf']
 
             user = Usuario.objects.latest('pk')
             username = '{0:07d}'.format(user.pk + 1)
 
             aluno = Aluno.objects.create(username=username, password=password, email=email, first_name=first_name,
-                                         last_name=last_name, turma=turma,
+                                         last_name=last_name, turma=turma, cpf=cpf,
                                          sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
                                          pkTurma=pkTurma)
 
@@ -104,6 +105,7 @@ class AtualizarAluno(AlunoView, AtualizarUsuario):
         pkTurma = form.cleaned_data['pkTurma']
         objTurma = Turma.objects.get(pk=pkTurma)
         turma = objTurma.sigla
+        cpf = form.cleaned_data['cpf']
 
         aluno = Aluno.objects.filter(username=username).first()
         if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
@@ -116,6 +118,7 @@ class AtualizarAluno(AlunoView, AtualizarUsuario):
                 aluno.id_instituto = instituto
                 aluno.turma = turma
                 aluno.pkTurma = pkTurma
+                aluno.cpf = cpf
 
                 CreatePerson.create_student(aluno, password)
                 return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_ALUNO))
@@ -203,14 +206,15 @@ class CadastrarServidor(ServidorView, CadastrarUsuario):
             instituto = form.cleaned_data['id_instituto']
             funcao = form.cleaned_data['funcao'].upper()
             admin = form.cleaned_data['admin']
+            cpf = form.cleaned_data['cpf']
 
             #Servidor.objects.filter(username=username).filter(first_name=first_name).filter(last_name=last_name).filter(datanascimento=datanascimento).delete()
 
             user = Usuario.objects.latest('pk')
             username = '{0:07d}'.format(user.pk + 1)
 
-            servidor = Servidor.objects.create(username=username,password=password, email=email, first_name=first_name,
-                                               last_name=last_name,
+            servidor = Servidor.objects.create(username=username, password=password, email=email, first_name=first_name,
+                                               last_name=last_name, cpf=cpf,
                                                sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
                                                funcao=funcao, admin=admin)
 
@@ -239,6 +243,7 @@ class AtualizarServidor(ServidorView, AtualizarUsuario):
         datanascimento = form.cleaned_data['datanascimento']
         instituto = form.cleaned_data['id_instituto']
         funcao = form.cleaned_data['funcao'].upper()
+        cpf = form.cleaned_data['cpf']
 
         servidor = Servidor.objects.filter(username=username).first()
         if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
@@ -250,6 +255,7 @@ class AtualizarServidor(ServidorView, AtualizarUsuario):
                 servidor.datanascimento = datanascimento
                 servidor.id_instituto = instituto
                 servidor.funcao = funcao
+                servidor.cpf = cpf
 
                 CreatePerson.create_employee(servidor, password, False)
                 return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SERVIDOR))
@@ -339,6 +345,7 @@ class CadastrarProfessor(ProfessorView, CadastrarUsuario):
             funcao = 'Professor'.upper()
             tipo_formacao = form.cleaned_data['tipo_formacao']
             formacao = form.cleaned_data['formacao'].upper()
+            cpf = form.cleaned_data['cpf']
 
             admin = form.cleaned_data['admin']
 
@@ -347,7 +354,7 @@ class CadastrarProfessor(ProfessorView, CadastrarUsuario):
 
             professor = Professor.objects.create(username=username, password=password, email=email,
                                                  first_name=first_name,
-                                                 last_name=last_name,
+                                                 last_name=last_name, cpf=cpf,
                                                  sexo=sexo, datanascimento=datanascimento, id_instituto=instituto,
                                                  funcao=funcao,
                                                  formacao=formacao, tipo_formacao=tipo_formacao, admin=admin)
@@ -378,6 +385,7 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
         instituto = form.cleaned_data['id_instituto']
         tipo_formacao = form.cleaned_data['tipo_formacao']
         formacao = form.cleaned_data['formacao'].upper()
+        cpf = form.cleaned_data['cpf']
 
         professor = Professor.objects.filter(username=username).first()
         if password == password_check and len(password) >= PersonConst.PASSWORD_LENGTH:
@@ -390,6 +398,7 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
                 professor.id_instituto = instituto
                 professor.tipo_formacao = tipo_formacao
                 professor.formacao = formacao
+                professor.cpf = cpf
 
                 CreatePerson.create_employee(professor, password, True)
                 oferecimento = Oferecimento.objects.filter(id_professor=professor.pk)

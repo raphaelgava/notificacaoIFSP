@@ -171,6 +171,7 @@ class Pessoa(Usuario):
     #   blank=True determines whether the field will be required in forms. This includes the admin and your own custom
     #   forms. If blank=True then the field will not be required, whereas if it's False the field cannot be blank.
     id_instituto = models.ForeignKey(Instituto, blank=False, null=True)  # Field name made lowercase.
+    cpf = models.CharField(max_length=11, blank=False, null=False, default='00000000000')
 
     class Meta(Usuario.Meta):
         abstract = True
@@ -179,7 +180,8 @@ class Pessoa(Usuario):
 
     # essa definição é para mostrar a descrição na lista dos cadastros
     def __str__(self):
-        return '{} - {} {}'.format(self.username, self.first_name, self.last_name)
+        return '{} - {} {} {}'.format(self.username, self.cpf, self.first_name, self.last_name)
+        # return '{} - {} {}'.format(self.username, self.first_name, self.last_name)
 
 class Servidor(Pessoa):
     funcao = models.CharField("Função", max_length=30)  # Field name made lowercase.
@@ -239,8 +241,7 @@ class Aluno(Pessoa):
 
     def __str__(self):
         # turma = Turma.objects.get(pk=self.pkTurma)
-
-        return '{} {} - {}'.format(self.username, self.first_name, self.turma)
+        return '{} - {} {} {} - {}'.format(self.username, self.cpf, self.first_name, self.last_name, self.turma)
 
 
 class Disciplina(models.Model):
@@ -362,7 +363,7 @@ class Oferecimento(Remetente):
     time = models.IntegerField("Horário", default=1, choices=TIME)  # Field name made lowercase.
     # period = models.IntegerField("Período", default=1, choices=PERIOD)  # Field name made lowercase.
     qtd = models.IntegerField("Quantidade de aulas", default=2, choices=QTD)
-    id_professor = models.ForeignKey(Professor)  # Field name made lowercase.
+    id_professor = models.ForeignKey(Professor, blank=True, null=True)  # Field name made lowercase.
     professor = models.CharField("Professor", max_length=61, default="Professor teste")
     sigla = models.CharField("Sigla", max_length=4, blank=False, default='DDD')  # Field name made lowercase.
     id_disciplina = models.ForeignKey(Disciplina)  # Field name made lowercase.

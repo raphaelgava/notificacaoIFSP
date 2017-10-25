@@ -2,6 +2,7 @@ from colorfield.fields import ColorField
 from django import forms
 from django.forms import ModelForm
 from django.forms.widgets import TextInput
+from localflavor.br.forms import BRCPFField
 
 from .models import Aluno
 from .models import Curso
@@ -42,6 +43,7 @@ class _PersonForm(ModelForm):
     datanascimento = forms.CharField(label='Data de nascimento')  # forms.DateInput.input_type = "date"
     # datanascimento = models.DateField("Data de nascimento", default=datetime.now())  # Field name made lowercase.
     id_instituto = forms.ModelChoiceField(label='Id Instituto', queryset=Instituto.objects.filter(is_active=True))
+    cpf = BRCPFField(label='CPF', required=True)
 
     def __init__(self, *args, **kwargs):
         super(_PersonForm, self).__init__(*args, **kwargs)
@@ -65,7 +67,7 @@ class _PersonForm(ModelForm):
         abstract = True
         fields = (
             'username',
-            'first_name', 'last_name', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
+            'first_name', 'last_name', 'cpf', 'email', 'password', 'password_check', 'sexo', 'datanascimento',
             'id_instituto',)
 
 
@@ -124,8 +126,8 @@ class InstitutoForm(_RemetenteForm):
 
 
 class OferecimentoForm(_RemetenteForm):
-    id_professor = forms.ModelChoiceField(
-        queryset=Professor.objects.filter(is_active=True).order_by('first_name', 'last_name'))
+    # id_professor = forms.ModelChoiceField(
+    #     queryset=Professor.objects.filter(is_active=True).order_by('first_name', 'last_name'))
     id_disciplina = forms.ModelChoiceField(queryset=Disciplina.objects.filter(is_active=True))
     alunos = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,
                                             queryset=Aluno.objects.filter(is_active=True).order_by('turma',
@@ -144,7 +146,8 @@ class OferecimentoForm(_RemetenteForm):
     class Meta:
         model = Oferecimento
         fields = _RemetenteForm.Meta.fields + (
-        'ano', 'semestre', 'week', 'time', 'dataInicio', 'qtd', 'id_professor', 'id_disciplina', 'alunos')
+            'ano', 'semestre', 'week', 'time', 'dataInicio', 'qtd', 'id_disciplina', 'alunos')
+        # 'ano', 'semestre', 'week', 'time', 'dataInicio', 'qtd', 'id_professor', 'id_disciplina', 'alunos')
         # 'ano', 'semestre', 'week', 'time', 'period', 'dataInicio', 'qtd', 'id_professor', 'id_disciplina', 'alunos')
 
 

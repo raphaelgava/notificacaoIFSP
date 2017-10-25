@@ -21,7 +21,7 @@ TokenAdmin.raw_id_fields = ('user',)
 
 class _PersonAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
-        (('Outras Informações'), {'fields': ('sexo', 'datanascimento', 'id_instituto',)}),
+        (('Outras Informações'), {'fields': ('sexo', 'cpf', 'datanascimento', 'id_instituto',)}),
     )
 
     class Meta:

@@ -40,7 +40,8 @@ from notificacao.views.outros import CadastrarLocal, AtualizarLocal, ListarLocal
 from notificacao.views.outros import CadastrarNotificacao, AtualizarNotificacao, ListarNotificacoes, ApagarNotificacao, \
     AddNotificacao
 from notificacao.views.outros import CadastrarTipoNotificacao, AtualizarTipoNotificacao, ListarTiposNotificacao
-from notificacao.views.remetente import CadastrarCurso, AtualizarCurso, ListarCursos, ApagarCurso, AddCurso
+from notificacao.views.remetente import CadastrarCurso, AtualizarCurso, ListarCursos, ApagarCurso, AddCurso, \
+    WarningOferecimento
 from notificacao.views.remetente import CadastrarInstituto, AtualizarInstituto, ListarInstitutos, ApagarInstituto, \
     AddInstituto
 from notificacao.views.remetente import CadastrarOferecimento, AtualizarOferecimento, ListarOferecimentos, \
@@ -106,6 +107,7 @@ urlpatterns = [
                 url(r'delete_oferecimento/(?P<pk>\d+)/$', ApagarOferecimento.as_view(),
                       name=Urls.DELETAR_OFERECIMENTO),
                 url(r'add_oferecimento/(?P<pk>\d+)/$', AddOferecimento.as_view(), name=Urls.ADD_OFERECIMENTO),
+                  url(r'warning_oferecimento/$', WarningOferecimento.as_view(), name=Urls.WARNING_OFERECIMENTO),
 
                 url(r'lista_cursos/$', ListarCursos.as_view(), name=Urls.LISTAR_CURSO),
                 url(r'cadastro_curso/$', CadastrarCurso.as_view(), name=Urls.CADASTRAR_CURSO),
