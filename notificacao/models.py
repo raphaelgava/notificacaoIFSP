@@ -202,7 +202,7 @@ class Professor(Servidor):
         ('Pós Doutorado', 'Pós Doutorado'),
         ('Livre Docência', 'Livre Docência'),
     )
-    formacao = models.CharField("Área", max_length=20)  # Field name made lowercase.
+    formacao = models.CharField("Área", max_length=30)  # Field name made lowercase.
     tipo_formacao = models.CharField(verbose_name="Tipo formação", default='Graduação', max_length=15,
                                      choices=TIPO_FORMACAO)  # Field name made lowercase.
 
