@@ -168,6 +168,10 @@ class AtualizarOferecimento(OferecimentoView, AtualizarRemetente):
             disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
             offer.sigla = disciplina.sigla
             offer.id_curso = disciplina.id_curso.pk
+
+            # for aluno in offer.alunos.all():
+            #     if (aluno is not None):
+            #         conta = 1;
             offer.save()
 
             return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_OFERECIMENTO))
@@ -192,6 +196,24 @@ class AddOferecimento(OferecimentoView, AddItem):
 
 
 class ListarOferecimentos(OferecimentoView, ListarRemetentes):
+    def get_context_data(self, **kwargs):
+        context = super(ListarRemetentes, self).get_context_data(**kwargs)
+        if self.request.method == 'GET':
+            if 'filtro' in self.request.GET:
+                parametro = self.request.GET['filtro']
+                if parametro == 'ativo':
+                    context['lista'] = Oferecimento.objects.order_by('-pk').filter(is_active=True,
+                                                                                   id_professor=self.request.user.id)
+                    return context
+                else:
+                    if parametro == 'inativo':
+                        context['lista'] = Oferecimento.objects.order_by('-pk').filter(is_active=False,
+                                                                                       id_professor=self.request.user.id)
+                        return context
+
+        context['lista'] = Oferecimento.objects.order_by('-pk').filter(id_professor=self.request.user.id)
+        return context
+
     def get_title(self, **kwargs):
         return 'Cadastro Oferecimento (Remetente)'
 

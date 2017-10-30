@@ -143,6 +143,18 @@ class OferecimentoForm(_RemetenteForm):
             'placeholder': 'Data Início'
         })
 
+        # Overriding save allows us to process the value of 'toppings' field
+
+    def save(self, commit=True):
+        # Get the unsave Pizza instance
+        instance = forms.ModelForm.save(self, False)
+
+        instance.alunos.clear()
+        for aluno in self.cleaned_data['alunos']:
+            instance.alunos.add(aluno)
+
+        return instance
+
     class Meta:
         model = Oferecimento
         fields = _RemetenteForm.Meta.fields + (

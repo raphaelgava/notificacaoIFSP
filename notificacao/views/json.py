@@ -47,18 +47,25 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
             ano = self.request.GET.get('ano')
             semestre = self.request.GET.get('semestre')
             pkTurma = self.request.GET.get('turma')
+            pk = self.request.GET.get('pk')
             if ano is not None and semestre is not None:
+                # if (pk is not None):
+                #     oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
+                #     for oferecimento in oferecimentos:
+                #         aluno = oferecimento.alunos.filter(pk=pk).first()
+                #         if (aluno is None):
+                #             oferecimentos = oferecimentos.exclude(pk=oferecimento.pk)
+                # else:
                 if (pkTurma is None):
                     oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
                 else:
                     turma = Turma.objects.get(pk=pkTurma)
                     oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, id_curso=turma.id_curso.pk)
-            else:
-                pk = self.request.GET.get('pk')
-                if (pkTurma is not None):
-                    oferecimentos = Oferecimento.objects.filter(pk=pk)
-                else:
-                    oferecimentos = ''
+                    # else:
+                    #     if (pkTurma is not None):
+                    #         oferecimentos = Oferecimento.objects.filter(pk=pk)
+                    #     else:
+                    #         oferecimentos = ''
         else:
             if self.request.method == "PUT":
                 oferecimentos = Oferecimento.objects.all()
