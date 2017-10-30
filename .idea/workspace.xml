@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="31af6973-212b-4bc5-937a-cefeed621565" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/forms.py" afterPath="$PROJECT_DIR$/notificacao/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/json.py" afterPath="$PROJECT_DIR$/notificacao/views/json.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notificacao/views/remetente.py" afterPath="$PROJECT_DIR$/notificacao/views/remetente.py" />
     </list>
     <ignored path="NotificacaoIFSP.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -815,7 +812,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509081793518</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Atualização da retirada do aluno em oferecimento/filtro para oferecimento">
+      <created>1509345357873</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1509345357873</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TodoView">
