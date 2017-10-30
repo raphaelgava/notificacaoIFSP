@@ -147,11 +147,13 @@ class OferecimentoForm(_RemetenteForm):
 
     def save(self, commit=True):
         # Get the unsave Pizza instance
-        instance = forms.ModelForm.save(self, False)
+        # instance = forms.ModelForm.save(self, False)
+        instance = forms.ModelForm.save(self, commit)
 
-        instance.alunos.clear()
-        for aluno in self.cleaned_data['alunos']:
-            instance.alunos.add(aluno)
+        if instance.alunos is not None:
+            instance.alunos.clear()
+            for aluno in self.cleaned_data['alunos']:
+                instance.alunos.add(aluno)
 
         return instance
 

@@ -127,11 +127,12 @@ class OferecimentoView:
 
 class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
     def form_valid(self, form):
-        offer = form.save(commit=False)
-        offer.tipo = "Oferecimento"
-
+        # offer = form.save(commit=False)
         prof = Professor.objects.filter(pk=self.request.user.id).first()  # self.kwargs.get('pk'))
         if (prof is not None):
+            offer = form.save(commit=True)
+            offer.tipo = "Oferecimento"
+
             offer.id_professor = prof
             offer.professor = prof.first_name + ' ' + prof.last_name
             disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
@@ -157,12 +158,12 @@ class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
 
 class AtualizarOferecimento(OferecimentoView, AtualizarRemetente):
     def form_valid(self, form):
-        offer = form.save(commit=False)
-        offer.tipo = "Oferecimento"
         # prof = Professor.objects.get(pk=offer.id_professor)
         # offer.professor = prof.first_name + ' ' + prof.last_name
         prof = Professor.objects.filter(pk=self.request.user.id).first()  # self.kwargs.get('pk'))
         if (prof is not None):
+            offer = form.save(commit=True)
+            offer.tipo = "Oferecimento"
             offer.id_professor = prof
             offer.professor = prof.first_name + ' ' + prof.last_name
             disciplina = Disciplina.objects.get(pk=offer.id_disciplina.pk)
