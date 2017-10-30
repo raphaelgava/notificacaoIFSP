@@ -819,7 +819,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509345357873</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Atualização da retirada do aluno em oferecimento/filtro para oferecimento">
+      <created>1509345560902</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1509345560902</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView">
