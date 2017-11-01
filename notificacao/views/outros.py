@@ -96,13 +96,13 @@ class AddNotificacao(NotificacaoView, AddItem):
 
 
 class ListarNotificacoes(NotificacaoView, ListView):
-    template_name = HTML.LISTA_OUTROS
+    template_name = HTML.LISTA_TIPOS
 
     def get_context_data(self, **kwargs):
         context = super(ListarNotificacoes, self).get_context_data(**kwargs)
 
-        #context['lista'] = Notificacao.objects.filter(username=self.request.user.username)
-        context['lista'] = Notificacao.objects.order_by('-pk').all()
+        context['lista'] = Notificacao.objects.filter(servidor=self.request.user.pk).order_by('-pk')
+        # context['lista'] = Notificacao.objects.order_by('-pk').all()
         return context
 
     def get_title(self, **kwargs):
