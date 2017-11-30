@@ -5,14 +5,14 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 
-from notificacao.models import Aluno, Turma, Remetente, Local, SalaProfessores
+from notificacao.models import Aluno, Turma, Remetente, Local, SalaProfessores, Curso
 from notificacao.models import Instituto
 from notificacao.models import Notificacao
 from notificacao.models import Oferecimento
 from notificacao.models import Professor
 from notificacao.models import Servidor
 from notificacao.models import TipoNotificacao
-from notificacao.serializers import AlunoSerializer, _RemetenteSerializer, LocalSerializer
+from notificacao.serializers import AlunoSerializer, _RemetenteSerializer, LocalSerializer, CursoSerializer
 from notificacao.serializers import InstitutoSerializer
 from notificacao.serializers import NotificacaoSerializer
 from notificacao.serializers import OferecimentoSerializer
@@ -48,6 +48,8 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
             semestre = self.request.GET.get('semestre')
             pkTurma = self.request.GET.get('turma')
             pk = self.request.GET.get('pk')
+            user = self.request.GET.get('user')
+
             if ano is not None and semestre is not None:
                 # if (pk is not None):
                 #     oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
@@ -56,11 +58,15 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
                 #         if (aluno is None):
                 #             oferecimentos = oferecimentos.exclude(pk=oferecimento.pk)
                 # else:
-                if (pkTurma is None):
-                    oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
+                if (user == '1'):
+                    if (pkTurma is None):
+                        oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
+                    else:
+                        turma = Turma.objects.get(pk=pkTurma)
+                        oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre,
+                                                                    id_curso=turma.id_curso.pk)
                 else:
-                    turma = Turma.objects.get(pk=pkTurma)
-                    oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, id_curso=turma.id_curso.pk)
+                    oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, id_professor=pk)
                     # else:
                     #     if (pkTurma is not None):
                     #         oferecimentos = Oferecimento.objects.filter(pk=pk)
@@ -245,6 +251,17 @@ class LocalViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Local.objects.all()
+
+
+class CursoViewSet(viewsets.ModelViewSet):
+    model = Curso
+    lookup_field = 'pk'
+    serializer_class = CursoSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        return Curso.objects.all()
 
 
 class InstitutoViewSet(viewsets.ModelViewSet):
