@@ -86,7 +86,7 @@ class CadastrarAluno(AlunoView, CadastrarUsuario):
         return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self):
-        return 'Cadastrar Aluno'
+        return 'Cadastrar aluno'
 
 
 class AtualizarAluno(AlunoView, AtualizarUsuario):
@@ -132,7 +132,7 @@ class AtualizarAluno(AlunoView, AtualizarUsuario):
         return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
-        return 'Atualizar Aluno'
+        return 'Atualizar aluno'
 
 
 class ApagarAluno(AlunoView, ApagarItem):
@@ -164,7 +164,7 @@ class ListarAlunos(AlunoView, ListarUsuario):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Aluno'
+        return 'Cadastro aluno'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_ALUNO
@@ -226,7 +226,7 @@ class CadastrarServidor(ServidorView, CadastrarUsuario):
         return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
-        return 'Cadastrar Servidor'
+        return 'Cadastrar servidor'
 
 
 class AtualizarServidor(ServidorView, AtualizarUsuario):
@@ -269,7 +269,7 @@ class AtualizarServidor(ServidorView, AtualizarUsuario):
         return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
-        return 'Atualizar Servidor'
+        return 'Atualizar servidor'
 
 
 class ApagarServidor(ServidorView, ApagarItem):
@@ -302,7 +302,7 @@ class ListarServidores(ServidorView, ListarUsuario):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Servidor'
+        return 'Cadastro servidor'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_SERVIDOR
@@ -367,7 +367,7 @@ class CadastrarProfessor(ProfessorView, CadastrarUsuario):
         return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
-        return 'Cadastrar Professor'
+        return 'Cadastrar professor'
 
 
 class AtualizarProfessor(ProfessorView, AtualizarUsuario):
@@ -418,7 +418,7 @@ class AtualizarProfessor(ProfessorView, AtualizarUsuario):
         return render(self.request, HTML.CADASTRO, {'form': form, 'titulo': self.get_title()})
 
     def get_title(self, **kwargs):
-        return 'Atualizar Professor'
+        return 'Atualizar professor'
 
 
 class ApagarProfessor(ProfessorView, ApagarItem):
@@ -449,7 +449,7 @@ class ListarProfessores(ProfessorView, ListarUsuario):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Professor'
+        return 'Cadastro professor'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_PROFESSOR

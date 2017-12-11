@@ -8,16 +8,16 @@
 {% block content %}
 <div class="col-sm-9">
     {% if user|has_group:"Admin" %}
-    <h1>Bem Vindo Administrador {{ request.user.first_name }}!</h1>
+    <h1>Bem-vindo administrador {{ request.user.first_name }}!</h1>
     {% else %}
     {% if user|has_group:"Professor" %}
-    <h1>Bem Vindo Professor {{ request.user.first_name }}!</h1>
+    <h1>Bem-vindo professor {{ request.user.first_name }}!</h1>
     {% else %}
     {% if user|has_group:"Employee" %}
-    <h1>Bem Vindo Servidor {{ request.user.first_name }}!</h1>
+    <h1>Bem-vindo servidor {{ request.user.first_name }}!</h1>
     {% else %}
     {% if user|has_group:"Student" %}
-    <h1>Bem Vindo Estudante {{ request.user.first_name }}!</h1>
+    <h1>Bem-vindo estudante {{ request.user.first_name }}!</h1>
     {% else %}
     {% endif %}
     {% endif %}

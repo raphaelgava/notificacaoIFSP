@@ -75,14 +75,14 @@ class CadastrarNotificacao(NotificacaoView, CreateView):
         return render(self.request, HTML.CADASTRO, {'form': form})
 
     def get_title(self, **kwargs):
-        return 'Cadastro Notificação'
+        return 'Cadastro notificação'
 
 
 class AtualizarNotificacao(NotificacaoView, UpdateView):
     template_name = HTML.CADASTRO
 
     def get_title(self, **kwargs):
-        return 'Atualizar Notificação'
+        return 'Atualizar notificação'
 
 
 class ApagarNotificacao(NotificacaoView, ApagarItem):
@@ -106,7 +106,7 @@ class ListarNotificacoes(NotificacaoView, ListView):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Notificação'
+        return 'Cadastro notificação'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_NOTIFICACAO
@@ -135,7 +135,7 @@ class CadastrarDisciplina(DisciplinaView, CreateView):
     template_name = HTML.CADASTRO
 
     def get_title(self, **kwargs):
-        return 'Cadastro Disciplina'
+        return 'Cadastro disciplina'
 
 
 class AtualizarDisciplina(DisciplinaView, UpdateView):
@@ -152,7 +152,7 @@ class AtualizarDisciplina(DisciplinaView, UpdateView):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_DISCIPLINA))
 
     def get_title(self, **kwargs):
-        return 'Atualizar Disciplina'
+        return 'Atualizar disciplina'
 
 
 class ApagarDisciplina(DisciplinaView, ApagarItem):
@@ -191,7 +191,7 @@ class ListarDisciplinas(DisciplinaView, ListView):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Disciplina'
+        return 'Cadastro disciplina'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_DISCIPLINA
@@ -220,12 +220,12 @@ class LocalView(LoginRequiredMixin, GroupRequiredMixin):
 
 class CadastrarLocal(LocalView, CreateView):
     def get_title(self, **kwargs):
-        return 'Cadastro Local'
+        return 'Cadastro local'
 
 
 class AtualizarLocal(LocalView, UpdateView):
     def get_title(self, **kwargs):
-        return 'Atualizar Local'
+        return 'Atualizar local'
 
 
 class ListarLocal(LocalView, ListView):
@@ -238,7 +238,7 @@ class ListarLocal(LocalView, ListView):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Local'
+        return 'Cadastro local'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_LOCAL
@@ -259,12 +259,12 @@ class TipoNotificacaoView(LoginRequiredMixin, GroupRequiredMixin):
 
 class CadastrarTipoNotificacao(TipoNotificacaoView, CreateView):
     def get_title(self, **kwargs):
-        return 'Cadastro Tipo Notificação'
+        return 'Cadastro tipo notificação'
 
 
 class AtualizarTipoNotificacao(TipoNotificacaoView, UpdateView):
     def get_title(self, **kwargs):
-        return 'Atualizar Tipo Notificação'
+        return 'Atualizar tipo notificação'
 
 
 class ListarTiposNotificacao(TipoNotificacaoView, ListView):
@@ -277,7 +277,7 @@ class ListarTiposNotificacao(TipoNotificacaoView, ListView):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Tipo Notificação'
+        return 'Cadastro tipo notificação'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_TIPO_NOTIFICACAO

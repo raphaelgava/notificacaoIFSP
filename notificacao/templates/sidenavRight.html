@@ -4,31 +4,31 @@
     <!--<div class="well well-sm text-center">-->
     {% if user|has_group:"Admin" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaInstitutos' %}'">
-        <a href="{% url 'listaInstitutos' %}">Cadastro Instituto</a>
+    <a href="{% url 'listaInstitutos' %}">Cadastro instituto</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaCursos' %}'">
-    <a href="{% url 'listaCursos' %}">Cadastro Curso</a>
+    <a href="{% url 'listaCursos' %}">Cadastro curso</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaDisciplinas' %}'">
-        <a href="{% url 'listaDisciplinas' %}">Cadastro Disciplina</a>
+    <a href="{% url 'listaDisciplinas' %}">Cadastro disciplina</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaOferecimentos' %}'">
-        <a href="{% url 'listaOferecimentos' %}">Cadastro Oferecimento</a>
+    <a href="{% url 'listaOferecimentos' %}">Cadastro oferecimento</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaTurma' %}'">
-    <a href="{% url 'listaTurma' %}">Cadastro Turma</a>
+    <a href="{% url 'listaTurma' %}">Cadastro turma</a>
 </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaProfessores' %}'">
-    <a href="{% url 'listaSalaProfessores' %}">Cadastro Sala Professores</a>
+    <a href="{% url 'listaSalaProfessores' %}">Cadastro sala professores</a>
 </div>
     {% else %}
 <!--<p>teste</p>-->
     {% if user|has_group:"Professor" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaOferecimentos' %}'">
-        <a href="{% url 'listaOferecimentos' %}">Cadastro Oferecimento</a>
+    <a href="{% url 'listaOferecimentos' %}">Cadastro oferecimento</a>
     </div>
         <div class="well well-sm text-center" onclick="location.href='{% url 'listaSalaProfessores' %}'">
-            <a href="{% url 'listaSalaProfessores' %}">Cadastro Sala Professores</a>
+            <a href="{% url 'listaSalaProfessores' %}">Cadastro sala professores</a>
         </div>
     {% else %}
     {% if user|has_group:"Employee" %}

@@ -76,7 +76,7 @@ class CadastrarInstituto(InstitutoView, CadastrarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_INSTITUTO))
 
     def get_title(self, **kwargs):
-        return 'Cadastro Instituto (Remetente)'
+        return 'Cadastro instituto (remetente)'
 
 
 class AtualizarInstituto(InstitutoView, AtualizarRemetente):
@@ -87,7 +87,7 @@ class AtualizarInstituto(InstitutoView, AtualizarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_INSTITUTO))
 
     def get_title(self, **kwargs):
-        return 'Atualizar Instituto (Remetente)'
+        return 'Atualizar instituto (remetente)'
 
 
 class ApagarInstituto(InstitutoView, ApagarItem):
@@ -102,7 +102,7 @@ class AddInstituto(InstitutoView, AddItem):
 
 class ListarInstitutos(InstitutoView, ListarRemetentes):
     def get_title(self, **kwargs):
-        return 'Cadastro Instituto (Remetente)'
+        return 'Cadastro instituto (remetente)'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_INSTITUTO
@@ -150,7 +150,7 @@ class CadastrarOferecimento(OferecimentoView, CadastrarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.WARNING_OFERECIMENTO))
 
     def get_title(self, **kwargs):
-        return 'Cadastro Oferecimento (Remetente)'
+        return 'Cadastro oferecimento (remetente)'
 
         # def get_link_warning(self, **kwargs):
         #     return Urls.WARNING_OFERECIMENTO
@@ -179,7 +179,7 @@ class AtualizarOferecimento(OferecimentoView, AtualizarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.WARNING_OFERECIMENTO))
 
     def get_title(self, **kwargs):
-        return 'Atualizar Oferecimento (Remetente)'
+        return 'Atualizar oferecimento (remetente)'
 
 
 class WarningOferecimento(OferecimentoView, WarningItem):
@@ -216,7 +216,7 @@ class ListarOferecimentos(OferecimentoView, ListarRemetentes):
         return context
 
     def get_title(self, **kwargs):
-        return 'Cadastro Oferecimento (Remetente)'
+        return 'Cadastro oferecimento (remetente)'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_OFERECIMENTO
@@ -245,7 +245,7 @@ class CadastrarCurso(CursoView, CadastrarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_CURSO))
 
     def get_title(self, **kwargs):
-        return 'Cadastro Curso (Remetente)'
+        return 'Cadastro curso (remetente)'
 
 
 class AtualizarCurso(CursoView, AtualizarRemetente):
@@ -256,7 +256,7 @@ class AtualizarCurso(CursoView, AtualizarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_CURSO))
 
     def get_title(self, **kwargs):
-        return 'Atualizar Curso (Remetente)'
+        return 'Atualizar curso (remetente)'
 
 
 class ApagarCurso(CursoView, ApagarItem):
@@ -271,7 +271,7 @@ class AddCurso(CursoView, AddItem):
 
 class ListarCursos(CursoView, ListarRemetentes):
     def get_title(self, **kwargs):
-        return 'Cadastro Curso (Remetente)'
+        return 'Cadastro curso (remetente)'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_CURSO
@@ -300,7 +300,7 @@ class CadastrarTurma(TurmaView, CadastrarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_TURMA))
 
     def get_title(self, **kwargs):
-        return 'Cadastro Turma (Remetente)'
+        return 'Cadastro turma (remetente)'
 
 
 class AtualizarTurma(TurmaView, AtualizarRemetente):
@@ -316,7 +316,7 @@ class AtualizarTurma(TurmaView, AtualizarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_TURMA))
 
     def get_title(self, **kwargs):
-        return 'Atualizar Turma (Remetente)'
+        return 'Atualizar turma (remetente)'
 
 
 class ApagarTurma(TurmaView, ApagarItem):
@@ -331,7 +331,7 @@ class AddTurma(TurmaView, AddItem):
 
 class ListarTurma(TurmaView, ListarRemetentes):
     def get_title(self, **kwargs):
-        return 'Cadastro Turma (Remetente)'
+        return 'Cadastro turma (remetente)'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_TURMA
@@ -362,7 +362,7 @@ class CadastrarSalaProfessores(SalaProfessoresView, CadastrarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SALA_PROFESSORES))
 
     def get_title(self, **kwargs):
-        return 'Cadastro Sala Professores (Remetente)'
+        return 'Cadastro sala professores (remetente)'
 
 
 class AtualizarSalaProfessores(SalaProfessoresView, AtualizarRemetente):
@@ -373,7 +373,7 @@ class AtualizarSalaProfessores(SalaProfessoresView, AtualizarRemetente):
         return HttpResponseRedirect(reverse_lazy(Urls.LISTAR_SALA_PROFESSORES))
 
     def get_title(self, **kwargs):
-        return 'Atualizar Sala Professores (Remetente)'
+        return 'Atualizar sala professores (remetente)'
 
 
 class ApagarSalaProfessores(SalaProfessoresView, ApagarItem):
@@ -388,7 +388,7 @@ class AddSalaProfessores(SalaProfessoresView, AddItem):
 
 class ListarSalaProfessores(SalaProfessoresView, ListarRemetentes):
     def get_title(self, **kwargs):
-        return 'Cadastro Sala Professores (Remetente)'
+        return 'Cadastro sala professores (remetente)'
 
     def get_link_insert(self, **kwargs):
         return Urls.CADASTRAR_SALA_PROFESSOR

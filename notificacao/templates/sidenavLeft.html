@@ -4,39 +4,39 @@
     <!--<div class="well well-sm text-center">-->
     {% if user|has_group:"Admin" %}
 <div class="well well-sm text-center active" onclick="location.href='{% url 'listaAlunos' %}'">
-        <a href="{% url 'listaAlunos' %}">Cadastro Aluno</a>
+    <a href="{% url 'listaAlunos' %}">Cadastro aluno</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaServidores' %}'">
-        <a href="{% url 'listaServidores' %}">Cadastro Servidor</a>
+    <a href="{% url 'listaServidores' %}">Cadastro servidor</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaProfessores' %}'">
-        <a href="{% url 'listaProfessores' %}">Cadastro Professor</a>
+    <a href="{% url 'listaProfessores' %}">Cadastro professor</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
-    <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
+    <a href="{% url 'listaNotificacoes' %}">Cadastro notificação</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
-    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
+    <a href="{% url 'listaLocais' %}">Cadastro local</a>
 </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaTiposNotificacao' %}'">
-    <a href="{% url 'listaTiposNotificacao' %}">Cadastro Tipo Notificação</a>
+    <a href="{% url 'listaTiposNotificacao' %}">Cadastro tipo notificação</a>
 </div>
     {% else %}
 <!--<p>teste</p>-->
     {% if user|has_group:"Professor" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
-    <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
+    <a href="{% url 'listaNotificacoes' %}">Cadastro notificação</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
-    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
+    <a href="{% url 'listaLocais' %}">Cadastro local</a>
 </div>
     {% else %}
     {% if user|has_group:"Employee" %}
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaNotificacoes' %}'">
-    <a href="{% url 'listaNotificacoes' %}">Cadastro Notificação</a>
+    <a href="{% url 'listaNotificacoes' %}">Cadastro notificação</a>
     </div>
 <div class="well well-sm text-center" onclick="location.href='{% url 'listaLocais' %}'">
-    <a href="{% url 'listaLocais' %}">Cadastro Local</a>
+    <a href="{% url 'listaLocais' %}">Cadastro local</a>
 </div>
     {% else %}
     {% if user|has_group:"Student" %}

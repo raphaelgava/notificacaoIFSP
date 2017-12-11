@@ -60,13 +60,14 @@ class OferecimentoViewSet(viewsets.ModelViewSet):
                 # else:
                 if (user == '1'):
                     if (pkTurma is None):
-                        oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre)
+                        oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, is_active=True)
                     else:
                         turma = Turma.objects.get(pk=pkTurma)
                         oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre,
-                                                                    id_curso=turma.id_curso.pk)
+                                                                    id_curso=turma.id_curso.pk, is_active=True)
                 else:
-                    oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, id_professor=pk)
+                    oferecimentos = Oferecimento.objects.filter(ano=ano, semestre=semestre, id_professor=pk,
+                                                                is_active=True)
                     # else:
                     #     if (pkTurma is not None):
                     #         oferecimentos = Oferecimento.objects.filter(pk=pk)
@@ -261,6 +262,7 @@ class CursoViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
+        # return Curso.objects.filter(is_active=True)
         return Curso.objects.all()
 
 
@@ -272,6 +274,7 @@ class InstitutoViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
+        #return Instituto.objects.filter(is_active=True)
         return Instituto.objects.all()
 
 
